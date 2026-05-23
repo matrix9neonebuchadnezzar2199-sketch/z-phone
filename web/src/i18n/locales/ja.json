@@ -1,0 +1,33 @@
+{
+  "common": {
+    "back": "戻る",
+    "search": "検索...",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "send": "送信",
+    "pay": "支払う",
+    "accept": "応答",
+    "decline": "拒否"
+  },
+  "wallet": {
+    "title": "ウォレット",
+    "transfer": "送金",
+    "bills": "請求書",
+    "history": "履歴"
+  },
+  "phone": {
+    "title": "電話",
+    "incoming": "着信中",
+    "calling": "発信中...",
+    "in_call": "通話中"
+  },
+  "message": {
+    "title": "メッセージ",
+    "new_message": "新着メッセージ"
+  },
+  "notify": {
+    "transfer_success": "送金が完了しました",
+    "call_not_answered": "応答がありませんでした"
+  }
+}
