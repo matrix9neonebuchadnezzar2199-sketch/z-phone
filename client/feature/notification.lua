@@ -96,10 +96,7 @@ RegisterNetEvent('z-phone:client:sendNotifIncomingCall', function(message)
                         from = "Phone",
                         message = "Call not answered"
                     })
-                    cb(false)
-                    
-                    lib.callback('z-phone:server:EndCall', false, function(isOk)
-                        cb(isOk)
+                    lib.callback('z-phone:server:EndCall', false, function(_)
                     end, { to_source = message.from_source })
                     break
                 end
