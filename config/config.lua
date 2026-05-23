@@ -45,7 +45,8 @@ Config.App = {
         Name = "Message"
     },
     Wallet = {
-        Name = "Wallet"
+        Name = "Wallet",
+        MinTransfer = 20000,
     },
 }
 

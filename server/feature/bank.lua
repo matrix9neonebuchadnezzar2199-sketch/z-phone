@@ -26,15 +26,6 @@ lib.callback.register('z-phone:server:PayInvoice', function(source, body)
         return false
     end
 
-    if Player.money.bank < body.amount then 
-        TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
-            type = "Notification",
-            from = "Wallet",
-            message = "Balance is not enough"
-        })
-        return false
-    end
-    
     local citizenid = Player.citizenid
     local invoice = xCore.bankInvoiceByCitizenID(body.id, citizenid)
 
@@ -43,6 +34,15 @@ lib.callback.register('z-phone:server:PayInvoice', function(source, body)
             type = "Notification",
             from = "Wallet",
             message = "Failed to pay bill"
+        })
+        return false
+    end
+
+    if Player.money.bank < invoice.amount then 
+        TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
+            type = "Notification",
+            from = "Wallet",
+            message = "Balance is not enough"
         })
         return false
     end
@@ -117,6 +117,8 @@ lib.callback.register('z-phone:server:TransferCheck', function(source, body)
         }
     end
 
+    DeductInetMaxUsage(source, Config.App.Wallet.Name, Config.App.InetMax.InetMaxUsage.BankCheckTransferReceiver)
+
     return {
         isValid = true,
         name = ReceiverPlayer.name
@@ -135,8 +137,19 @@ lib.callback.register('z-phone:server:Transfer', function(source, body)
     end
 
     local citizenid = Player.citizenid
+    local total = tonumber(body.total)
+    local minTransfer = Config.Wallet.MinTransfer or 0
 
-    if Player.money.bank < body.total then 
+    if not total or total < minTransfer then
+        TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
+            type = "Notification",
+            from = "Wallet",
+            message = string.format("Minimum transfer amount is $%s", minTransfer)
+        })
+        return false
+    end
+
+    if Player.money.bank < total then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
             from = "Wallet",
@@ -180,8 +193,8 @@ lib.callback.register('z-phone:server:Transfer', function(source, body)
 
     local senderReason = string.format("Transfer send: %s - to %s", body.note, body.iban)
     local receiverReason = string.format("%s - from %s", "Transfer received", body.iban)
-    Player.removeAccountMoney('bank', body.total, senderReason)
-    ReceiverPlayer.addAccountMoney('bank', body.total, receiverReason)
+    Player.removeAccountMoney('bank', total, senderReason)
+    ReceiverPlayer.addAccountMoney('bank', total, receiverReason)
 
     local content = [[
 We are pleased to inform you that your recent money transfer has been successfully completed. 
@@ -200,7 +213,7 @@ Thank you for choosing our services!
         "wallet",
         Player.citizenid,
         "Successful Money Transfer Confirmation",
-        string.format(content, body.total, body.iban, body.note),
+        string.format(content, total, body.iban, body.note),
     })
 
     TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
@@ -214,5 +227,7 @@ Thank you for choosing our services!
         from = "Wallet",
         message = "Received Money Transfer"
     })
+
+    DeductInetMaxUsage(source, Config.App.Wallet.Name, Config.App.InetMax.InetMaxUsage.BankTransfer)
     return true
 end)
