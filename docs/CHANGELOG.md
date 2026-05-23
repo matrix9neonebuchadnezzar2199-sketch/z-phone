@@ -20,6 +20,16 @@ All notable fixes for [matrix9neonebuchadnezzar2199-sketch/z-phone](https://gith
 - **M-07** Notification overlay visibility uses `notification.type` instead of broken `isNullOrUndefined`.
 - **M-08** Message notifications include `conversationid`; active chat append matches by conversation ID.
 - **i18n Phase 1** Japanese `config.json` labels, `Asia/Tokyo`, `locales/ja.lua` + `L()`, react-i18next skeleton.
+- **C-03** InetMax usage deduction is server-authoritative (`DeductInetMaxUsage`); client `usage-internet-data` NetEvent removed; positive usage + app whitelist validated.
+- **M-10** InetMax deducted only after successful server callbacks (not on client failure paths).
+- **H-04** PayInvoice balance check uses `invoice.amount` from DB, not client `body.amount`.
+- **M-09** Transfer enforces `Config.Wallet.MinTransfer` on server.
+- **H-05** Call end callbacks guard nil players before accessing `citizenid`.
+- **M-13** `InCalls` cleared on `playerDropped`.
+- **M-12** GetChats groups by `c.id` instead of `conversation_name`.
+- **M-11** Restoring outside incoming call notification preserves all fields via object spread.
+- **I-05** NUI axios base URL uses `GetParentResourceName()` when available.
+- **I-04** `fxmanifest.lua` declares dependencies: ox_lib, oxmysql, pma-voice.
 
 ### Configuration
 
@@ -33,4 +43,4 @@ setr zphone_discord_webhook "https://discord.com/api/webhooks/YOUR_WEBHOOK_HERE"
 
 - **i18n Phase 2** NUI component strings and server notify messages (~250+ keys).
 - **L-04** LockScreen weekday/month names still English.
-- **Runtime verify** See jp-z-phone `docs/VERIFICATION.md` §4.
+- **Runtime verify** See jp-z-phone `docs/VERIFICATION.md` (batch 5 static check done; live server pending).
