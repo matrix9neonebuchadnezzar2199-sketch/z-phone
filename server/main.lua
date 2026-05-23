@@ -1,4 +1,5 @@
-local WebHook = 'https://discord.com/api/webhooks/1266709115313328160/jU0lELlscEJYAr4_lHXmFfSwFt37mPrFKNas4EgEJsTcsR-_FnyYKVDj26mT5H8e4ljR'
+-- Set in server.cfg: setr zphone_discord_webhook "https://discord.com/api/webhooks/..."
+local WebHook = GetConvar('zphone_discord_webhook', '')
 
 lib.callback.register('z-phone:server:HasPhone', function(source)
     return xCore.HasItemByName(source, 'phone')
@@ -8,7 +9,7 @@ lib.callback.register('z-phone:server:GetWebhook', function(_)
     if WebHook ~= '' then
         return WebHook
     else
-        print('Set your webhook to ensure that your camera will work!!!!!! Set this on line 10 of the server sided script!!!!!')
+        print('[z-phone] zphone_discord_webhook convar is not set. Camera uploads will fail until configured.')
         return nil
     end
 end)

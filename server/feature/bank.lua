@@ -119,7 +119,7 @@ lib.callback.register('z-phone:server:TransferCheck', function(source, body)
 
     return {
         isValid = true,
-        name = ReceiverPlayer.charinfo.firstname .. ' '.. ReceiverPlayer.charinfo.lastname
+        name = ReceiverPlayer.name
     }
 end)
 
