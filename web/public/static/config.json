@@ -33,6 +33,7 @@
   "SERVICES": {
     "ALLOWED_JOBS": [
       "goverment",
+      "government",
       "police",
       "ambulance",
       "realestate",

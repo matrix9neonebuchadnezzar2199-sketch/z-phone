@@ -88,6 +88,11 @@ Config.Services = {
         name = "Goverment",
         type = "General"
     },
+    government = {
+        job = "government",
+        name = "Government",
+        type = "General"
+    },
     police = {
         job = "police",
         name = "Police",
