@@ -790,31 +790,18 @@ function App() {
       setNotificationCall({ type: "" });
     } else {
       if (data.notification) {
-        if (data.notification.type == MENU_NEW_MESSAGE_NOTIFICATION) {
+        const { type } = data.notification;
+        if (type === MENU_NEW_MESSAGE_NOTIFICATION) {
           setNotificationMessage(data.notification);
-        }
-
-        if (data.notification.type == MENU_INCOMING_CALL_NOTIFICATION) {
+        } else if (
+          type === MENU_INCOMING_CALL_NOTIFICATION ||
+          type === MENU_INCALL ||
+          type === MENU_START_CALL_NOTIFICATION
+        ) {
           setNotificationCall(data.notification);
-        }
-
-        if (data.notification.type == MENU_INCALL) {
-          setNotificationCall(data.notification);
-        }
-
-        if (data.notification.type == MENU_START_CALL_NOTIFICATION) {
-          setNotificationCall(data.notification);
-        }
-
-        if (data.notification.type == MENU_INCOMING_CALL_NOTIFICATION) {
-          setNotificationCall(data.notification);
-        }
-
-        if (data.notification.type == MENU_NEW_NEWS_NOTIFICATION) {
+        } else if (type === MENU_NEW_NEWS_NOTIFICATION) {
           setNotificationNews(data.notification);
-        }
-
-        if (data.notification.type == MENU_INTERNAL_NOTIFICATION) {
+        } else if (type === MENU_INTERNAL_NOTIFICATION) {
           setNotificationInternal(data.notification);
         }
       } else if (data.outsideMessageNotif) {
@@ -916,23 +903,36 @@ function App() {
 
   // LISTEN NEW MESSAGE
   useEffect(() => {
-    if (
-      notificationMessage?.type == MENU_NEW_MESSAGE_NOTIFICATION &&
-      chatting?.conversation_name == notificationMessage.from
-    ) {
-      const newMessage = {
-        time: "just now",
-        message: notificationMessage.message,
-        media: notificationMessage.media,
-        sender_citizenid: notificationMessage.from_citizenid,
-      };
-
-      setChatting((prevChatting) => ({
-        ...prevChatting,
-        chats: [...prevChatting.chats, newMessage],
-      }));
+    if (notificationMessage?.type !== MENU_NEW_MESSAGE_NOTIFICATION) {
+      return;
     }
-  }, [notificationMessage]);
+    if (!chatting?.conversationid) {
+      return;
+    }
+
+    const isSameChat =
+      (!chatting.is_group &&
+        notificationMessage.from_citizenid === chatting.citizenid) ||
+      (chatting.is_group &&
+        notificationMessage.from === chatting.conversation_name) ||
+      notificationMessage.from === chatting.conversation_name;
+
+    if (!isSameChat) {
+      return;
+    }
+
+    const newMessage = {
+      time: "just now",
+      message: notificationMessage.message,
+      media: notificationMessage.media,
+      sender_citizenid: notificationMessage.from_citizenid,
+    };
+
+    setChatting((prevChatting) => ({
+      ...prevChatting,
+      chats: [...prevChatting.chats, newMessage],
+    }));
+  }, [notificationMessage, chatting]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -945,29 +945,6 @@ function App() {
     // Cleanup the timer when the component is unmounted
     return () => clearTimeout(timer);
   }, [outsideMessageNotif]);
-
-  function generateDimensions(height) {
-    const initWidthAndHeight = {
-      initWidth: resolution.frameWidth,
-      initHeight: resolution.frameHeight,
-    };
-
-    const aspectRatio =
-      initWidthAndHeight.initHeight / initWidthAndHeight.initWidth;
-    const newWidth = height / aspectRatio;
-    const newRadius = height * 0.066;
-    const newMargin = height * 0.033;
-    let newScale = (height / initWidthAndHeight.initHeight) * resolution.scale;
-
-    return {
-      frameWidth: newWidth,
-      frameHeight: height,
-      layoutWidth: newWidth - newMargin,
-      layoutHeight: height - newMargin,
-      radius: newRadius,
-      scale: newScale,
-    };
-  }
 
   function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
