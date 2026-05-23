@@ -16,6 +16,10 @@ All notable fixes for [matrix9neonebuchadnezzar2199-sketch/z-phone](https://gith
 - **M-02** Removed duplicate `generateDimensions` in `App.jsx`.
 - **M-03** Consolidated call notification type routing in `handleEventPhone`.
 - **M-04** Active chat message append uses `from_citizenid` and group name matching.
+- **M-06** Consolidated call ring logic in `client/call_ring.lua` (caller owns timeout; callee ring only).
+- **M-07** Notification overlay visibility uses `notification.type` instead of broken `isNullOrUndefined`.
+- **M-08** Message notifications include `conversationid`; active chat append matches by conversation ID.
+- **i18n Phase 1** Japanese `config.json` labels, `Asia/Tokyo`, `locales/ja.lua` + `L()`, react-i18next skeleton.
 
 ### Configuration
 
@@ -27,5 +31,6 @@ setr zphone_discord_webhook "https://discord.com/api/webhooks/YOUR_WEBHOOK_HERE"
 
 ### Known remaining
 
-- **M-06–M-08** Call ring duplication, notification visibility helper, group chat `conversationid` — see jp-z-phone `docs/KNOWN-ISSUES.md` and `docs/VERIFICATION.md`.
-- **H-01** Requires `phone_invoices` table populated on your server `[runtime verify]`.
+- **i18n Phase 2** NUI component strings and server notify messages (~250+ keys).
+- **L-04** LockScreen weekday/month names still English.
+- **Runtime verify** See jp-z-phone `docs/VERIFICATION.md` §4.
