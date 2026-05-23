@@ -95,7 +95,6 @@ const DynamicComponent = () => {
           <GalleryComponent isShow={menu === menus.APPS.MENU_GALLERY} />
           <SettingComponent isShow={menu === menus.APPS.MENU_SETTING} />
           <HouseComponent isShow={menu === menus.APPS.MENU_HOUSE} />
-          <SettingComponent isShow={menu === menus.APPS.MENU_SETTING} />
           <NewsComponent isShow={menu === menus.APPS.MENU_NEWS} />
           <LovyComponent isShow={menu === menus.APPS.MENU_LOVY} />
           <PlayTVComponent isShow={menu === menus.APPS.MENU_PLAYTV} />
