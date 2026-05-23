@@ -132,44 +132,40 @@ if Config.Core == "QBX" then
     end
 
     xCore.bankInvoices = function(citizenid)
-        -- local query = [[
-        --     select
-        --         pi.id,
-        --         pi.society,
-        --         '-' as reason,
-        --         pi.amount,
-        --         pi.sendercitizenid,
-        --         DATE_FORMAT(now(), '%d/%m/%Y %H:%i') as created_at
-        --     from phone_invoices as pi
-        --     where pi.citizenid = ? order by pi.id desc
-        -- ]]
+        local query = [[
+            select
+                pi.id,
+                pi.society,
+                COALESCE(pi.reason, '-') as reason,
+                pi.amount,
+                pi.sendercitizenid,
+                DATE_FORMAT(now(), '%d/%m/%Y %H:%i') as created_at
+            from phone_invoices as pi
+            where pi.citizenid = ? order by pi.id desc
+        ]]
 
-        -- local bills = MySQL.query.await(querybill, { citizenid })
+        local bills = MySQL.query.await(query, { citizenid })
+        if not bills then
+            bills = {}
+        end
 
-        -- if not histories then
-        --     bills = {}
-        -- end
-
-        -- return bills
-        return {}
+        return bills
     end
 
     xCore.bankInvoiceByCitizenID = function(id, citizenid)
-        -- local query = [[
-        --     select pi.id, pi.amount, pi.reason, pi.society, pi.amount from phone_invoices pi WHERE pi.id = ? and pi.citizenid = ? LIMIT 1
-        -- ]]
+        local query = [[
+            select pi.id, pi.amount, pi.reason, pi.society
+            from phone_invoices pi
+            WHERE pi.id = ? and pi.citizenid = ? LIMIT 1
+        ]]
 
-        -- return MySQL.single.await(query, {id, citizenid})
-        lib.print.info("CHANGE THIS CODE TO USE INVOICE bankInvoiceByCitizenID")
-        return nil
+        return MySQL.single.await(query, { id, citizenid })
     end
 
     xCore.deleteBankInvoiceByID = function(id)
-        lib.print.info("CHANGE THIS CODE TO USE INVOICE deleteBankInvoiceByID")
-
-        -- local query = [[
-        --     DELETE FROM phone_invoices WHERE id = ?
-        -- ]]
-        -- MySQL.query(query, { id })
+        local query = [[
+            DELETE FROM phone_invoices WHERE id = ?
+        ]]
+        MySQL.query(query, { id })
     end
 end
