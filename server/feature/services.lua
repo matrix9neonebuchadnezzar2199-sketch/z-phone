@@ -48,6 +48,7 @@ lib.callback.register('z-phone:server:SendMessageService', function(source, body
         from = "Services",
         message = "Message sended!"
     })
+    DeductInetMaxUsage(source, Config.App.Services.Name, Config.App.InetMax.InetMaxUsage.ServicesMessage)
     return true
 end)
 

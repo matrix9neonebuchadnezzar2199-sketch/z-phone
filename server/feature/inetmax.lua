@@ -96,33 +96,4 @@ Thank you for being a valued customer!
     return IncrementBalance
 end)
 
-local function UseInternetData(citizenid, app, totalInKB)
-    local queryHistories = "INSERT INTO zp_inetmax_histories (citizenid, flag, label, total) VALUES (?, ?, ?, ?)"
-    MySQL.Async.insert(queryHistories, {
-        citizenid,
-        "USAGE",
-        app,
-        totalInKB
-    })
-
-    local queryUpdateBalance = [[
-        UPDATE zp_users SET inetmax_balance = inetmax_balance - ? WHERE citizenid = ?
-    ]]
-    MySQL.Async.execute(queryUpdateBalance, {
-        totalInKB,
-        citizenid
-    })
-end
-
-RegisterNetEvent('z-phone:server:usage-internet-data', function(app, usageInKB)
-    local src = source
-    if Config.App.InetMax.IsUseInetMax then
-        local Player = xCore.GetPlayerBySource(src)
-        if Player == nil then return false end
-
-        local citizenid = Player.citizenid    
-        UseInternetData(citizenid, app, usageInKB)
-
-        TriggerClientEvent("z-phone:client:usage-internet-data", src,  app, usageInKB)
-    end
-end)
+-- C-03: client NetEvent removed; use DeductInetMaxUsage from server callbacks only.

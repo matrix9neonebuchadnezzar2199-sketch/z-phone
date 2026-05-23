@@ -27,7 +27,6 @@ RegisterNUICallback('send-ads', function(body, cb)
 
     lib.callback('z-phone:server:SendAds', false, function(isOk)
         lib.callback('z-phone:server:GetAds', false, function(ads)
-            TriggerServerEvent("z-phone:server:usage-internet-data", Config.App.Ads.Name, Config.App.InetMax.InetMaxUsage.AdsPost)
             cb(ads)
         end)
     end, body)

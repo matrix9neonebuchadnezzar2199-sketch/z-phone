@@ -198,7 +198,7 @@ lib.callback.register('z-phone:server:GetChats', function(source)
                 ON c.id = last_msg.conversationid AND last_msg.rn = 1
             WHERE
                 p.citizenid = ?
-            GROUP BY conversation_name
+            GROUP BY c.id
             ORDER BY
                 last_msg.created_at DESC
         ]]
@@ -314,6 +314,7 @@ lib.callback.register('z-phone:server:SendChatting', function(source, body)
         end
     end
 
+    DeductInetMaxUsage(source, Config.App.Message.Name, Config.App.InetMax.InetMaxUsage.MessageSend)
     return id
 end)
 

@@ -223,6 +223,7 @@ lib.callback.register('z-phone:server:SendTweet', function(source, body)
                 from = "Loops",
                 message = "Tweet posted!"
             })
+            DeductInetMaxUsage(source, Config.App.Loops.Name, Config.App.InetMax.InetMaxUsage.LoopsPostTweet)
             return true
         else
             return false
@@ -263,20 +264,20 @@ lib.callback.register('z-phone:server:SendTweetComment', function(source, body)
             ]]
             local notifications = MySQL.query.await(queryNotification, {body.loops_userid})
 
-            if not notifications then
-                return true
-            end
-
-            for i, v in pairs(notifications) do
-                local TargetPlayer = xCore.GetPlayerByIdentifier(v.citizenid)
-                if TargetPlayer ~= nil and TargetPlayer.source ~= source then
-                    TriggerClientEvent("z-phone:client:sendNotifInternal", TargetPlayer.source, {
-                        type = "Notification",
-                        from = "Loops",
-                        message = "@"..body.comment_username .. " reply on your tweet"
-                    })
+            if notifications then
+                for i, v in pairs(notifications) do
+                    local TargetPlayer = xCore.GetPlayerByIdentifier(v.citizenid)
+                    if TargetPlayer ~= nil and TargetPlayer.source ~= source then
+                        TriggerClientEvent("z-phone:client:sendNotifInternal", TargetPlayer.source, {
+                            type = "Notification",
+                            from = "Loops",
+                            message = "@"..body.comment_username .. " reply on your tweet"
+                        })
+                    end
                 end
             end
+
+            DeductInetMaxUsage(source, Config.App.Loops.Name, Config.App.InetMax.InetMaxUsage.LoopsPostComment)
             return true
         else
             return false

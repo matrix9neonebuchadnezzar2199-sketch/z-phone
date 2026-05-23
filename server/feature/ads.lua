@@ -50,5 +50,6 @@ lib.callback.register('z-phone:server:SendAds', function(source, body)
         from = "Ads",
         message = "New ads posted!"
     })
+    DeductInetMaxUsage(source, Config.App.Ads.Name, Config.App.InetMax.InetMaxUsage.AdsPost)
     return true
 end)

@@ -32,7 +32,6 @@ RegisterNUICallback('transfer-check', function(body, cb)
     end
     
     lib.callback('z-phone:server:TransferCheck', false, function(result)
-        TriggerServerEvent("z-phone:server:usage-internet-data", Config.App.Wallet.Name, Config.App.InetMax.InetMaxUsage.BankCheckTransferReceiver)
         cb(result)
     end, body)
 end)
@@ -59,7 +58,6 @@ RegisterNUICallback('transfer', function(body, cb)
     end
 
     lib.callback('z-phone:server:Transfer', false, function(isOk)
-        TriggerServerEvent("z-phone:server:usage-internet-data", Config.App.Wallet.Name, Config.App.InetMax.InetMaxUsage.BankTransfer)
         cb(isOk)
     end, body)
 end)

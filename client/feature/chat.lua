@@ -38,7 +38,6 @@ RegisterNUICallback('send-chatting', function(body, cb)
     end
 
     lib.callback('z-phone:server:SendChatting', false, function(isOk)
-        TriggerServerEvent("z-phone:server:usage-internet-data", Config.App.Message.Name, Config.App.InetMax.InetMaxUsage.MessageSend)
         cb(isOk)
     end, body)
 end)

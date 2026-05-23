@@ -38,7 +38,6 @@ RegisterNUICallback('send-tweet', function(body, cb)
     end
 
     lib.callback('z-phone:server:SendTweet', false, function(isOk)
-        TriggerServerEvent("z-phone:server:usage-internet-data", Config.App.Loops.Name, Config.App.InetMax.InetMaxUsage.LoopsPostTweet)
         lib.callback('z-phone:server:GetTweets', false, function(tweets)
             cb(tweets)
         end)
@@ -73,7 +72,6 @@ RegisterNUICallback('send-tweet-comments', function(body, cb)
     end
 
     lib.callback('z-phone:server:SendTweetComment', false, function(isOk)
-        TriggerServerEvent("z-phone:server:usage-internet-data", Config.App.Loops.Name, Config.App.InetMax.InetMaxUsage.LoopsPostComment)
         cb(isOk)
     end, body)
 end)
