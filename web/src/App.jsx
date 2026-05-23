@@ -911,11 +911,8 @@ function App() {
     }
 
     const isSameChat =
-      (!chatting.is_group &&
-        notificationMessage.from_citizenid === chatting.citizenid) ||
-      (chatting.is_group &&
-        notificationMessage.from === chatting.conversation_name) ||
-      notificationMessage.from === chatting.conversation_name;
+      notificationMessage.conversationid != null &&
+      notificationMessage.conversationid === chatting.conversationid;
 
     if (!isSameChat) {
       return;

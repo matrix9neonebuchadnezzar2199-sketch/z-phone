@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import LayoutComponent from "./LayoutComponent";
 import MenuContext from "../context/MenuContext";
 import HomeComponent from "./HomeComponent";
@@ -66,9 +66,15 @@ const DynamicComponent = () => {
     notificationNews,
   } = useContext(MenuContext);
 
-  function isNullOrUndefined(value) {
-    return value === menus.APPS.null || value === menus.APPS.undefined;
+  function isActiveNotification(notification) {
+    return notification?.type != null && notification.type !== "";
   }
+
+  const showCallNotifications = isActiveNotification(notificationCall);
+  const showInternalNotification = isActiveNotification(notificationInternal);
+  const showNewsNotification = isActiveNotification(notificationNews);
+  const showMessageNotification = isActiveNotification(notificationMessage);
+
   return (
     <LayoutComponent>
       {menus == null ? (
@@ -103,7 +109,7 @@ const DynamicComponent = () => {
           <div
             className="absolute top-0 left-0 z-50 w-full"
             style={{
-              display: !isNullOrUndefined(notificationCall) ? "block" : "none",
+              display: showCallNotifications ? "block" : "none",
             }}
           >
             <InCallComponent
@@ -114,7 +120,7 @@ const DynamicComponent = () => {
           <div
             className="absolute top-0 left-0 z-50 w-full"
             style={{
-              display: !isNullOrUndefined(notificationCall) ? "block" : "none",
+              display: showCallNotifications ? "block" : "none",
             }}
           >
             <IncomingCallNotificationComponent
@@ -124,7 +130,7 @@ const DynamicComponent = () => {
           <div
             className="absolute top-0 left-0 z-50 w-full"
             style={{
-              display: !isNullOrUndefined(notificationCall) ? "block" : "none",
+              display: showCallNotifications ? "block" : "none",
             }}
           >
             <StartCallNotificationComponent
@@ -134,9 +140,7 @@ const DynamicComponent = () => {
           <div
             className="absolute top-0 left-0 z-50 w-full"
             style={{
-              display: !isNullOrUndefined(notificationInternal)
-                ? "block"
-                : "none",
+              display: showInternalNotification ? "block" : "none",
             }}
           >
             <InternalNotificationComponent
@@ -146,7 +150,7 @@ const DynamicComponent = () => {
           <div
             className="absolute top-0 left-0 z-50 w-full"
             style={{
-              display: !isNullOrUndefined(notificationNews) ? "block" : "none",
+              display: showNewsNotification ? "block" : "none",
             }}
           >
             <NewNewsNotificationComponent
@@ -156,9 +160,7 @@ const DynamicComponent = () => {
           <div
             className="absolute top-0 left-0 z-50 w-full"
             style={{
-              display: !isNullOrUndefined(notificationMessage)
-                ? "block"
-                : "none",
+              display: showMessageNotification ? "block" : "none",
             }}
           >
             <NewMessageNotificationComponent
