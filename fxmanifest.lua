@@ -5,6 +5,12 @@ author "Alfaben"
 description "iPhone 15"
 version "1.0.0"
 
+dependencies {
+	"ox_lib",
+	"oxmysql",
+	"pma-voice",
+}
+
 -- ui_page "http://localhost:5173"
 ui_page "html/index.html"
 

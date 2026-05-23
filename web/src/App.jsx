@@ -122,8 +122,10 @@ function App() {
       fetchData();
 
       if (outsideCallNotif.message != null) {
-        outsideCallNotif.type = MENU_INCOMING_CALL_NOTIFICATION;
-        setNotificationCall(outsideCallNotif);
+        setNotificationCall({
+          ...outsideCallNotif,
+          type: MENU_INCOMING_CALL_NOTIFICATION,
+        });
       }
 
       setOutsideMessageNotif({

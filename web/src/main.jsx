@@ -6,7 +6,9 @@ import "./i18n";
 import { MenuProvider } from "./context/MenuContext";
 import axios from "axios";
 
-const resourceName = "z-phone";
+const resourceName = window.GetParentResourceName
+  ? window.GetParentResourceName()
+  : "z-phone";
 // const resourceName = "phone-mock.vercel.app";
 axios.defaults.baseURL = `https://${resourceName}`;
 axios.defaults.headers.common["Authorization"] = "Bearer ZPHONE";
