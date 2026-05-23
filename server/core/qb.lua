@@ -26,7 +26,7 @@ if Config.Core == "QB" then
                 ply.Functions.RemoveMoney(account, amount, reason)
             end,
             addAccountMoney = function (account, amount, reason)
-                ply.Functions.RemoveMoney(account, amount, reason)
+                ply.Functions.AddMoney(account, amount, reason)
             end
         }
     end
@@ -53,7 +53,7 @@ if Config.Core == "QB" then
                 ply.Functions.RemoveMoney(account, amount, reason)
             end,
             addAccountMoney = function (account, amount, reason)
-                ply.Functions.RemoveMoney(account, amount, reason)
+                ply.Functions.AddMoney(account, amount, reason)
             end
         }
     end
