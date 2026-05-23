@@ -1,5 +1,11 @@
 local InCalls = {}
 
+local function clearInCall(Player)
+    if Player then
+        InCalls[Player.citizenid] = nil
+    end
+end
+
 lib.callback.register('z-phone:server:StartCall', function(source, body)
     local Player = xCore.GetPlayerBySource(source)
     if not Player then return false end
@@ -126,11 +132,13 @@ lib.callback.register('z-phone:server:CancelCall', function(source, body)
     local Player1 = xCore.GetPlayerBySource(source)
     local Player2 = xCore.GetPlayerBySource(body.to_source)
     
-    TriggerClientEvent("z-phone:client:closeCall", body.to_source)
+    if body.to_source then
+        TriggerClientEvent("z-phone:client:closeCall", body.to_source)
+    end
     TriggerClientEvent("z-phone:client:closeCallSelf", source)
 
-    InCalls[Player1.citizenid] = nil
-    InCalls[Player2.citizenid] = nil
+    clearInCall(Player1)
+    clearInCall(Player2)
 
     return true
 end)
@@ -139,17 +147,21 @@ lib.callback.register('z-phone:server:DeclineCall', function(source, body)
     local Player1 = xCore.GetPlayerBySource(source)
     local Player2 = xCore.GetPlayerBySource(body.to_source)
 
-    InCalls[Player1.citizenid] = nil
-    InCalls[Player2.citizenid] = nil
+    clearInCall(Player1)
+    clearInCall(Player2)
 
-    TriggerClientEvent("z-phone:client:closeCallSelf", body.to_source)
+    if body.to_source then
+        TriggerClientEvent("z-phone:client:closeCallSelf", body.to_source)
+    end
     TriggerClientEvent("z-phone:client:closeCall", source)
 
-    TriggerClientEvent("z-phone:client:sendNotifInternal", body.to_source, {
-        type = "Notification",
-        from = "Phone",
-        message = "Call declined!"
-    })
+    if body.to_source then
+        TriggerClientEvent("z-phone:client:sendNotifInternal", body.to_source, {
+            type = "Notification",
+            from = "Phone",
+            message = "Call declined!"
+        })
+    end
     return true
 end)
 
@@ -157,17 +169,23 @@ lib.callback.register('z-phone:server:AcceptCall', function(source, body)
     local Player1 = xCore.GetPlayerBySource(source)
     local Player2 = xCore.GetPlayerBySource(body.to_source)
 
-    InCalls[Player1.citizenid] = true
-    InCalls[Player2.citizenid] = true
+    if Player1 then
+        InCalls[Player1.citizenid] = true
+    end
+    if Player2 then
+        InCalls[Player2.citizenid] = true
+    end
 
     -- CALLER
-    TriggerClientEvent("z-phone:client:setInCall", body.to_source, {
-        from = body.to_person_for_caller,
-        photo = body.to_photo_for_caller,
-        from_source = body.to_source,
-        to_source = source,
-        call_id = body.call_id
-    })
+    if body.to_source then
+        TriggerClientEvent("z-phone:client:setInCall", body.to_source, {
+            from = body.to_person_for_caller,
+            photo = body.to_photo_for_caller,
+            from_source = body.to_source,
+            to_source = source,
+            call_id = body.call_id
+        })
+    end
 
     -- RECEIVER
     TriggerClientEvent("z-phone:client:setInCall", source, {
@@ -185,16 +203,18 @@ lib.callback.register('z-phone:server:EndCall', function(source, body)
     local Player1 = xCore.GetPlayerBySource(source)
     local Player2 = xCore.GetPlayerBySource(body.to_source)
 
-    InCalls[Player1.citizenid] = nil
-    InCalls[Player2.citizenid] = nil
+    clearInCall(Player1)
+    clearInCall(Player2)
     
-    TriggerClientEvent("z-phone:client:sendNotifInternal", body.to_source, {
-        type = "Notification",
-        from = "Phone",
-        message = "Call ended!"
-    })
+    if body.to_source then
+        TriggerClientEvent("z-phone:client:sendNotifInternal", body.to_source, {
+            type = "Notification",
+            from = "Phone",
+            message = "Call ended!"
+        })
 
-    TriggerClientEvent("z-phone:client:closeCall", body.to_source)
+        TriggerClientEvent("z-phone:client:closeCall", body.to_source)
+    end
     TriggerClientEvent("z-phone:client:closeCallSelf", source)
 
     return true
@@ -231,4 +251,9 @@ lib.callback.register('z-phone:server:GetCallHistories', function(source)
     end
 
     return histories
+end)
+
+AddEventHandler('playerDropped', function()
+    local Player = xCore.GetPlayerBySource(source)
+    clearInCall(Player)
 end)
