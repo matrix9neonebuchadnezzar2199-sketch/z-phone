@@ -11,6 +11,6 @@ end)
 
 RegisterNUICallback('get-direction', function(body, cb)
     SetNewWaypoint(body.coords.enter.x, body.coords.enter.y)
-    xCore.Notify('GPS has been set to ' .. body.name .. '!', 'success')
+    xCore.Notify(L('gps_set', body.name), 'success')
     cb("ok")
 end)

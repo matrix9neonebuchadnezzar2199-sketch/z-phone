@@ -7,8 +7,8 @@ RegisterNUICallback('start-call', function(body, cb)
     if PhoneData.CallData.InCall then
         TriggerEvent("z-phone:client:sendNotifInternal", {
             type = "Notification",
-            from = "Phone",
-            message = "You're in a call!"
+            from = Config.App.Phone.Name,
+            message = L("call_in_progress"),
         })
         cb(false)
         return
@@ -59,35 +59,7 @@ RegisterNUICallback('start-call', function(body, cb)
         PhoneData.CallData.CallId = callId
         cb(res)
 
-        local RepeatCount = 0
-        for _ = 1, Config.CallRepeats + 1, 1 do
-            if not PhoneData.CallData.AnsweredCall then
-                if RepeatCount + 1 ~= Config.CallRepeats + 1 then
-                    if PhoneData.CallData.InCall then
-                        RepeatCount = RepeatCount + 1
-                        TriggerServerEvent('InteractSound_SV:PlayOnSource', 'zpcall', 0.2)
-                    else
-                        break
-                    end
-                    Wait(Config.RepeatTimeout)
-                else
-                    PhoneData.CallData.CallId = nil
-                    PhoneData.CallData.InCall = false
-
-                    TriggerEvent("z-phone:client:sendNotifInternal", {
-                        type = "Notification",
-                        from = "Phone",
-                        message = "Call not answered"
-                    })
-                    cb(false)
-                    
-                    lib.callback('z-phone:server:CancelCall', false, function(isOk)
-                        cb(isOk)
-                    end, { to_source = res.to_source })
-                    break
-                end
-            end
-        end
+        RunOutgoingCallTimeout(res.to_source)
     end, body)
 end)
 

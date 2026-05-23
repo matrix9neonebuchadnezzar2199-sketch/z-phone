@@ -32,7 +32,7 @@ RegisterNUICallback('TakePhoto', function(_, cb)
         elseif IsControlJustPressed(1, 176) then -- TAKE.. PIC
             lib.callback('z-phone:server:GetWebhook', false, function(hook)
             if not hook then
-                    xCore.Notify('Camera not setup', 'error', 3000)
+                    xCore.Notify(L('camera_not_setup'), 'error', 3000)
                     return
                 end
                 exports['screenshot-basic']:requestScreenshotUpload(tostring(hook), 'files[]', function(data)

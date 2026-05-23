@@ -6,6 +6,8 @@ Config.OpenPhone = 'M'
 Config.RepeatTimeout = 3000
 Config.CallRepeats = 5
 
+Config.Locale = "ja"
+
 Config.App = {
     InetMax = {
         Name = "InetMax",
@@ -47,8 +49,8 @@ Config.App = {
     },
 }
 
-Config.MsgNotEnoughInternetData = "Your internet data not enough!"
-Config.MsgSignalZone = "No Signal"
+Config.MsgNotEnoughInternetData = L("msg_not_enough_inet")
+Config.MsgSignalZone = L("msg_no_signal")
 
 Config.Signal = {
     IsUse = false,

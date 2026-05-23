@@ -10,6 +10,7 @@ RegisterNetEvent('z-phone:client:sendNotifMessage', function(message)
                     message = message.message,
                     media = message.media,
                     from_citizenid = message.from_citizenid,
+                    conversationid = message.conversationid,
                 },
             })
         else
@@ -17,7 +18,7 @@ RegisterNetEvent('z-phone:client:sendNotifMessage', function(message)
                 event = 'z-phone',
                 outsideMessageNotif = {
                     from = message.from,
-                    message = "New message!"
+                    message = L("new_message_preview")
                 },
             })
         end
@@ -76,32 +77,7 @@ RegisterNetEvent('z-phone:client:sendNotifIncomingCall', function(message)
             })
         end
 
-        local RepeatCount = 0
-        for _ = 1, Config.CallRepeats + 1, 1 do
-            if not PhoneData.CallData.AnsweredCall then
-                if RepeatCount + 1 ~= Config.CallRepeats + 1 then
-                    if PhoneData.CallData.InCall then
-                        RepeatCount = RepeatCount + 1
-                        TriggerServerEvent('InteractSound_SV:PlayOnSource', 'ringing', 0.2)
-                    else
-                        break
-                    end
-                    Wait(Config.RepeatTimeout)
-                else
-                    PhoneData.CallData.CallId = nil
-                    PhoneData.CallData.InCall = false
-
-                    TriggerEvent("z-phone:client:sendNotifInternal", {
-                        type = "Notification",
-                        from = "Phone",
-                        message = "Call not answered"
-                    })
-                    lib.callback('z-phone:server:EndCall', false, function(_)
-                    end, { to_source = message.from_source })
-                    break
-                end
-            end
-        end
+        PlayIncomingCallRing()
     end
 end)
 

@@ -62,7 +62,7 @@ end
 function OpenPhone()
     local hasWeapon, weaponHash = GetCurrentPedWeapon(PlayerPedId(), true)
     if weaponHash ~= GetHashKey("WEAPON_UNARMED") then
-        xCore.Notify("Cannot open phone!", 'error', 3000)
+        xCore.Notify(L("phone_weapon"), 'error', 3000)
         return
     end
 
@@ -94,7 +94,7 @@ function OpenPhone()
                 newPhoneProp()
             end)
         else
-            xCore.Notify("You don't have a phone", 'error', 3000)
+            xCore.Notify(L("phone_no_item"), 'error', 3000)
         end
     end)
 end
