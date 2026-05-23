@@ -1,158 +1,217 @@
-# Z-Phone
+# Z-Phone（日本語 RP 向けフォーク）
 
-Welcome to **Z-Phone**, the open-source initiative that transforms the in-game mobile experience in FiveM by introducing a sleek, iPhone-inspired design that prioritizes simplicity and elegance.
+[![License: DWYWDBM](https://img.shields.io/badge/License-DWYWDBM-blue.svg)](LICENSE)
+[![FiveM](https://img.shields.io/badge/FiveM-Resource-6c3fb5.svg)](https://docs.fivem.net/)
+[![GitHub](https://img.shields.io/badge/GitHub-matrix9neonebuchadnezzar2199--sketch%2Fz--phone-181717.svg?logo=github)](https://github.com/matrix9neonebuchadnezzar2199-sketch/z-phone)
+[![Based on](https://img.shields.io/badge/Based%20on-alfaben12%2Fz--phone-181717.svg?logo=github)](https://github.com/alfaben12/z-phone)
+[![Framework](https://img.shields.io/badge/Framework-QBCore%20%7C%20ESX%20%7C%20QBX-green.svg)](config/config.lua)
+[![UI](https://img.shields.io/badge/UI-React%2018%20%2B%20Tailwind-61DAFB.svg?logo=react&logoColor=white)](web/)
+[![SQL](https://img.shields.io/badge/SQL-oxmysql-orange.svg)](https://github.com/overextended/oxmysql)
+[![Voice](https://img.shields.io/badge/Voice-pma--voice-blueviolet.svg)](https://github.com/AvarianKnight/pma-voice)
+[![i18n](https://img.shields.io/badge/i18n-Phase%201%20done-3fb950.svg)](docs/CHANGELOG.md)
+[![Locale](https://img.shields.io/badge/Locale-ja%20%2F%20Asia%2FTokyo-red.svg)](locales/ja.lua)
 
-## Objective
+[alfaben12/z-phone](https://github.com/alfaben12/z-phone) をベースに、**日本語 RP サーバー向けのバグ修正・i18n 基盤**を加えた FiveM スマホリソースです。  
+iPhone 15 風 NUI で、連絡先・メッセージ・通話・銀行・SNS・ニュースなど RP 機能を 1 つに集約します。
 
-Our goal is to create a visually appealing and user-friendly phone interface that enhances the gameplay experience without overwhelming players. By focusing on essential features and an intuitive layout, we hope to make communication in the game more enjoyable and immersive.
-
-## Inspiration
-
-This project is inspired by **QBPhone** from **QBCore**, combining its core functionalities with a fresh aesthetic that appeals to modern users. Our redesign aims to modernize the user experience while retaining the familiar features players love.
-
-## Dependencies
-for QB
-- **[QB Core](https://github.com/qbcore-framework/qb-core "QB Core")**: This project relies on the QBCore framework for core functionalities.
-- **[QB Banking](https://github.com/qbcore-framework/qb-banking "QB Banking")**: QB Banking is need for digital banking app or invoices.
-
-for ESX
-- **[ESX Core](https://github.com/esx-framework/esx_core "ESX Core")**: This project relies on the ESX framework for core functionalities.
-- **[ESX Banking](https://github.com/esx-framework/esx_banking "ESX Banking")**: ESX Banking is need for digital banking app.
-- **[ESX Billing](https://github.com/esx-framework/esx_billing "ESX Billing")**: ESX Banking is need for billing on banking app.
-
-for QBX
-    TODO updates documentation
-
-for OX (inprogress)
-
-**IMPORTANT**: If you use others **garage, housing, banking and invoice resource** you still can use this phone but need a little changes on **server/core/[your fw].lua** then update query for retrieving datas following structure, please dont change the structure if you dont want enter to .jsx code!
-
-always need
-- **[OX Lib](https://github.com/overextended/ox_lib "OX Lib")**: OX Lib is also required to ensure seamless integration with existing systems.
-
-## Tech Stack
-
-We are using the following technologies to build this project:
-
-- **React.js**: For creating a dynamic and responsive user interface.
-- **Tailwind CSS**: To style our components with a utility-first approach, ensuring a clean and modern design.
-
-## Contributing
-
-We welcome contributions from the community! Feel free to open issues, submit pull requests, or suggest features. Together, we can make the Z-Phone experience better for everyone.
-
-## License
-
-This project is licensed under the DWYWDBM License - see the [LICENSE](https://github.com/alfaben12/z-phone/blob/main/LICENSE) file for details.
+| 読者 | 最初に読むセクション |
+|------|----------------------|
+| **サーバー管理者** | [インストール](#インストール) → [server.cfg](#servercfg) → [トラブルシューティング](#トラブルシューティング) |
+| **開発者** | [開発](#開発) → [CHANGELOG](docs/CHANGELOG.md) |
 
 ---
 
-Thank you for checking out Z-Phone! We hope you enjoy the new experience as much as we enjoyed creating it.
+## 目次
+
+- [概要](#概要)
+- [本家からの改善点](#本家からの改善点)
+- [アプリ一覧](#アプリ一覧)
+- [必要条件](#必要条件)
+- [インストール](#インストール)
+- [server.cfg](#servercfg)
+- [設定](#設定)
+- [開発](#開発)
+- [トラブルシューティング](#トラブルシューティング)
+- [既知の残課題](#既知の残課題)
+- [クレジット・ライセンス](#クレジットライセンス)
+- [GitHub Topics](#github-topics)
 
 ---
 
-## Ready to Use???
+## 概要
 
-#### (Optional for QB) **BANK TRANSACTION**
+| 項目 | 内容 |
+|------|------|
+| ベース | [alfaben12/z-phone](https://github.com/alfaben12/z-phone) |
+| UI | React 18 + Vite + Tailwind |
+| DB | oxmysql（`zp_*`） |
+| デフォルト | QBX（`Config.Core` で切替） |
 
-If you want all bank transactions recorded, then do it
-in **qb-core/server/player.lua**
+---
 
-**function self.Functions.AddMoney**
+## 本家からの改善点
 
-```lua
--- OTHERS CODE
-if not self.Offline then
-    -- OTHERS CODE
-    if moneytype == 'bank' then
-        MySQL.Async.insert('INSERT INTO bank_statements (citizenid, account_name, amount, reason, statement_type) VALUES (?, ?, ?, ?, ?)', {
-            self.PlayerData.citizenid,
-            'checking',
-            amount,
-            reason,
-            'deposit'
-        })
-    end
-    -- OTHERS CODE
-end
+詳細: [docs/CHANGELOG.md](docs/CHANGELOG.md)
+
+### Critical / High
+
+| ID | 問題 | 対応 |
+|----|------|------|
+| C-01 | 送金時 `addAccountMoney` が `RemoveMoney` を呼ぶ | `AddMoney` に修正 |
+| C-02 | Discord Webhook ハードコード | convar `zphone_discord_webhook` |
+| H-01 | QBX 請求書スタブ | `phone_invoices` 接続 |
+| H-02 | IBAN 確認の charinfo エラー | `ReceiverPlayer.name` 使用 |
+| H-03 | goverment / government 表記ゆれ | 両エイリアス追加 |
+
+### Medium + i18n
+
+M-01〜M-08（NUI リファクタ・着信リング統合・conversationid）、i18n Phase 1（config 日本語、`locales/ja.lua`、react-i18next スケルトン）
+
+---
+
+## アプリ一覧
+
+| カテゴリ | アプリ | 説明 |
+|----------|--------|------|
+| 通信 | 電話 / メッセージ / 連絡先 | 通話（pma-voice）、DM・グループ、共有 |
+| 金融 | ウォレット | 残高・送金・履歴・請求書 |
+| SNS | Loops | タイムライン・コメント・プロフィール |
+| 情報 | ニュース / メール / 広告 | 記事・ライブ・受信メール・掲示板 |
+| 生活 | ガレージ / 物件 / サービス | 車両・住宅・職業問い合わせ |
+| メディア | カメラ / 写真 | 撮影 → Discord → ギャラリー |
+| インフラ | InetMax | 通信量・トップアップ |
+| 設定 | 設定 | アバター・壁紙・匿名/DND |
+
+---
+
+## 必要条件
+
+| リソース | 用途 |
+|----------|------|
+| ox_lib | callback / notify |
+| oxmysql | DB |
+| ox_inventory | 電話アイテム |
+| qb-core | QBX / QB |
+| qb-banking | 銀行 |
+| pma-voice | 通話 |
+| screenshot-basic | カメラ |
+| interact-sound | 着信音 |
+
+---
+
+## インストール
+
+### 1. 配置
+
+```powershell
+git clone https://github.com/matrix9neonebuchadnezzar2199-sketch/z-phone.git
 ```
 
-**self.Functions.RemoveMoney**
+`resources` 配下に配置。フォルダ名 = ensure 名。
 
-```lua
--- OTHERS CODE
-if not self.Offline then
-    -- OTHERS CODE
-   if moneytype == 'bank' then
-        MySQL.Async.insert('INSERT INTO bank_statements (citizenid, account_name, amount, reason, statement_type) VALUES (?, ?, ?, ?, ?)', {
-            self.PlayerData.citizenid,
-            'checking',
-            amount,
-            reason,
-            'withdraw'
-        })
-        TriggerClientEvent('qb-phone:client:RemoveBankMoney', self.PlayerData.source, amount)
-    end
-    -- OTHERS CODE
-end
+> リネームする場合は `web/src/main.jsx` の `resourceName` も一致させ、`npm run build` すること。
+
+### 2. ensure 順
+
+```cfg
+ensure ox_lib
+ensure oxmysql
+ensure ox_inventory
+ensure qb-core
+ensure qb-banking
+ensure pma-voice
+ensure screenshot-basic
+ensure interact-sound
+ensure z-phone
 ```
 
-#### (Required) **IMPORT SOUND**
+### 3. データベース
 
-Go to https://github.com/alfaben12/z-phone/tree/main/html/sounds copy all files then paste to resources/[standalone]/interact-sound/client/html/sounds
+```bash
+mysql -u USER -p DATABASE < z-phone.sql
+```
 
-#### (Required) **IMPORT DATABASE**
+QBX/QB で請求書を使う場合は `phone_invoices` テーブルも必要。
 
-Go to https://github.com/alfaben12/z-phone/blob/main/z-phone.sql import query to your database to add all table for support z-phone
+### 4. 着信音
 
-## IMPORTANT NOTES
+[本家手順](https://github.com/alfaben12/z-phone#required-import-sound) に従い `html/sounds/` を interact-sound へコピー。
 
-Default phone number in QBCore may not be compatible with z-phone. If you use QBCore.Functions.GetPlayerByPhone(number) with a z-phone number, it is likely to return incorrect results. To avoid this issue, it's essential to synchronize the z-phone numbers with the QBCore character information (on table players, column charinfo, key phone).
+---
 
-## BTW
+## server.cfg
 
-I forgot where I downloaded this iPhone object, as far as I remember I downloaded it from forum.cfx.re, remind me if you know the author.
+```cfg
+setr zphone_discord_webhook "https://discord.com/api/webhooks/YOUR_ID/YOUR_TOKEN"
+```
 
-Please note that in V2.x.x, z-phone has not been optimized. If you want it optimized, that's fine and don't forget to make a pull request.
+---
 
-## DISCUSSION
+## 設定
 
-https://discord.com/channels/1012753553418354748/1289265300457525269/1289265300457525269
+`config/config.lua`:
 
-## Showcase
+```lua
+Config.Core = "QBX"
+Config.OpenPhone = 'M'
+Config.Locale = "ja"
+```
 
-[https://www.youtube.com/watch?v=sE6SahWlA3U](https://www.youtube.com/watch?v=sE6SahWlA3U)
+`web/public/static/config.json` — メニューラベル・`Asia/Tokyo` 等。変更後は `npm run build`。
 
-## FORUM
-https://forum.cfx.re/t/open-source-z-phone-release/5272649
+`server/core/qbx.lua` — 車両/住宅/銀行/請求書クエリ（サーバー固有）。
 
-## SUPPORT
+---
 
-Thank you for your support! [ko-fi](https://ko-fi.com/alfaben)
+## 開発
 
-## All Thanks to Our Contributors
+```powershell
+cd web
+npm install
+npm run build
+```
 
-<table>
-   <tbody>
-      <tr>
-         <td align="center" valign="top">
-            <a href="https://github.com/alfaben12"
-                style="text-decoration: none;"
-               ><img
-               src="https://avatars.githubusercontent.com/u/20008086?v=4"
-               width="50px"
-               alt="alfaben12"
-               /><br /><sub><b>alfaben12</b></sub></a>
-         </td>
-          <td align="center" valign="top">
-            <a href="https://github.com/QBStevie"
-                style="text-decoration: none;"
-               ><img
-               src="https://avatars.githubusercontent.com/u/43250308?v=4"
-               width="50px"
-               alt="QBStevie"
-               /><br /><sub><b>QBStevie</b></sub></a>
-         </td>
-      </tr>
-   </tbody>
-</table>
+出力: `html/`（本番 NUI）
+
+---
+
+## トラブルシューティング
+
+| 症状 | 対処 |
+|------|------|
+| 電話が開かない | 武器をしまう / phone アイテム確認 |
+| カメラ失敗 | `zphone_discord_webhook` convar 設定 |
+| 請求書が空 | `phone_invoices` テーブル・データ確認 |
+| 着信音なし | interact-sound + sounds コピー確認 |
+| NUI 真っ白 | `npm run build` / `resourceName` 一致確認 |
+
+---
+
+## 既知の残課題
+
+- i18n Phase 2（NUI コンポーネント全文）
+- LockScreen 曜日・月名
+- FiveM 実機検証（管理者側で要確認）
+
+---
+
+## クレジット・ライセンス
+
+- **原作:** [alfaben12/z-phone](https://github.com/alfaben12/z-phone) by Alfaben — [DWYWDBM](LICENSE)
+- **フォーク:** [matrix9neonebuchadnezzar2199-sketch/z-phone](https://github.com/matrix9neonebuchadnezzar2199-sketch/z-phone)
+
+---
+
+## GitHub Topics
+
+```
+fivem, fivem-script, fivem-resource, qbcore, qbox, qbx, esx,
+ox-lib, oxmysql, react, tailwindcss, nui, phone, smartphone,
+roleplay, japanese, i18n, z-phone, jp-mods, pma-voice
+```
+
+---
+
+<p align="center">
+  <sub>Based on <a href="https://github.com/alfaben12/z-phone">alfaben12/z-phone</a></sub>
+</p>
