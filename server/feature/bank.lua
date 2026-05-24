@@ -191,29 +191,16 @@ lib.callback.register('z-phone:server:Transfer', function(source, body)
         return false
     end
 
-    local senderReason = string.format("Transfer send: %s - to %s", body.note, body.iban)
-    local receiverReason = string.format("%s - from %s", "Transfer received", body.iban)
+    local senderReason = string.format(L("bank_transfer_reason_send"), body.note, body.iban)
+    local receiverReason = string.format(L("bank_transfer_reason_receive"), body.iban)
     Player.removeAccountMoney('bank', total, senderReason)
     ReceiverPlayer.addAccountMoney('bank', total, receiverReason)
 
-    local content = [[
-We are pleased to inform you that your recent money transfer has been successfully completed. 
-\
-Here are the details of the transaction:
-\
-Total: %s \
-IBAN : %s \
-Note : %s \
-\
-If you have any questions or need further assistance, please don't hesitate to reach out.
-\
-Thank you for choosing our services!
-    ]]
     MySQL.Async.insert('INSERT INTO zp_emails (institution, citizenid, subject, content) VALUES (?, ?, ?, ?)', {
         "wallet",
         Player.citizenid,
-        "Successful Money Transfer Confirmation",
-        string.format(content, total, body.iban, body.note),
+        L("email_wallet_transfer_subject"),
+        string.format(L("email_wallet_transfer_body"), total, body.iban, body.note),
     })
 
     TriggerClientEvent("z-phone:client:sendNotifInternal", source, {

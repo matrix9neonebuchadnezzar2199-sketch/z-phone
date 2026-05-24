@@ -51,6 +51,7 @@ lib.callback.register('z-phone:server:GetProfile', function(source)
     result.job.name = Player.job.name
     result.job.label = Player.job.label
     result.signal = Config.Signal.Zones[Config.Signal.DefaultSignalZones].ChanceSignal
+    result.locale = Config.Locale or "ja"
     return result
 end)
 
@@ -92,7 +93,7 @@ lib.callback.register('z-phone:server:UpdateProfile', function(source, body)
         if affectedRows then
             TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
                 type = "Notification",
-                from = "Setting",
+                from = L("notify_from_setting"),
                 message = L("notify_profile_update_success")
             })
             return true

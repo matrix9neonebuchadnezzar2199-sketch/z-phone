@@ -86,24 +86,17 @@ lib.callback.register('z-phone:server:LoopsSignup', function(source, body)
                 from = L("notify_from_loops"),
                 message = L("notify_loops_signup_prompt")
             })
-            local content = [[
-Welcome aboard! \
-\
-Username: @%s \
-Fullname : %s \
-Password : %s \
-Phone Number : %s \
-\
-We're thrilled to have you join our community. Your Loops account signup was successful created, and you’re now all set to explore everything. \
-To get started, log in to your account and check out all tweets. \
-\
-We're excited to see you dive in and start exploring. Welcome to the Loopsverse!
-    ]]
             MySQL.single.await('INSERT INTO zp_emails (institution, citizenid, subject, content) VALUES (?, ?, ?, ?)', {
                 "loops",
                 Player.citizenid,
-                "Your account ".. body.username .. " Has Been Created",
-                string.format(content, body.username, body.fullname, body.password,  body.phone_number),
+                L("email_loops_signup_subject", body.username),
+                string.format(
+                    L("email_loops_signup_body"),
+                    body.username,
+                    body.fullname,
+                    body.password,
+                    body.phone_number
+                ),
             })
             return {
                 is_valid = true,

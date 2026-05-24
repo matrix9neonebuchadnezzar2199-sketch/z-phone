@@ -99,6 +99,48 @@ local ja = {
     notify_loops_reply_tweet = "@%s があなたのツイートに返信しました",
     notify_loops_relogin_profile = "プロフィール更新には再ログインしてください",
     notify_loops_profile_updated = "アカウントを更新しました",
+
+    notify_from_setting = "設定",
+    notify_outside_format = "[%s] %s",
+
+    -- Bank transfer ledger reasons
+    bank_transfer_reason_send = "送金: %s → %s",
+    bank_transfer_reason_receive = "送金受取 - %s",
+
+    -- Email templates
+    email_wallet_transfer_subject = "送金完了の確認",
+    email_wallet_transfer_body = [[
+送金が正常に完了しました。
+
+取引詳細:
+金額: %s
+IBAN: %s
+メモ: %s
+
+ご不明点があればお問い合わせください。
+]],
+    email_inetmax_purchase_subject = "InetMax データパッケージ購入確認",
+    email_inetmax_purchase_body = [[
+InetMax データパッケージの購入が完了しました。
+
+合計: %s
+レート: $%s / %sKB
+ステータス: %s
+
+データパッケージはまもなく有効化されます。
+]],
+    email_inetmax_status_success = "成功",
+    email_loops_signup_subject = "Loops アカウント %s が作成されました",
+    email_loops_signup_body = [[
+Loops へようこそ！
+
+ユーザー名: @%s
+表示名: %s
+パスワード: %s
+電話番号: %s
+
+ログインしてツイートをお楽しみください。
+]],
 }
 
 for key, value in pairs(ja) do

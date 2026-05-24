@@ -37,7 +37,7 @@ RegisterNetEvent('z-phone:client:sendNotifInternal', function(message)
                 },
             })
         else
-            xCore.Notify(string.format("[%s] %s", message.from, message.message), 'info', 5000)
+            xCore.Notify(string.format(L("notify_outside_format"), message.from, message.message), 'info', 5000)
         end
     end
 end)

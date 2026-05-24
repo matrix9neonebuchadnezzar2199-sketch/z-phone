@@ -75,22 +75,17 @@ lib.callback.register('z-phone:server:TopupInternetData', function(source, body)
         message = L("notify_inetmax_purchase_successful")
     })
 
-    local content = [[
-Thank you for choosing our services! We are pleased to confirm that your purchase of the internet data package has been successful.
-\
-Total: %s \
-Rate : $%s / %sKB \
-Status : %s \
-\
-Your data package will be activated shortly, and you’ll receive an email with all the necessary details. If you have any questions or need further assistance, please don't hesitate to reach out.
-\
-Thank you for being a valued customer!
-    ]]
     MySQL.Async.insert('INSERT INTO zp_emails (institution, citizenid, subject, content) VALUES (?, ?, ?, ?)', {
         "inetmax",
         Player.citizenid,
-        "Your Internet Data Package Purchase Confirmation",
-        string.format(content, body.total, Config.App.InetMax.TopupRate.Price, Config.App.InetMax.TopupRate.InKB, "Success"),
+        L("email_inetmax_purchase_subject"),
+        string.format(
+            L("email_inetmax_purchase_body"),
+            body.total,
+            Config.App.InetMax.TopupRate.Price,
+            Config.App.InetMax.TopupRate.InKB,
+            L("email_inetmax_status_success")
+        ),
     })
     
     return IncrementBalance
