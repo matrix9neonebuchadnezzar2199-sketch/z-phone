@@ -31,6 +31,9 @@ All notable fixes for [matrix9neonebuchadnezzar2199-sketch/z-phone](https://gith
 - **I-05** NUI axios base URL uses `GetParentResourceName()` when available.
 - **I-04** `fxmanifest.lua` declares dependencies: ox_lib, oxmysql, pma-voice.
 - **i18n Phase 2** Full NUI Japanese via react-i18next (`ja.json` ~250 keys, 32 components). Server/client notifications use `L()` in `locales/ja.lua`. LockScreen weekday/month localized.
+- **Email templates** Wallet/InetMax/Loops confirmation emails use `L("email_*")` keys.
+- **i18n Phase 5 foundation** `en.json`, `locales/en.lua`, `Config.Locale` drives NUI via `profile.locale`.
+- **Services logos** Per-job logo URLs in `Config.Services` (L-01).
 
 ### Configuration
 
@@ -40,7 +43,13 @@ Add to `server.cfg`:
 setr zphone_discord_webhook "https://discord.com/api/webhooks/YOUR_WEBHOOK_HERE"
 ```
 
+```lua
+Config.Core = "QBX"
+Config.OpenPhone = 'M'
+Config.Locale = "ja"   -- set to "en" for English UI
+```
+
 ### Known remaining
 
-- **Runtime verify** See jp-z-phone `docs/VERIFICATION.md` (i18n Phase 2 static check done; live server pending).
-- **Email templates** Wallet transfer confirmation email body still English in `bank.lua`.
+- **Runtime verify** FiveM live server test only remaining item.
+- **ESX** `AddMoneyBankSociety` stub when using ESX core.
