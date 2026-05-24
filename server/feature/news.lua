@@ -48,7 +48,7 @@ lib.callback.register('z-phone:server:CreateNews', function(source, body)
             TriggerClientEvent("z-phone:client:sendNotifInternal", -1, {
                 type = "Notification",
                 from = "News",
-                message = "News from ".. Player.name
+                message = L("notify_news_from", Player.name)
             })
             return true
         else

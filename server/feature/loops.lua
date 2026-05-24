@@ -12,7 +12,7 @@ lib.callback.register('z-phone:server:LoopsLogin', function(source, body)
         if not id then
             return {
                 is_valid = false,
-                message = "Incorrect username or password",
+                message = L("notify_loops_incorrect_credentials"),
             }
         end
 
@@ -43,14 +43,14 @@ lib.callback.register('z-phone:server:LoopsLogin', function(source, body)
 
         return {
             is_valid = true,
-            message = "Welcome back @".. body.username,
+            message = L("notify_loops_welcome_back", body.username),
             profile = profile
         }
     end
 
     return {
         is_valid = false,
-        message = "Try again later!",
+        message = L("notify_loops_try_again"),
     }
 end)
 
@@ -67,7 +67,7 @@ lib.callback.register('z-phone:server:LoopsSignup', function(source, body)
         if duplicateUsername then
             return {
                 is_valid = false,
-                message = "@"..body.username .. " not available",
+                message = L("notify_loops_username_unavailable", body.username),
             }
         end
 
@@ -83,8 +83,8 @@ lib.callback.register('z-phone:server:LoopsSignup', function(source, body)
         if id then
             TriggerClientEvent("z-phone:client:sendNotifInternal", Player.source, {
                 type = "Notification",
-                from = "Loops",
-                message = "Awesome, let's signin!"
+                from = L("notify_from_loops"),
+                message = L("notify_loops_signup_prompt")
             })
             local content = [[
 Welcome aboard! \
@@ -107,19 +107,19 @@ We're excited to see you dive in and start exploring. Welcome to the Loopsverse!
             })
             return {
                 is_valid = true,
-                message = "Loops ".. body.username .. " Has Been Created",
+                message = L("notify_loops_account_created", body.username),
             }
         else
             return {
                 is_valid = false,
-                message = "Find others username!",
+                message = L("notify_loops_find_username")
             }
         end
     end
 
     return {
         is_valid = false,
-        message = "Try again later!",
+        message = L("notify_loops_try_again"),
     }
 end)
 
@@ -204,8 +204,8 @@ lib.callback.register('z-phone:server:SendTweet', function(source, body)
         if loopsUserID == 0 then 
             TriggerClientEvent("z-phone:client:sendNotifInternal", Player.source, {
                 type = "Notification",
-                from = "Loops",
-                message = "Please re-login to post tweet!"
+                from = L("notify_from_loops"),
+                message = L("notify_loops_relogin_tweet")
             })
             return 
         end
@@ -220,8 +220,8 @@ lib.callback.register('z-phone:server:SendTweet', function(source, body)
         if id then
             TriggerClientEvent("z-phone:client:sendNotifInternal", Player.source, {
                 type = "Notification",
-                from = "Loops",
-                message = "Tweet posted!"
+                from = L("notify_from_loops"),
+                message = L("notify_loops_tweet_posted")
             })
             DeductInetMaxUsage(source, Config.App.Loops.Name, Config.App.InetMax.InetMaxUsage.LoopsPostTweet)
             return true
@@ -245,8 +245,8 @@ lib.callback.register('z-phone:server:SendTweetComment', function(source, body)
         if loopsUserID == 0 then 
             TriggerClientEvent("z-phone:client:sendNotifInternal", Player.source, {
                 type = "Notification",
-                from = "Loops",
-                message = "Please re-login to comment tweet!"
+                from = L("notify_from_loops"),
+                message = L("notify_loops_relogin_comment")
             })
             return 
         end
@@ -270,8 +270,8 @@ lib.callback.register('z-phone:server:SendTweetComment', function(source, body)
                     if TargetPlayer ~= nil and TargetPlayer.source ~= source then
                         TriggerClientEvent("z-phone:client:sendNotifInternal", TargetPlayer.source, {
                             type = "Notification",
-                            from = "Loops",
-                            message = "@"..body.comment_username .. " reply on your tweet"
+                            from = L("notify_from_loops"),
+                            message = L("notify_loops_reply_tweet", body.comment_username)
                         })
                     end
                 end
@@ -300,7 +300,7 @@ lib.callback.register('z-phone:server:UpdateLoopsProfile', function(source, body
         if duplicateUsername then
             return {
                 is_valid = false,
-                message = "@"..body.username .. " not available",
+                message = L("notify_loops_username_unavailable", body.username),
             }
         end
         
@@ -312,7 +312,7 @@ lib.callback.register('z-phone:server:UpdateLoopsProfile', function(source, body
         if activeLoopsUserID == 0 then
             return {
                 is_valid = false,
-                message = "Please re-login to update profile!"
+                message = L("notify_loops_relogin_profile")
             }
         end
 
@@ -360,24 +360,24 @@ lib.callback.register('z-phone:server:UpdateLoopsProfile', function(source, body
 
             TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
                 type = "Notification",
-                from = "Loops",
-                message = "Success update account!"
+                from = L("notify_from_loops"),
+                message = L("notify_loops_profile_updated")
             })
             return {
                 is_valid = true,
-                message = "Success update account!",
+                message = L("notify_loops_profile_updated"),
                 profile = profile
             }
         end
         
         return {
             is_valid = false,
-            message = "Please try again later!",
+            message = L("notify_loops_try_again"),
         }
     end
     return {
         is_valid = false,
-        message = "Please try again later!",
+        message = L("notify_loops_try_again"),
     }
 end)
 

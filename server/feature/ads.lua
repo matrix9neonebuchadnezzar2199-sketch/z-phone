@@ -47,8 +47,8 @@ lib.callback.register('z-phone:server:SendAds', function(source, body)
      
     TriggerClientEvent("z-phone:client:sendNotifInternal", -1, {
         type = "Notification",
-        from = "Ads",
-        message = "New ads posted!"
+        from = L("notify_from_ads"),
+        message = L("notify_ads_new_posted")
     })
     DeductInetMaxUsage(source, Config.App.Ads.Name, Config.App.InetMax.InetMaxUsage.AdsPost)
     return true

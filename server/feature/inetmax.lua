@@ -42,8 +42,8 @@ lib.callback.register('z-phone:server:TopupInternetData', function(source, body)
     if Player.money.bank < body.total then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "InetMax",
-            message = "Bank Balance is not enough"
+            from = L("notify_from_inetmax"),
+            message = L("notify_inetmax_bank_balance_not_enough")
         })
         return false
     end
@@ -71,8 +71,8 @@ lib.callback.register('z-phone:server:TopupInternetData', function(source, body)
 
     TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
         type = "Notification",
-        from = "InetMax",
-        message = "Purchase Successful"
+        from = L("notify_from_inetmax"),
+        message = L("notify_inetmax_purchase_successful")
     })
 
     local content = [[

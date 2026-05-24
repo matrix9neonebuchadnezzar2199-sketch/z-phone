@@ -43,7 +43,7 @@ lib.callback.register('z-phone:server:DeleteContact', function(source, body)
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
             from = "Contact",
-            message = "Success delete contact!"
+            message = L("notify_contact_delete_success")
         })
         return true
     end
@@ -67,7 +67,7 @@ lib.callback.register('z-phone:server:UpdateContact', function(source, body)
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
             from = "Contact",
-            message = "Success update contact!"
+            message = L("notify_contact_update_success")
         })
         return true
     end
@@ -88,7 +88,7 @@ lib.callback.register('z-phone:server:SaveContact', function(source, body)
             TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
                 type = "Notification",
                 from = "Contact",
-                message = "Phone Number not registered!"
+                message = L("notify_contact_phone_not_registered")
             })
             return false
         end
@@ -105,7 +105,7 @@ lib.callback.register('z-phone:server:SaveContact', function(source, body)
             TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
                 type = "Notification",
                 from = "Contact",
-                message = "Duplicate contact (".. isDuplicate.contact_name ..")!"
+                message = L("notify_contact_duplicate", isDuplicate.contact_name)
             })
             return false
         end
@@ -124,7 +124,7 @@ lib.callback.register('z-phone:server:SaveContact', function(source, body)
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
             from = "Contact",
-            message = "Success save contact!"
+            message = L("notify_contact_save_success")
         })
         return true
     end
@@ -176,7 +176,7 @@ lib.callback.register('z-phone:server:ShareContact', function(source, body)
     TriggerClientEvent("z-phone:client:sendNotifInternal", body.to_source, {
         type = "Notification",
         from = "Contact",
-        message = "New contact request received!"
+        message = L("notify_contact_request_received")
     })
     return true
 end)

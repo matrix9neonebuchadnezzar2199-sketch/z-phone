@@ -93,7 +93,7 @@ lib.callback.register('z-phone:server:UpdateProfile', function(source, body)
             TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
                 type = "Notification",
                 from = "Setting",
-                message = "Success updated!"
+                message = L("notify_profile_update_success")
             })
             return true
         else

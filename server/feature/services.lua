@@ -45,8 +45,8 @@ lib.callback.register('z-phone:server:SendMessageService', function(source, body
     
     TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
         type = "Notification",
-        from = "Services",
-        message = "Message sended!"
+        from = L("notify_from_services"),
+        message = L("notify_services_message_sent")
     })
     DeductInetMaxUsage(source, Config.App.Services.Name, Config.App.InetMax.InetMaxUsage.ServicesMessage)
     return true
@@ -65,8 +65,8 @@ lib.callback.register('z-phone:server:SolvedMessageService', function(source, bo
     
     TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
         type = "Notification",
-        from = "Services",
-        message = "Message service solved!"
+        from = L("notify_from_services"),
+        message = L("notify_services_solved")
     })
 
     return true

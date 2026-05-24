@@ -22,27 +22,27 @@ lib.callback.register('z-phone:server:StartCall', function(source, body)
     if not targetUser then
         return {
             is_valid = false,
-            message = "Phone number not registered!"
+            message = L("notify_call_phone_not_registered")
         }
     end
 
     if targetUser.is_donot_disturb then
         return {
             is_valid = false,
-            message = "Person is busy!"
+            message = L("notify_call_person_busy")
         }
     end
     
     if InCalls[targetUser.citizenid] then
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Phone",
-            message = "Person in a call!"
+            from = L("notify_from_phone"),
+            message = L("notify_call_person_in_call")
         })
 
         return {
             is_valid = false,
-            message = "Person in a call!"
+            message = L("notify_call_person_in_call")
         }  
     end
 
@@ -63,13 +63,13 @@ lib.callback.register('z-phone:server:StartCall', function(source, body)
     if not TargetPlayer then
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Phone",
-            message = "Person is unavailable to call!"
+            from = L("notify_from_phone"),
+            message = L("notify_call_unavailable")
         })
 
         return {
             is_valid = false,
-            message = "Person is unavailable to call!"
+            message = L("notify_call_unavailable")
         } 
     end
 
@@ -83,14 +83,14 @@ lib.callback.register('z-phone:server:StartCall', function(source, body)
     end
 
     if body.is_anonim then
-        contactNameCaller = "Anonim"
+        contactNameCaller = L("notify_call_anonymous")
         body.from_avatar = ""
     end
 
     TriggerClientEvent("z-phone:client:sendNotifIncomingCall", TargetPlayer.source, {
         from = contactNameCaller,
         photo = body.from_avatar,
-        message = "Incoming call..",
+        message = L("notify_call_incoming"),
         to_source = source,
         from_source = TargetPlayer.source,
         to_person_for_caller = contactNameTarget,
@@ -124,7 +124,7 @@ lib.callback.register('z-phone:server:StartCall', function(source, body)
     return {
         is_valid = true,
         to_source =TargetPlayer.source,
-        message = "Waiting for response!"
+        message = L("notify_call_waiting")
     }  
 end)
 
@@ -158,8 +158,8 @@ lib.callback.register('z-phone:server:DeclineCall', function(source, body)
     if body.to_source then
         TriggerClientEvent("z-phone:client:sendNotifInternal", body.to_source, {
             type = "Notification",
-            from = "Phone",
-            message = "Call declined!"
+            from = L("notify_from_phone"),
+            message = L("notify_call_declined")
         })
     end
     return true
@@ -209,8 +209,8 @@ lib.callback.register('z-phone:server:EndCall', function(source, body)
     if body.to_source then
         TriggerClientEvent("z-phone:client:sendNotifInternal", body.to_source, {
             type = "Notification",
-            from = "Phone",
-            message = "Call ended!"
+            from = L("notify_from_phone"),
+            message = L("notify_call_ended")
         })
 
         TriggerClientEvent("z-phone:client:closeCall", body.to_source)

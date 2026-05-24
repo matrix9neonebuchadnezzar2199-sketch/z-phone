@@ -8,7 +8,7 @@ lib.callback.register('z-phone:server:StartOrContinueChatting', function(source,
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
             from = "Message",
-            message = "Cannot chat to your self!"
+            message = L("notify_chat_cannot_chat_self")
         })
         return nil 
     end
@@ -25,7 +25,7 @@ lib.callback.register('z-phone:server:StartOrContinueChatting', function(source,
             TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
                 type = "Notification",
                 from = "Message",
-                message = "Invalid phone number!"
+                message = L("notify_chat_invalid_phone")
             })
             return nil 
         end
@@ -37,7 +37,7 @@ lib.callback.register('z-phone:server:StartOrContinueChatting', function(source,
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
             from = "Message",
-            message = "Cannot chat to your self!"
+            message = L("notify_chat_cannot_chat_self")
         })
         return nil 
     end
@@ -376,7 +376,7 @@ lib.callback.register('z-phone:server:CreateGroup', function(source, body)
                 TriggerClientEvent("z-phone:client:sendNotifInternal", TargetPlayer.source, {
                     type = "Notification",
                     from = "Message",
-                    message = "You invited to group ".. body.name
+                    message = L("notify_chat_group_invited", body.name)
                 })
             end
         end

@@ -20,8 +20,8 @@ lib.callback.register('z-phone:server:PayInvoice', function(source, body)
     if Player == nil then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Failed to pay bill"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_failed_pay_bill")
         })
         return false
     end
@@ -32,8 +32,8 @@ lib.callback.register('z-phone:server:PayInvoice', function(source, body)
     if not invoice then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Failed to pay bill"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_failed_pay_bill")
         })
         return false
     end
@@ -41,8 +41,8 @@ lib.callback.register('z-phone:server:PayInvoice', function(source, body)
     if Player.money.bank < invoice.amount then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Balance is not enough"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_balance_not_enough")
         })
         return false
     end
@@ -54,8 +54,8 @@ lib.callback.register('z-phone:server:PayInvoice', function(source, body)
     
     TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
         type = "Notification",
-        from = "Wallet",
-        message = "Success pay bill"
+        from = L("notify_from_wallet"),
+        message = L("notify_wallet_success_pay_bill")
     })
     return true
 end)
@@ -65,8 +65,8 @@ lib.callback.register('z-phone:server:TransferCheck', function(source, body)
     if Player == nil then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Failed to check receiver!"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_failed_check_receiver")
         })
         return {
             isValid = false,
@@ -83,8 +83,8 @@ lib.callback.register('z-phone:server:TransferCheck', function(source, body)
     if not receiverCitizenid then
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "IBAN not registered!"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_iban_not_registered")
         })
         return {
             isValid = false,
@@ -95,8 +95,8 @@ lib.callback.register('z-phone:server:TransferCheck', function(source, body)
     if receiverCitizenid == citizenid then
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Cannot transfer to your self!"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_cannot_transfer_self")
         })
         return {
             isValid = false,
@@ -108,8 +108,8 @@ lib.callback.register('z-phone:server:TransferCheck', function(source, body)
     if ReceiverPlayer == nil then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Receiver is offline!"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_receiver_offline")
         })
         return {
             isValid = false,
@@ -130,8 +130,8 @@ lib.callback.register('z-phone:server:Transfer', function(source, body)
     if Player == nil then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Failed to check receiver!"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_failed_check_receiver")
         })
         return false
     end
@@ -143,8 +143,8 @@ lib.callback.register('z-phone:server:Transfer', function(source, body)
     if not total or total < minTransfer then
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = string.format("Minimum transfer amount is $%s", minTransfer)
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_min_transfer", minTransfer)
         })
         return false
     end
@@ -152,8 +152,8 @@ lib.callback.register('z-phone:server:Transfer', function(source, body)
     if Player.money.bank < total then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Balance is not enough"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_balance_not_enough")
         })
         return false
     end
@@ -166,8 +166,8 @@ lib.callback.register('z-phone:server:Transfer', function(source, body)
     if not receiverCitizenid then
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "IBAN not registered!"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_iban_not_registered")
         })
         return false
     end
@@ -175,8 +175,8 @@ lib.callback.register('z-phone:server:Transfer', function(source, body)
     if receiverCitizenid == citizenid then
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Cannot transfer to your self!"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_cannot_transfer_self")
         })
         return false
     end
@@ -185,8 +185,8 @@ lib.callback.register('z-phone:server:Transfer', function(source, body)
     if ReceiverPlayer == nil then 
         TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
             type = "Notification",
-            from = "Wallet",
-            message = "Receiver is offline!"
+            from = L("notify_from_wallet"),
+            message = L("notify_wallet_receiver_offline")
         })
         return false
     end
@@ -218,14 +218,14 @@ Thank you for choosing our services!
 
     TriggerClientEvent("z-phone:client:sendNotifInternal", source, {
         type = "Notification",
-        from = "Wallet",
-        message = "Successful Money Transfer"
+        from = L("notify_from_wallet"),
+        message = L("notify_wallet_transfer_success")
     })
 
     TriggerClientEvent("z-phone:client:sendNotifInternal", ReceiverPlayer.source, {
         type = "Notification",
-        from = "Wallet",
-        message = "Received Money Transfer"
+        from = L("notify_from_wallet"),
+        message = L("notify_wallet_transfer_received")
     })
 
     DeductInetMaxUsage(source, Config.App.Wallet.Name, Config.App.InetMax.InetMaxUsage.BankTransfer)
