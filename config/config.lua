@@ -88,42 +88,52 @@ Config.Signal = {
 Config.Services = {
     goverment = {
         job = "goverment",
-        name = "Goverment",
-        type = "General"
+        name = "市政府",
+        type = "General",
+        logo = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/goverment.png",
     },
     government = {
         job = "government",
-        name = "Government",
-        type = "General"
+        name = "市政府",
+        type = "General",
+        logo = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/government.png",
     },
     police = {
         job = "police",
-        name = "Police",
-        type = "General"
+        name = "警察",
+        type = "General",
+        logo = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/police.png",
     },
     ambulance = {
         job = "ambulance",
-        name = "Ambulance",
-        type = "Health"
+        name = "救急",
+        type = "Health",
+        logo = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/ambulance.png",
     },
     realestate = {
         job = "realestate",
-        name = "Real Estate",
-        type = "Property"
+        name = "不動産",
+        type = "Property",
+        logo = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/realestate.png",
     },
     taxi = {
         job = "taxi",
-        name = "Taxi",
-        type = "Transport"
+        name = "タクシー",
+        type = "Transport",
+        logo = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/taxi.png",
     },
     burgershot = {
         job = "burgershot",
-        name = "Burger Shot",
-        type = "Food"
+        name = "バーガーショット",
+        type = "Food",
+        logo = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/burgershot.png",
     },
     kfc = {
         job = "kfc",
         name = "KFC",
-        type = "Food"
+        type = "Food",
+        logo = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/kfc.png",
     },
 }
+
+Config.DefaultServiceLogo = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/goverment.png"

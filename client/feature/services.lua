@@ -2,7 +2,7 @@ RegisterNUICallback('get-services', function(_, cb)
     local list = {}
     for i, v in pairs(Config.Services) do
         list[#list + 1] = {
-            logo = 'https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/logo/business/goverment.png',
+            logo = v.logo or Config.DefaultServiceLogo,
             service = v.name,
             job = v.job,
             type = v.type,
