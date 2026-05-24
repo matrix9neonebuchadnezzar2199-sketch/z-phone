@@ -30,6 +30,7 @@ All notable fixes for [matrix9neonebuchadnezzar2199-sketch/z-phone](https://gith
 - **M-11** Restoring outside incoming call notification preserves all fields via object spread.
 - **I-05** NUI axios base URL uses `GetParentResourceName()` when available.
 - **I-04** `fxmanifest.lua` declares dependencies: ox_lib, oxmysql, pma-voice.
+- **i18n Phase 2** Full NUI Japanese via react-i18next (`ja.json` ~250 keys, 32 components). Server/client notifications use `L()` in `locales/ja.lua`. LockScreen weekday/month localized.
 
 ### Configuration
 
@@ -41,6 +42,5 @@ setr zphone_discord_webhook "https://discord.com/api/webhooks/YOUR_WEBHOOK_HERE"
 
 ### Known remaining
 
-- **i18n Phase 2** NUI component strings and server notify messages (~250+ keys).
-- **L-04** LockScreen weekday/month names still English.
-- **Runtime verify** See jp-z-phone `docs/VERIFICATION.md` (batch 5 static check done; live server pending).
+- **Runtime verify** See jp-z-phone `docs/VERIFICATION.md` (i18n Phase 2 static check done; live server pending).
+- **Email templates** Wallet transfer confirmation email body still English in `bank.lua`.
