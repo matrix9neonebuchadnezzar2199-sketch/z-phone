@@ -63,10 +63,25 @@ Config.AutoInstallSchema = true   -- false = 手動で z-phone.sql を import
 
 ---
 
+## 新しいアプリを追加する（開発者向け）
+
+コミュニティ開発・PR 用の**正本**は次のガイドです（設計 0 → ビルド 8、InetMax / セキュリティチェックリスト、RP アプリ案付き）。
+
+| ガイド | 内容 |
+|--------|------|
+| **[docs/ADDING-APP.md](docs/ADDING-APP.md)** | **アプリ追加 完全版（日本語）** |
+| [docs/ADDING-APP-EN.md](docs/ADDING-APP-EN.md) | Adding apps (English) |
+
+**最短チェックリスト:** `config.json` → `menu.js` → React → `DynamicComponent` / `App.jsx` → `client/feature` → `server/feature` → i18n → `npm run build`
+
+---
+
 ## ドキュメント
 
 | ドキュメント | 内容 |
 |-------------|------|
+| **[docs/ADDING-APP.md](docs/ADDING-APP.md)** | **アプリ追加ガイド（日本語）** |
+| [docs/ADDING-APP-EN.md](docs/ADDING-APP-EN.md) | Adding apps (English) |
 | **[docs/GUIDE-JA.md](docs/GUIDE-JA.md)** | **詳細ガイド（日本語）** — インストール・設定・i18n・TS |
 | [docs/GUIDE-EN.md](docs/GUIDE-EN.md) | Full guide (English) |
 | [README.en.md](README.en.md) | TOP (English) |

@@ -417,14 +417,25 @@ npm run dev
 
 ## アプリを追加する
 
-1. `config.json` — APPS + MENUS
-2. `menu.js` — export 定数
-3. React Component
-4. `DynamicComponent.jsx` — ルーティング
-5. `App.jsx` — fetch
-6. `client/feature/*.lua` — NUICallback
-7. `server/feature/*.lua` — lib.callback
-8. `npm run build`
+コミュニティ開発・PR 向けの**正本**は専用ガイドです（Step 0 設計〜 Step 8 ビルド、InetMax / セキュリティチェックリスト、RP アプリ案）。
+
+| ガイド | 内容 |
+|--------|------|
+| **[ADDING-APP.md](ADDING-APP.md)** | **完全版（日本語）** |
+| [ADDING-APP-EN.md](ADDING-APP-EN.md) | English |
+
+**8 ステップ概要**
+
+1. 設計 — ID・DB・job・InetMax・通知  
+2. `config.json` — `APPS` + `MENUS`  
+3. `menu.js` — export  
+4. React — `*Component.jsx` + `MenuContext`  
+5. `DynamicComponent.jsx` + `App.jsx` — `axios.post` でデータ取得  
+6. `client/feature/*.lua` — `RegisterNUICallback`  
+7. `server/feature/*.lua` — `lib.callback` + `DeductInetMaxUsage` + `00a_schema`  
+8. i18n + `npm run build`
+
+新規 DB は `server/00a_schema.lua` の `SCHEMA` に `CREATE TABLE IF NOT EXISTS` を追記（`zp_` 接頭辞）。外部 API は server のみ。
 
 ---
 
@@ -434,6 +445,8 @@ npm run dev
 |----------|------|
 | [../README.md](../README.md) | TOP（日本語） |
 | [../README.en.md](../README.en.md) | TOP (English) |
+| [ADDING-APP.md](ADDING-APP.md) | アプリ追加（日本語） |
+| [ADDING-APP-EN.md](ADDING-APP-EN.md) | Adding apps (English) |
 | [GUIDE-EN.md](GUIDE-EN.md) | Full guide (English) |
 | [CHANGELOG.md](CHANGELOG.md) | 変更履歴（英語） |
 | [alfaben12/z-phone](https://github.com/alfaben12/z-phone) | 本家 README |

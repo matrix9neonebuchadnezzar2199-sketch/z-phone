@@ -416,14 +416,25 @@ npm run dev
 
 ## Adding an app
 
-1. `config.json` — APPS + MENUS
-2. `menu.js` — export constants
-3. React component
-4. `DynamicComponent.jsx` — routing
-5. `App.jsx` — fetch handlers
-6. `client/feature/*.lua` — NUICallback
-7. `server/feature/*.lua` — lib.callback
-8. `npm run build`
+Canonical guide for community PRs (Step 0 design → Step 8 build, InetMax / security checklist, app ideas).
+
+| Guide | Description |
+|-------|-------------|
+| **[ADDING-APP-EN.md](ADDING-APP-EN.md)** | **Full guide (English)** |
+| [ADDING-APP.md](ADDING-APP.md) | 日本語版 |
+
+**8-step summary**
+
+1. Design — ID, DB, jobs, InetMax, notifications  
+2. `config.json` — `APPS` + `MENUS`  
+3. `menu.js` — exports  
+4. React — `*Component.jsx` + `MenuContext`  
+5. `DynamicComponent.jsx` + `App.jsx` — `axios.post` data fetch  
+6. `client/feature/*.lua` — `RegisterNUICallback`  
+7. `server/feature/*.lua` — `lib.callback` + `DeductInetMaxUsage` + `00a_schema`  
+8. i18n + `npm run build`
+
+New tables: append to `server/00a_schema.lua` `SCHEMA` (`zp_` prefix). External APIs: server only.
 
 ---
 
@@ -433,6 +444,8 @@ npm run dev
 |------|-------------|
 | [../README.en.md](../README.en.md) | TOP (English) |
 | [../README.md](../README.md) | TOP (日本語) |
+| [ADDING-APP-EN.md](ADDING-APP-EN.md) | Adding apps (English) |
+| [ADDING-APP.md](ADDING-APP.md) | アプリ追加（日本語） |
 | [GUIDE-JA.md](GUIDE-JA.md) | Full guide (日本語) |
 | [CHANGELOG.md](CHANGELOG.md) | Changelog |
 | [alfaben12/z-phone](https://github.com/alfaben12/z-phone) | Upstream README |

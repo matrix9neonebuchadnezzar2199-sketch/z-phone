@@ -63,10 +63,25 @@ Details: **[Full guide](docs/GUIDE-EN.md#improvements-over-upstream)**
 
 ---
 
+## Adding a new app (developers)
+
+Canonical step-by-step guide for community contributions:
+
+| Guide | Description |
+|-------|-------------|
+| **[docs/ADDING-APP-EN.md](docs/ADDING-APP-EN.md)** | **Full guide (English)** |
+| [docs/ADDING-APP.md](docs/ADDING-APP.md) | アプリ追加（日本語） |
+
+**Quick path:** `config.json` → `menu.js` → React → `DynamicComponent` / `App.jsx` → `client/feature` → `server/feature` → i18n → `npm run build`
+
+---
+
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
+| **[docs/ADDING-APP-EN.md](docs/ADDING-APP-EN.md)** | **Adding apps (English)** |
+| [docs/ADDING-APP.md](docs/ADDING-APP.md) | アプリ追加（日本語） |
 | **[docs/GUIDE-EN.md](docs/GUIDE-EN.md)** | **Full guide** — install, config, i18n, troubleshooting |
 | [docs/GUIDE-JA.md](docs/GUIDE-JA.md) | 日本語版ガイド |
 | [docs/CHANGELOG.md](docs/CHANGELOG.md) | Changelog |

@@ -43,6 +43,7 @@ All notable fixes for [matrix9neonebuchadnezzar2199-sketch/z-phone](https://gith
 
 - **README restructure** TOP page slimmed to quick-start; install, config, i18n, troubleshooting, and app-add steps moved to `docs/GUIDE-JA.md`.
 - **English docs** Added `README.en.md` and `docs/GUIDE-EN.md` with cross-links to Japanese versions.
+- **Developer guides** Expanded `docs/ADDING-APP.md` / `ADDING-APP-EN.md` (full app development workflow, security checklist, app ideas). Linked from README and GUIDE.
 
 ### Configuration
 
