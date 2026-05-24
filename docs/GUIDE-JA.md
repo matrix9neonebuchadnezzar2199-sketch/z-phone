@@ -1,6 +1,8 @@
 # Z-Phone 詳細ガイド（日本語 RP 向けフォーク）
 
-> **README が TOP ページ** — 最短導入は [../README.md](../README.md)。  
+**Languages:** **日本語 (GUIDE-JA)** · [English (GUIDE-EN)](GUIDE-EN.md)
+
+> **README が TOP ページ** — 最短導入は [../README.md](../README.md) · [../README.en.md](../README.en.md) (English)。  
 > 本ファイルは設計・設定・トラブルシューティングの**詳細版**です。
 
 | 読者 | 最初に読む章 |
@@ -47,6 +49,7 @@
 2. **i18n Phase 2 完了** — NUI 32 コンポーネント + サーバー通知 ~60 件
 3. セキュリティ強化 — InetMax server 権威化（C-03）、PayInvoice / 送金下限検証
 4. 多言語基盤 — `locales/en.lua` + `en.json` + `Config.Locale`
+5. **DB 自動作成** — 起動時 16 テーブル（`Config.AutoInstallSchema`）
 
 ---
 
@@ -171,7 +174,7 @@ flowchart TB
 | 通話音声 | pma-voice（`call_id`） |
 | InetMax | server `DeductInetMaxUsage`（成功 callback のみ） |
 
-**server スクリプト読込順（C-03）:** `server/00_inetmax_usage.lua` が `server/**` より先にロードされます。
+**server スクリプト読込順:** `server/00a_schema.lua` → `server/00_inetmax_usage.lua` → core / feature / main。
 
 ---
 
@@ -421,7 +424,7 @@ npm run dev
 5. `App.jsx` — fetch
 6. `client/feature/*.lua` — NUICallback
 7. `server/feature/*.lua` — lib.callback
-| 8. `npm run build` — 詳細は monorepo の `docs/ADDING-APP.md` を参照（jp-z-phone 利用時） |
+8. `npm run build`
 
 ---
 
@@ -429,7 +432,9 @@ npm run dev
 
 | ファイル | 内容 |
 |----------|------|
-| [../README.md](../README.md) | TOP（最短導入） |
+| [../README.md](../README.md) | TOP（日本語） |
+| [../README.en.md](../README.en.md) | TOP (English) |
+| [GUIDE-EN.md](GUIDE-EN.md) | Full guide (English) |
 | [CHANGELOG.md](CHANGELOG.md) | 変更履歴（英語） |
 | [alfaben12/z-phone](https://github.com/alfaben12/z-phone) | 本家 README |
 

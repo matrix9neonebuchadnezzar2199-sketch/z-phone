@@ -1,5 +1,7 @@
 # Z-Phone（日本語 RP 向けフォーク）
 
+**Languages:** **日本語** · [English](README.en.md)
+
 [![License: DWYWDBM](https://img.shields.io/badge/License-DWYWDBM-blue.svg)](LICENSE)
 [![FiveM](https://img.shields.io/badge/FiveM-Resource-6c3fb5.svg)](https://docs.fivem.net/)
 [![GitHub](https://img.shields.io/badge/GitHub-matrix9neonebuchadnezzar2199--sketch%2Fz--phone-181717.svg?logo=github)](https://github.com/matrix9neonebuchadnezzar2199-sketch/z-phone)
@@ -20,7 +22,7 @@ iPhone 15 風 NUI で、連絡先・通話・銀行・SNS（Loops）・ニュー
 git clone https://github.com/matrix9neonebuchadnezzar2199-sketch/z-phone.git
 ```
 
-`mysql ... < z-phone.sql` は **不要**（デフォルトで起動時に 16 テーブル自動作成）。手動管理する場合は [GUIDE-JA.md](docs/GUIDE-JA.md#データベース) を参照。
+`mysql ... < z-phone.sql` は **不要**（デフォルトで起動時に 16 テーブル自動作成）。手動管理する場合は [GUIDE-JA.md](docs/GUIDE-JA.md#3-データベース) を参照。
 
 ```cfg
 # server.cfg
@@ -55,7 +57,7 @@ Config.AutoInstallSchema = true   -- false = 手動で z-phone.sql を import
 | **Critical** | 送金バグ修正（C-01）、Webhook convar 化（C-02）、InetMax server 権威化（C-03） |
 | **High** | QBX 請求書接続、PayInvoice 検証、通話 nil ガード |
 | **i18n** | NUI 全文日本語 + `Config.Locale` で ja/en 切替 |
-| **その他** | 着信リング統合、GetChats 修正、Services 職種別 logo |
+| **Ops** | DB 自動作成（AutoInstallSchema）、着信リング統合、GetChats 修正、Services logo |
 
 一覧・背景は **[詳細ガイド](docs/GUIDE-JA.md#本家からの改善点)** を参照。
 
@@ -65,7 +67,9 @@ Config.AutoInstallSchema = true   -- false = 手動で z-phone.sql を import
 
 | ドキュメント | 内容 |
 |-------------|------|
-| **[docs/GUIDE-JA.md](docs/GUIDE-JA.md)** | **詳細ガイド** — インストール・設定・i18n・トラブルシューティング |
+| **[docs/GUIDE-JA.md](docs/GUIDE-JA.md)** | **詳細ガイド（日本語）** — インストール・設定・i18n・TS |
+| [docs/GUIDE-EN.md](docs/GUIDE-EN.md) | Full guide (English) |
+| [README.en.md](README.en.md) | TOP (English) |
 | [docs/CHANGELOG.md](docs/CHANGELOG.md) | 変更履歴 |
 
 ---
@@ -110,5 +114,5 @@ npm run build
 ---
 
 <p align="center">
-  <sub>Based on <a href="https://github.com/alfaben12/z-phone">alfaben12/z-phone</a> · <a href="docs/GUIDE-JA.md">詳細ガイド</a></sub>
+  <sub>Based on <a href="https://github.com/alfaben12/z-phone">alfaben12/z-phone</a> · <a href="docs/GUIDE-JA.md">詳細ガイド</a> · <a href="README.en.md">English</a></sub>
 </p>
