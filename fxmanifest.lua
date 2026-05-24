@@ -20,7 +20,11 @@ client_scripts {
 
 server_scripts {
   	"@oxmysql/lib/MySQL.lua",
-	"server/**"
+	"server/00a_schema.lua",
+	"server/00_inetmax_usage.lua",
+	"server/core/**",
+	"server/feature/**",
+	"server/main.lua",
 }
 
 shared_scripts {

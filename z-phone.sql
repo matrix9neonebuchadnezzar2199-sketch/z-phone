@@ -1,17 +1,10 @@
 /*
- Navicat Premium Data Transfer
+ z-phone schema (manual import — optional when Config.AutoInstallSchema = true)
 
- Source Server         : localhost
- Source Server Type    : MySQL
- Source Server Version : 100422 (10.4.22-MariaDB)
- Source Host           : localhost:3306
- Source Schema         : zphone
+ Default: tables are created automatically on resource start via server/00a_schema.lua.
+ Use this file when AutoInstallSchema = false, or for DBA / fresh DB setup with HeidiSQL.
 
- Target Server Type    : MySQL
- Target Server Version : 100422 (10.4.22-MariaDB)
- File Encoding         : 65001
-
- Date: 30/11/2024 12:40:23
+ WARNING: This dump includes DROP TABLE — do NOT run on production with existing data.
 */
 
 SET NAMES utf8mb4;

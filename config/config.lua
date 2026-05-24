@@ -8,6 +8,10 @@ Config.CallRepeats = 5
 
 Config.Locale = "ja"
 
+-- Create zp_* tables on resource start when missing (see server/00a_schema.lua).
+-- Set false if your DBA manages schema via z-phone.sql manually.
+Config.AutoInstallSchema = true
+
 Config.App = {
     InetMax = {
         Name = "InetMax",

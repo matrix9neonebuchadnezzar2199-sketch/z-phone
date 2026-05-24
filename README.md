@@ -18,8 +18,9 @@ iPhone 15 風 NUI で、連絡先・通話・銀行・SNS（Loops）・ニュー
 
 ```powershell
 git clone https://github.com/matrix9neonebuchadnezzar2199-sketch/z-phone.git
-mysql -u USER -p DATABASE < z-phone.sql
 ```
+
+`mysql ... < z-phone.sql` は **不要**（デフォルトで起動時に 16 テーブル自動作成）。手動管理する場合は [GUIDE-JA.md](docs/GUIDE-JA.md#データベース) を参照。
 
 ```cfg
 # server.cfg
@@ -40,6 +41,7 @@ ensure z-phone
 ```lua
 Config.Core = "QBX"
 Config.Locale = "ja"   -- "en" で英語 UI
+Config.AutoInstallSchema = true   -- false = 手動で z-phone.sql を import
 ```
 
 着信音は [本家手順](https://github.com/alfaben12/z-phone#required-import-sound) で interact-sound へコピー。

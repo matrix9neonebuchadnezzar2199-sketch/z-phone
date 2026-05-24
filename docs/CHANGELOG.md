@@ -35,6 +35,10 @@ All notable fixes for [matrix9neonebuchadnezzar2199-sketch/z-phone](https://gith
 - **i18n Phase 5 foundation** `en.json`, `locales/en.lua`, `Config.Locale` drives NUI via `profile.locale`.
 - **Services logos** Per-job logo URLs in `Config.Services` (L-01).
 
+### Added
+
+- **Auto-install schema** On resource start, creates 16 `zp_*` tables via `CREATE TABLE IF NOT EXISTS` when `Config.AutoInstallSchema = true` (default). Manual `z-phone.sql` import remains optional.
+
 ### Documentation
 
 - **README restructure** TOP page slimmed to quick-start; install, config, i18n, troubleshooting, and app-add steps moved to `docs/GUIDE-JA.md`.
