@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import MenuContext from "./context/MenuContext";
 import {
   MENU_ADS,
@@ -36,6 +37,7 @@ import { FaBell } from "react-icons/fa6";
 import { MdCall } from "react-icons/md";
 
 function App() {
+  const { t } = useTranslation();
   const {
     notificationMessage,
     menu,
@@ -921,7 +923,7 @@ function App() {
     }
 
     const newMessage = {
-      time: "just now",
+      time: t("common.time.just_now"),
       message: notificationMessage.message,
       media: notificationMessage.media,
       sender_citizenid: notificationMessage.from_citizenid,
@@ -1065,7 +1067,9 @@ function App() {
                     {outsideMessageNotif.message}
                   </span>
                   <div className="flex space-x-1 text-white">
-                    <span className="text-sm">From</span>
+                    <span className="text-sm">
+                      {t("shell.outside_notification.from_label")}
+                    </span>
                     <span className="text-sm font-semibold">
                       {outsideMessageNotif.from}
                     </span>
@@ -1090,7 +1094,9 @@ function App() {
                     {outsideCallNotif.message}
                   </span>
                   <div className="flex space-x-1 text-white">
-                    <span className="text-sm">From</span>
+                    <span className="text-sm">
+                      {t("shell.outside_notification.from_label")}
+                    </span>
                     <span className="text-sm font-semibold">
                       {outsideCallNotif.from}
                     </span>
@@ -1155,7 +1161,7 @@ function App() {
                       />
                     </div>
                     <span className="text-xs font-medium text-white pl-1">
-                      5G
+                      {t("shell.status_bar.network_label")}
                     </span>
                     <div>
                       <svg

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew, MdClose } from "react-icons/md";
@@ -6,6 +7,7 @@ import LoadingComponent from "./LoadingComponent";
 import axios from "axios";
 
 const GalleryComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { resolution, setMenu, photos, setPhotos } = useContext(MenuContext);
   const [isShowModal, setIsShowModal] = useState(false);
   const [dataModal, setDataModal] = useState(null);
@@ -71,7 +73,7 @@ const GalleryComponent = ({ isShow }) => {
                   className="rounded-full bg-red-500 text-white text-xs px-2 py-1"
                   onClick={handleDelete}
                 >
-                  Delete
+                  {t("common.delete")}
                 </button>
               </div>
               <div>
@@ -90,10 +92,10 @@ const GalleryComponent = ({ isShow }) => {
           onClick={() => setMenu(MENU_DEFAULT)}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Photos
+          {t("gallery.title")}
         </span>
         <div className="flex items-center px-2 text-blue-500">
           {/* <MdEdit className='text-lg' /> */}

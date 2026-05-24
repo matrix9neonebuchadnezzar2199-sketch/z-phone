@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT, MENU_MESSAGE_CHATTING } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew, MdOutlineSearch } from "react-icons/md";
@@ -8,6 +9,7 @@ import Select from "react-select";
 import axios from "axios";
 
 const MessageComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { setMenu, chats, resolution, setChats, chatsBk, setChatting } =
     useContext(MenuContext);
   const [isOpenCreate, setIsOpenCreate] = useState(false);
@@ -33,14 +35,12 @@ const MessageComponent = ({ isShow }) => {
 
   const handleCreateGroup = async () => {
     if (selectedGroupContact.length < 3) {
-      setErrorCreateGroup(
-        "Please add at least three contacts to create a group."
-      );
+      setErrorCreateGroup(t("message.group.error.min_contacts"));
       return;
     }
 
     if (groupName == "") {
-      setErrorCreateGroup("Please fill group name.");
+      setErrorCreateGroup(t("message.group.error.name_required"));
       return;
     }
 
@@ -121,7 +121,7 @@ const MessageComponent = ({ isShow }) => {
                 options={contactGroup}
                 className="text-black text-sm bg-black w-full"
                 classNamePrefix="select"
-                placeholder="Choose contact"
+                placeholder={t("message.group.placeholder.choose_contact")}
                 onChange={handleChangeSelectedGroupContact}
                 styles={{
                   menu: (provided) => ({
@@ -139,7 +139,7 @@ const MessageComponent = ({ isShow }) => {
             </div>
             <input
               type="text"
-              placeholder="Group Name"
+              placeholder={t("message.group.placeholder.group_name")}
               className="w-full text-sm text-white flex-1 border border-slate-600 bg-slate-800 focus:outline-none rounded pl-2 pr-1 py-2.5"
               autoComplete="off"
               name="name"
@@ -148,9 +148,7 @@ const MessageComponent = ({ isShow }) => {
               onChange={handleChangeGroupName}
             />
             <span className="text-white text-xs pb-1 pt-1">
-              <strong>Note</strong>: Only saved contacts can be added. The group
-              creator serves as the admin, so please set conditions for the
-              group.
+              {t("message.group.note_admin")}
               {/* Only saved contacts can be added, but other
               members can also add contacts from their saved list. The group
               creator serves as the admin, so please set conditions for the
@@ -163,7 +161,7 @@ const MessageComponent = ({ isShow }) => {
               className="px-2 py-1 bg-blue-500 rounded font-semibold text-sm text-white"
               onClick={handleCreateGroup}
             >
-              Create Group
+              {t("message.group.create_button")}
             </button>
           </div>
         </div>
@@ -175,10 +173,10 @@ const MessageComponent = ({ isShow }) => {
           onClick={() => setMenu(MENU_DEFAULT)}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Message
+          {t("message.title")}
         </span>
         <div className="flex items-center px-2 text-blue-500">
           {/* <MdEdit className='text-lg' /> */}
@@ -202,7 +200,7 @@ const MessageComponent = ({ isShow }) => {
               </div>
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder={t("common.search")}
                 className="text-sm w-full text-white flex-1 border border-gray-700 focus:outline-none rounded-full px-2 py-1 pl-8 bg-[#3B3B3B]"
                 autoComplete="off"
                 onKeyUp={(e) => {

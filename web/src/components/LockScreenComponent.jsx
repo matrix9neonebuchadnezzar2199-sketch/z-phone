@@ -1,40 +1,43 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT, NAME, CFG_LATEST_NEWS } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { FaAngleUp } from "react-icons/fa6";
 
-const dateNow = new Date();
-const dateNumber = dateNow.getDate();
-const hour = dateNow.getHours();
-const minute = dateNow.getMinutes();
-let day = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-][new Date().getDay()];
+const weekdayKeys = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+];
 
-const month = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-][new Date().getMonth()];
+const monthKeys = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+];
 
 const LockScreenComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { time, resolution, profile, setMenu } = useContext(MenuContext);
   const [isOpen, setIsOpen] = useState(false);
+
+  const dateNow = new Date();
+  const dateNumber = dateNow.getDate();
+  const day = t(`lockscreen.weekday.${weekdayKeys[dateNow.getDay()]}`);
+  const month = t(`lockscreen.month.${monthKeys[dateNow.getMonth()]}`);
 
   useEffect(() => {
     setIsOpen(false);
@@ -101,8 +104,12 @@ const LockScreenComponent = ({ isShow }) => {
           >
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-xs font-bold">{NAME} Reporter</p>
-                <h2 className="text-lg font-bold">Latest News</h2>
+                <p className="text-xs font-bold">
+                  {t("lockscreen.news.reporter_brand", { name: NAME })}
+                </p>
+                <h2 className="text-lg font-bold">
+                  {t("lockscreen.news.latest_title")}
+                </h2>
               </div>
             </div>
             <div className="mt-2 flex flex-col">
@@ -130,7 +137,9 @@ const LockScreenComponent = ({ isShow }) => {
             </div>
             <hr className="mt-4 border-black/20" />
             <div className="col-span-2 pt-2">
-              <h3 className="text-xs font-bold">More Updates</h3>
+              <h3 className="text-xs font-bold">
+                {t("lockscreen.news.more_updates_title")}
+              </h3>
               <p className="mt-0.5 text-xs line-clamp-2">
                 {CFG_LATEST_NEWS.more_updates}
               </p>

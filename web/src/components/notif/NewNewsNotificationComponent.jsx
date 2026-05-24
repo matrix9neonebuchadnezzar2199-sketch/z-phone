@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import MenuContext from "../../context/MenuContext";
 import useSound from "use-sound";
 import notificationNewsSound from "/sounds/message-sound.mp3";
-import { MENU_NEW_NEWS_NOTIFICATION } from "../../constant/menu";
 
 const NewNewsNotificationComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { notificationNews, setNotificationNews } = useContext(MenuContext);
   const [play] = useSound(notificationNewsSound);
 
@@ -37,7 +38,7 @@ const NewNewsNotificationComponent = ({ isShow }) => {
               {notificationNews.from}
             </span>
             <span className="text-xs text-gray-300 line-clamp-1">
-              {MENU_NEW_NEWS_NOTIFICATION}
+              {t("news.notification.reporter_news")}
             </span>
           </div>
         </div>

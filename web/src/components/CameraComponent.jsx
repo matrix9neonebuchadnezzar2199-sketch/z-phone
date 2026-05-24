@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT, MENU_GALLERY } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew } from "react-icons/md";
 import axios from "axios";
 
 const CameraComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { setMenu } = useContext(MenuContext);
 
   function hide() {
@@ -77,10 +79,10 @@ const CameraComponent = ({ isShow }) => {
           }}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Camera
+          {t("camera.title")}
         </span>
         <div className="flex items-center px-2 text-white cursor-pointer"></div>
       </div>
@@ -91,7 +93,7 @@ const CameraComponent = ({ isShow }) => {
         }}
       >
         <div className="pt-5 flex justify-center text-sm">
-          Photos can check on gallery!
+          {t("camera.hint.check_gallery")}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import MenuContext from "../../context/MenuContext";
 import { LOOPS_DETAIL, LOOPS_PROFILE, LOOPS_TWEETS } from "./loops_constant";
@@ -17,6 +18,7 @@ const LoopsDetailComponent = ({
   setSelectedTweet,
   setProfileID,
 }) => {
+  const { t } = useTranslation();
   const { resolution, tweets, setTweets, setMenu, profile } =
     useContext(MenuContext);
   const [comments, setComments] = useState([]);
@@ -107,7 +109,7 @@ const LoopsDetailComponent = ({
               }}
             >
               <MdArrowBackIosNew className="text-lg" />
-              <span className="text-xs">Back</span>
+              <span className="text-xs">{t("common.back")}</span>
             </div>
             <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
             <div className="flex items-center px-2 space-x-2 text-white">
@@ -200,7 +202,7 @@ const LoopsDetailComponent = ({
                   <input
                     type="text"
                     className="bg-black text-xs font-medium w-full focus:outline-none text-white ml-2"
-                    placeholder="Comment"
+                    placeholder={t("loops.comment.placeholder")}
                     autoComplete="off"
                     name="comment"
                     value={formData.comment}

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT, MENU_MESSAGE_CHATTING } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import {
@@ -17,6 +18,7 @@ import axios from "axios";
 import { MENU_START_CALL_NOTIFICATION } from "./../constant/menu";
 
 const ContactComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const {
     resolution,
     contacts,
@@ -91,7 +93,7 @@ const ContactComponent = ({ isShow }) => {
         <div className="flex flex-col justify-center rounded-xl h-full w-full px-3">
           <div className="bg-slate-700 rounded-lg py-2 flex flex-col w-full p-3">
             <div className="flex justify-between items-center pb-2">
-              <span className="truncate font-semibold">Update Contact</span>
+              <span className="truncate font-semibold">{t("contact.edit_modal.title")}</span>
               <div>
                 <MdClose
                   className="text-2xl cursor-pointer text-white hover:text-red-500"
@@ -102,13 +104,13 @@ const ContactComponent = ({ isShow }) => {
             <form onSubmit={handleEditSubmit} className="w-full">
               <div className="flex flex-col gap-1 py-2 text-xs">
                 <span className="flex justify-between items-center text-sm">
-                  <span>Name:</span>
+                  <span>{t("contact.edit_modal.name_label")}</span>
                   <span>
                     <input
                       name="name"
                       value={formEdit?.name}
                       className="border-b w-full font-medium focus:outline-none bg-slate-700"
-                      placeholder="John"
+                      placeholder={t("contact.edit_modal.name_placeholder")}
                       onChange={handleEdit}
                       autoComplete="off"
                       required
@@ -116,11 +118,11 @@ const ContactComponent = ({ isShow }) => {
                   </span>
                 </span>
                 <span className="flex justify-between items-center text-sm">
-                  <span>Phone:</span>
+                  <span>{t("contact.edit_modal.phone_label")}</span>
                   <span>{formEdit?.phone_number}</span>
                 </span>
                 <span className="flex justify-between items-center text-sm">
-                  <span>Add at:</span>
+                  <span>{t("contact.edit_modal.added_at_label")}</span>
                   <span>{formEdit?.add_at}</span>
                 </span>
                 <div className="flex justify-end pt-2">
@@ -128,7 +130,7 @@ const ContactComponent = ({ isShow }) => {
                     className="flex font-medium rounded-full text-white bg-blue-500 px-3 py-1 text-sm items-center justify-center"
                     type="submit"
                   >
-                    <span>SAVE</span>
+                    <span>{t("common.save")}</span>
                   </button>
                 </div>
               </div>
@@ -147,10 +149,10 @@ const ContactComponent = ({ isShow }) => {
           }}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Contact
+          {t("contact.title")}
         </span>
         <div
           className="flex items-center space-x-1 px-2 group text-white hover:text-green-300"
@@ -165,7 +167,7 @@ const ContactComponent = ({ isShow }) => {
           }}
         >
           <span className="text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Share
+            {t("contact.action.share")}
           </span>
           <FaShare className="text-lg" />
         </div>
@@ -187,7 +189,7 @@ const ContactComponent = ({ isShow }) => {
               </div>
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder={t("common.search")}
                 className="text-sm w-full text-white flex-1 border border-gray-700 focus:outline-none rounded-full px-2 py-1 pl-8 bg-[#3B3B3B]"
                 autoComplete="off"
                 onKeyUp={(e) => {

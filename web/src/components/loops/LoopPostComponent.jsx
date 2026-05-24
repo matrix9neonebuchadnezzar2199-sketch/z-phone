@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import MenuContext from "../../context/MenuContext";
 import { LOOPS_DETAIL, LOOPS_PROFILE, LOOPS_TWEETS } from "./loops_constant";
@@ -11,6 +12,7 @@ import { LuRepeat2 } from "react-icons/lu";
 import { IoCamera } from "react-icons/io5";
 
 const LoopPostComponent = ({ isShow, setSubMenu, setProfileID }) => {
+  const { t } = useTranslation();
   const { resolution, profile, tweets, setTweets, setMenu } =
     useContext(MenuContext);
 
@@ -105,7 +107,7 @@ const LoopPostComponent = ({ isShow, setSubMenu, setProfileID }) => {
               }}
             >
               <MdArrowBackIosNew className="text-lg" />
-              <span className="text-xs">Back</span>
+              <span className="text-xs">{t("common.back")}</span>
             </div>
             <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
             <div className="flex items-center px-2 space-x-2 text-white">
@@ -139,7 +141,7 @@ const LoopPostComponent = ({ isShow, setSubMenu, setProfileID }) => {
                     value={formData.tweet}
                     name="tweet"
                     onChange={handleChange}
-                    placeholder="What's happening?"
+                    placeholder={t("loops.post.placeholder")}
                     rows={4}
                     className="focus:outline-none text-white w-full text-xs resize-none no-scrollbar bg-gray-900 rounded-lg"
                     required
@@ -154,7 +156,7 @@ const LoopPostComponent = ({ isShow, setSubMenu, setProfileID }) => {
                     type="submit"
                     className="rounded-full bg-[#1d9cf0] px-4 py-1 font-semibold text-white text-sm hover:bg-[#0975bd]"
                   >
-                    Post
+                    {t("loops.post.submit")}
                   </button>
                 </div>
               </div>

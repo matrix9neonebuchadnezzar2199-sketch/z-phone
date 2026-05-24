@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT, NAME } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew, MdClose, MdWhatsapp } from "react-icons/md";
@@ -7,6 +8,7 @@ import LoadingComponent from "./LoadingComponent";
 import axios from "axios";
 
 const HouseComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { setMenu, houses, resolution } = useContext(MenuContext);
   const [isShowModal, setIsShowModal] = useState(false);
   const [dataModal, setDataModal] = useState(null);
@@ -75,7 +77,7 @@ const HouseComponent = ({ isShow }) => {
                 </div>
                 <div className="flex flex-col gap-1 border-b py-2 text-xs">
                   <span className="flex justify-between">
-                    <span className="text-gray-800 text-sm">Keyholders:</span>
+                    <span className="text-gray-800 text-sm">{t("house.detail.keyholders")}</span>
                     <div className="flex flex-col space-y-1 font-semibold">
                       {dataModal.keyholders.map((v, i) => {
                         return <span>{v}</span>;
@@ -108,7 +110,7 @@ const HouseComponent = ({ isShow }) => {
                     <div>
                       <FaHouse className="text-sm" />
                     </div>
-                    <span>E-Property by {NAME}</span>
+                    <span>{t("house.footer.brand", { name: NAME })}</span>
                   </span>
                 </div>
               </div>
@@ -122,10 +124,10 @@ const HouseComponent = ({ isShow }) => {
           onClick={() => setMenu(MENU_DEFAULT)}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Houses
+          {t("house.title")}
         </span>
         <div className="flex items-center px-2 text-blue-500">
           {/* <MdEdit className='text-lg' /> */}
@@ -176,18 +178,18 @@ const HouseComponent = ({ isShow }) => {
                   </div>
                   <div className="flex flex-col gap-1 text-xs">
                     <span className="flex justify-between">
-                      <span className="text-gray-200">Tier:</span>
+                      <span className="text-gray-200">{t("house.card.tier")}</span>
                       <span>{v.tier}</span>
                     </span>
                     <span className="flex justify-between">
-                      <span className="text-gray-200">Keyholders:</span>
+                      <span className="text-gray-200">{t("house.detail.keyholders")}</span>
                       <span className="truncate">
-                        {v.keyholders.length} Keys
+                        {t("house.card.keys_count", { count: v.keyholders.length })}
                       </span>
                     </span>
                     <span className="flex justify-between">
-                      <span className="text-gray-100">Garage:</span>
-                      <span>{v.is_has_garage ? "Yes" : "No"}</span>
+                      <span className="text-gray-100">{t("house.card.garage")}</span>
+                      <span>{v.is_has_garage ? t("common.yes") : t("common.no")}</span>
                     </span>
                   </div>
                 </div>
@@ -195,16 +197,16 @@ const HouseComponent = ({ isShow }) => {
                 <div className="px-6 pt-4 pb-2">
                   <div className="flex flex-col gap-1 text-xs">
                     <span className="flex justify-between">
-                      <span className="text-gray-100">House Locked:</span>
-                      <span>{v.is_house_locked ? "Yes" : "No"}</span>
+                      <span className="text-gray-100">{t("house.card.house_locked")}</span>
+                      <span>{v.is_house_locked ? t("common.yes") : t("common.no")}</span>
                     </span>
                     <span className="flex justify-between">
-                      <span className="text-gray-100">Garage Locked:</span>
-                      <span>{v.is_garage_locked ? "Yes" : "No"}</span>
+                      <span className="text-gray-100">{t("house.card.garage_locked")}</span>
+                      <span>{v.is_garage_locked ? t("common.yes") : t("common.no")}</span>
                     </span>
                     <span className="flex justify-between">
-                      <span className="text-gray-200">Stash Locked:</span>
-                      <span>{v.is_stash_locked ? "Yes" : "No"}</span>
+                      <span className="text-gray-200">{t("house.card.stash_locked")}</span>
+                      <span>{v.is_stash_locked ? t("common.yes") : t("common.no")}</span>
                     </span>
                   </div>
                 </div>
@@ -217,7 +219,7 @@ const HouseComponent = ({ isShow }) => {
                       setDataModal(v);
                     }}
                   >
-                    <span>Keys</span>
+                    <span>{t("house.action.keys")}</span>
                     <div>
                       <FaKey />
                     </div>
@@ -229,7 +231,7 @@ const HouseComponent = ({ isShow }) => {
                       handleGPS(v);
                     }}
                   >
-                    <span>Location</span>
+                    <span>{t("house.action.location")}</span>
                     <div>
                       <FaLocationDot />
                     </div>

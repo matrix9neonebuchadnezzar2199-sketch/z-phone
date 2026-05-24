@@ -8,26 +8,429 @@
     "send": "送信",
     "pay": "支払う",
     "accept": "応答",
-    "decline": "拒否"
+    "decline": "拒否",
+    "yes": "はい",
+    "no": "いいえ",
+    "loading": "読み込み中...",
+    "from": "差出人",
+    "time": {
+      "now": "たった今",
+      "just_now": "たった今"
+    },
+    "error": {
+      "try_again": "しばらくしてから再度お試しください"
+    }
   },
-  "wallet": {
-    "title": "ウォレット",
-    "transfer": "送金",
-    "bills": "請求書",
-    "history": "履歴"
+  "shell": {
+    "status_bar": {
+      "network_label": "5G"
+    },
+    "outside_notification": {
+      "from_label": "差出人"
+    }
+  },
+  "lockscreen": {
+    "weekday": {
+      "sunday": "日曜日",
+      "monday": "月曜日",
+      "tuesday": "火曜日",
+      "wednesday": "水曜日",
+      "thursday": "木曜日",
+      "friday": "金曜日",
+      "saturday": "土曜日"
+    },
+    "month": {
+      "january": "1月",
+      "february": "2月",
+      "march": "3月",
+      "april": "4月",
+      "may": "5月",
+      "june": "6月",
+      "july": "7月",
+      "august": "8月",
+      "september": "9月",
+      "october": "10月",
+      "november": "11月",
+      "december": "12月"
+    },
+    "news": {
+      "reporter_brand": "{{name}} 記者",
+      "latest_title": "最新ニュース",
+      "more_updates_title": "続報"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "toggle": {
+      "anonymous_number": "非通知番号",
+      "do_not_disturb": "おやすみモード"
+    },
+    "placeholder": {
+      "avatar_url": "アバター URL",
+      "wallpaper_url": "壁紙 URL",
+      "choose_frame": "フレームを選択"
+    }
   },
   "phone": {
     "title": "電話",
-    "incoming": "着信中",
-    "calling": "発信中...",
-    "in_call": "通話中"
+    "incoming": {
+      "title": "着信",
+      "mobile_label": "携帯"
+    },
+    "outgoing": {
+      "title": "発信中",
+      "mobile_label": "携帯"
+    },
+    "incall": {
+      "title": "通話中"
+    },
+    "contact_modal": {
+      "title": "新規連絡先",
+      "name_label": "名前:",
+      "number_label": "番号:",
+      "name_placeholder": "名前"
+    },
+    "keypad": {
+      "add_number": "番号を追加"
+    },
+    "call_history": {
+      "as_anonymous_prefix": "（非通知） ",
+      "anonymous_label": "非通知"
+    },
+    "tab": {
+      "calls": "履歴",
+      "requests": "リクエスト",
+      "keypad": "キーパッド"
+    }
+  },
+  "contact": {
+    "title": "連絡先",
+    "edit_modal": {
+      "title": "連絡先を編集",
+      "name_label": "名前:",
+      "phone_label": "電話:",
+      "added_at_label": "追加日:",
+      "name_placeholder": "名前"
+    },
+    "action": {
+      "share": "共有"
+    }
   },
   "message": {
     "title": "メッセージ",
-    "new_message": "新着メッセージ"
+    "notification": {
+      "new_message": "新着メッセージ"
+    },
+    "group": {
+      "error": {
+        "min_contacts": "グループ作成には連絡先を3件以上追加してください。",
+        "name_required": "グループ名を入力してください。"
+      },
+      "placeholder": {
+        "choose_contact": "連絡先を選択",
+        "group_name": "グループ名"
+      },
+      "note_admin": "保存済み連絡先のみ追加できます。作成者が管理者となります。",
+      "create_button": "グループ作成"
+    },
+    "chat": {
+      "delete_confirm": {
+        "title": "メッセージを削除しますか？",
+        "media_fallback": "メディア"
+      },
+      "header": {
+        "last_seen_prefix": "最終ログイン "
+      },
+      "deleted_placeholder": "このメッセージは削除されました",
+      "input_placeholder": "メッセージを入力..."
+    }
+  },
+  "email": {
+    "title": "メール",
+    "inbox_label": "受信トレイ",
+    "detail": {
+      "to_me": " 宛 ",
+      "greeting": "こんにちは、{{name}} さん。",
+      "closing": "よろしくお願いいたします。"
+    }
+  },
+  "wallet": {
+    "title": "デジタルバンキング",
+    "greeting": {
+      "hi": "こんにちは、{{name}} さん",
+      "subtitle": "デジタルバンキングへようこそ。"
+    },
+    "account": {
+      "main_label": "メイン口座",
+      "active_balance": "利用可能残高",
+      "in_out_link": "入出金",
+      "transfer_now": "今すぐ送金"
+    },
+    "transactions": {
+      "last_five": "直近5件の取引",
+      "show_all": "すべて表示"
+    },
+    "footer": {
+      "brand": "Digital Bank by {{name}} ROLEPLAY"
+    },
+    "history": {
+      "title": "直近50件の取引"
+    },
+    "bills": {
+      "title": "請求書"
+    },
+    "transfer": {
+      "from": "送金元",
+      "to": "送金先",
+      "amount": "金額",
+      "note": "メモ",
+      "currency_name": "ドル {{name}}",
+      "balance_hint": "利用可能残高 ${{amount}}",
+      "check_button": "確認",
+      "submit": "送金",
+      "pending_label": "処理中...",
+      "error": {
+        "insufficient_balance": "残高が不足しています",
+        "min_amount": "送金の最低金額は ${{amount}} です"
+      }
+    },
+    "tab": {
+      "balance": "残高",
+      "history": "履歴"
+    }
+  },
+  "garage": {
+    "title": "ガレージ",
+    "state": {
+      "garaged": "保管中",
+      "impound": "押収",
+      "outside": "外出中"
+    },
+    "detail": {
+      "plate": "ナンバー:",
+      "model": "モデル:",
+      "brand": "ブランド:",
+      "category": "カテゴリ:",
+      "garage": "ガレージ:",
+      "state": "状態:",
+      "purchase": "購入日:"
+    },
+    "footer": {
+      "powered_by": "Powered by Mechanic"
+    },
+    "fallback": {
+      "unknown_vehicle": "不明な車両"
+    }
+  },
+  "house": {
+    "title": "物件",
+    "detail": {
+      "keyholders": "鍵保持者:"
+    },
+    "card": {
+      "keys_count": "{{count}} 本",
+      "tier": "ティア:",
+      "garage": "ガレージ:",
+      "house_locked": "住宅ロック:",
+      "garage_locked": "ガレージロック:",
+      "stash_locked": "スタッシュロック:"
+    },
+    "action": {
+      "keys": "鍵",
+      "location": "場所"
+    },
+    "footer": {
+      "brand": "E-Property by {{name}}"
+    }
+  },
+  "gallery": {
+    "title": "写真"
+  },
+  "camera": {
+    "title": "カメラ",
+    "hint": {
+      "check_gallery": "写真はギャラリーで確認できます"
+    }
+  },
+  "ads": {
+    "title": "広告",
+    "action": {
+      "new": "+新規",
+      "post": "投稿"
+    },
+    "placeholder": {
+      "content": "内容を入力..."
+    }
+  },
+  "services": {
+    "message": {
+      "placeholder": "サービスへのメッセージ"
+    },
+    "header": {
+      "title": "{{name}} サービス",
+      "subtitle": "{{name}} 市のサービスにいつでもどこからでもアクセスできます。"
+    },
+    "action": {
+      "message": "メッセージ"
+    },
+    "report": {
+      "solved_reason_placeholder": "（必須）対応完了の理由",
+      "solved_button": "完了"
+    }
+  },
+  "news": {
+    "title": "ニュース",
+    "notification": {
+      "reporter_news": "記者ニュース"
+    },
+    "detail": {
+      "reporter_prefix": "記者 - {{name}}"
+    },
+    "player": {
+      "volume": "音量",
+      "time": "時間"
+    },
+    "feed": {
+      "read_link": "読む"
+    },
+    "create": {
+      "title": "ニュース作成",
+      "placeholder": {
+        "title": "タイトル",
+        "cover_url": "カバー URL",
+        "stream_url": "ストリーム URL",
+        "content": "ニュース本文"
+      },
+      "hint": {
+        "stream_url": "ストリーム URL を入力するとライブ配信（YouTube URL）として扱われます。",
+        "reporter_name": "ニュースには所属会社名が記者名として表示されます。"
+      }
+    },
+    "tab": {
+      "feed": "フィード",
+      "live": "ライブ"
+    }
+  },
+  "player": {
+    "volume": "音量",
+    "time": "時間"
+  },
+  "lovy": {
+    "title": "Lovy",
+    "profile": {
+      "age_suffix": "{{age}} 歳"
+    }
+  },
+  "inetmax": {
+    "balance": {
+      "active_package": "有効プラン"
+    },
+    "topup": {
+      "buy": "購入",
+      "buy_now": "今すぐ購入",
+      "balance_hint": "購入には口座残高が十分である必要があります。",
+      "error": {
+        "min_purchase": "オンライン注文の最低購入量は {{amount}}GB です"
+      }
+    },
+    "chart": {
+      "data_usage_label": "データ使用量"
+    },
+    "tab": {
+      "purchase": "購入",
+      "usages": "利用",
+      "apps": "アプリ"
+    },
+    "history": {
+      "empty_purchase": "購入履歴がありません",
+      "empty_usage": "利用履歴がありません",
+      "app_usage_label": "アプリ別利用",
+      "label": {
+        "online_purchase": "オンライン購入",
+        "inetmax_purchase": "InetMax 購入"
+      }
+    },
+    "unit": {
+      "gb": "GB"
+    }
+  },
+  "loops": {
+    "field": {
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "fullname": "表示名",
+      "phone_number": "電話番号",
+      "bio": "自己紹介"
+    },
+    "signin": {
+      "title": "ログイン",
+      "subtitle": {
+        "welcome_back": "おかえりなさい。",
+        "missed_you": "お待ちしていました。"
+      },
+      "login_button": "ログイン",
+      "default_account_button": "デフォルトアカウントでログイン",
+      "no_account": "アカウントをお持ちでない方",
+      "sign_up_link": "新規登録"
+    },
+    "signup": {
+      "title": "Loops に参加",
+      "subtitle": {
+        "speak": "想いを届けよう",
+        "join": "Loopsverse へ！"
+      },
+      "error": {
+        "password_min": "パスワードは4文字以上"
+      },
+      "submit": "新規登録",
+      "default_account_button": "デフォルトアカウントで登録",
+      "have_account": "すでにアカウントをお持ちの方",
+      "login_link": "ログイン"
+    },
+    "error": {
+      "username_invalid": "ユーザー名が無効です",
+      "phone_invalid": "電話番号が無効です"
+    },
+    "post": {
+      "placeholder": "いまどうしてる？",
+      "submit": "投稿"
+    },
+    "comment": {
+      "placeholder": "コメント"
+    },
+    "profile": {
+      "logout": "ログアウト",
+      "send_message": "メッセージを送る",
+      "private": "非公開",
+      "joined_at": "{{date}} から参加",
+      "tab": {
+        "posts": "投稿",
+        "replies": "返信",
+        "settings": "設定"
+      }
+    },
+    "settings": {
+      "allow_message": "メッセージを許可",
+      "placeholder": {
+        "avatar_url": "アバター URL",
+        "cover_url": "カバー URL",
+        "username": "ユーザー名（@なし）"
+      }
+    },
+    "footer": {
+      "copyright": "© 2025 Loops Corp."
+    }
   },
   "notify": {
-    "transfer_success": "送金が完了しました",
-    "call_not_answered": "応答がありませんでした"
+    "type": {
+      "new_message": "新着メッセージ",
+      "incoming_call": "着信",
+      "calling": "発信中",
+      "in_call": "通話中",
+      "internal": "通知"
+    },
+    "outside": {
+      "format": "[%s] %s"
+    }
   }
 }

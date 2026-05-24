@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import MenuContext from "../../context/MenuContext";
 import {
@@ -39,6 +40,7 @@ const LoopsProfileComponent = ({
   setProfileID,
   profileID,
 }) => {
+  const { t } = useTranslation();
   const {
     resolution,
     tweets,
@@ -149,12 +151,12 @@ const LoopsProfileComponent = ({
   const handleSubmitSetting = async (e) => {
     e.preventDefault();
     if (isNonAlphaNumeric(formData.username)) {
-      setErrorMessage("Username not valid");
+      setErrorMessage(t("loops.error.username_invalid"));
       return;
     }
 
     if (isNumeric(formData.phone_number)) {
-      setErrorMessage("Phone number not valid");
+      setErrorMessage(t("loops.error.phone_invalid"));
       return;
     }
 
@@ -167,7 +169,7 @@ const LoopsProfileComponent = ({
     }
 
     if (result == null) {
-      setErrorMessage("Please try again later!");
+      setErrorMessage(t("common.error.try_again"));
       return;
     }
 
@@ -214,7 +216,7 @@ const LoopsProfileComponent = ({
               }}
             >
               <MdArrowBackIosNew className="text-lg" />
-              <span className="text-xs">Back</span>
+              <span className="text-xs">{t("common.back")}</span>
             </div>
             <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
             <div
@@ -259,7 +261,7 @@ const LoopsProfileComponent = ({
                     setSubMenu(LOOPS_SIGNIN);
                   }}
                 >
-                  Logout
+                  {t("loops.profile.logout")}
                 </button>
               </div>
             ) : (
@@ -277,7 +279,7 @@ const LoopsProfileComponent = ({
                     <>
                       <div className="flex space-x-2 items-center">
                         <span className="text-xs text-white">
-                          Send message{" "}
+                          {t("loops.profile.send_message")}{" "}
                         </span>
                         <button
                           className="w-8 h-8 border border-gray-600 rounded-full items-center flex justify-center hover:bg-gray-700"
@@ -306,7 +308,7 @@ const LoopsProfileComponent = ({
                   ) : (
                     <>
                       <div className="flex items-center">
-                        <span className="text-xs text-white">Private</span>
+                        <span className="text-xs text-white">{t("loops.profile.private")}</span>
                         <div className="w-8 h-8 rounded-full items-center flex justify-center">
                           <FaLock className="text-white" />
                         </div>
@@ -329,7 +331,7 @@ const LoopsProfileComponent = ({
                   </span>
                   <span className="flex space-x-2 text-gray-300 text-xs items-center">
                     <FaRegCalendar className="text-gray-200" />
-                    <span>Join at {loopsProfile?.join_at}</span>
+                    <span>{t("loops.profile.joined_at", { date: loopsProfile?.join_at })}</span>
                   </span>
                 </div>
                 <div className="flex space-x-2 pt-2">
@@ -338,7 +340,7 @@ const LoopsProfileComponent = ({
                     onClick={() => setActiveTab(LOOPS_TAB_POST)}
                   >
                     <span className="text-sm text-center text-white">
-                      Posts
+                      {t("loops.profile.tab.posts")}
                     </span>
                     <span
                       className={`h-0.5 w-10 rounded ${
@@ -353,7 +355,7 @@ const LoopsProfileComponent = ({
                     onClick={() => setActiveTab(LOOPS_TAB_REPLIES)}
                   >
                     <span className="text-sm text-center text-white">
-                      Replies
+                      {t("loops.profile.tab.replies")}
                     </span>
                     <span
                       className={`h-0.5 w-10 rounded ${
@@ -369,7 +371,7 @@ const LoopsProfileComponent = ({
                       onClick={() => setActiveTab(LOOPS_TAB_SETTING)}
                     >
                       <span className="text-sm text-center text-white">
-                        Setting
+                        {t("loops.profile.tab.settings")}
                       </span>
                       <span
                         className={`h-0.5 w-10 rounded ${
@@ -552,7 +554,7 @@ const LoopsProfileComponent = ({
                     </div>
                     <div className="flex w-full justify-between items-center space-x-3 pb-1.5 mb-1.5">
                       <span className="text-sm font-light text-white line-clamp-1">
-                        Allow Message
+                        {t("loops.settings.allow_message")}
                       </span>
                       <div className="flex items-center justify-center">
                         <div className="relative inline-block align-middle select-none">
@@ -593,7 +595,7 @@ const LoopsProfileComponent = ({
                     <div className="flex w-full justify-between items-center space-x-2 pb-1.5 mb-1.5">
                       <input
                         type="text"
-                        placeholder="URL avatar"
+                        placeholder={t("loops.settings.placeholder.avatar_url")}
                         className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none rounded-md px-2 py-1 bg-[#3B3B3B]"
                         autoComplete="off"
                         name="avatar"
@@ -611,7 +613,7 @@ const LoopsProfileComponent = ({
                     <div className="flex w-full justify-between items-center space-x-2 pb-1.5 mb-1.5">
                       <input
                         type="text"
-                        placeholder="URL Cover"
+                        placeholder={t("loops.settings.placeholder.cover_url")}
                         className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none rounded-md px-2 py-1 bg-[#3B3B3B]"
                         autoComplete="off"
                         name="cover"
@@ -630,7 +632,7 @@ const LoopsProfileComponent = ({
                     <div className="flex w-full justify-between items-center space-x-2 pb-1.5 mb-1.5">
                       <input
                         type="text"
-                        placeholder="Username (without @)"
+                        placeholder={t("loops.settings.placeholder.username")}
                         className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none rounded-md px-2 py-1 bg-[#3B3B3B]"
                         autoComplete="off"
                         name="username"
@@ -649,7 +651,7 @@ const LoopsProfileComponent = ({
                     <div className="flex w-full justify-between items-center space-x-2 pb-1.5 mb-1.5">
                       <input
                         type="text"
-                        placeholder="Fullname"
+                        placeholder={t("loops.field.fullname")}
                         className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none rounded-md px-2 py-1 bg-[#3B3B3B]"
                         autoComplete="off"
                         name="fullname"
@@ -668,7 +670,7 @@ const LoopsProfileComponent = ({
                     <div className="flex w-full justify-between items-center space-x-2 pb-1.5 mb-1.5">
                       <input
                         type="text"
-                        placeholder="Phone number"
+                        placeholder={t("loops.field.phone_number")}
                         className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none rounded-md px-2 py-1 bg-[#3B3B3B]"
                         autoComplete="off"
                         name="phone_number"
@@ -686,7 +688,7 @@ const LoopsProfileComponent = ({
                     </div>
                     <div className="flex w-full justify-between items-center space-x-2 pb-1.5 mb-1.5">
                       <textarea
-                        placeholder="Bio"
+                        placeholder={t("loops.field.bio")}
                         className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none resize-none no-scrollbar rounded-md px-2 py-1 bg-[#3B3B3B]"
                         autoComplete="off"
                         name="bio"
@@ -699,7 +701,7 @@ const LoopsProfileComponent = ({
                   </div>
                   <div className="flex items-center justify-end">
                     <button className="text-center bg-[#1d9cf0] px-3 py-1 text-white rounded-md text-sm">
-                      SAVE
+                      {t("common.save")}
                     </button>
                   </div>
 
@@ -725,11 +727,11 @@ const LoopsProfileComponent = ({
                         setSubMenu(LOOPS_SIGNIN);
                       }}
                     >
-                      Logout
+                      {t("loops.profile.logout")}
                     </button>
                   </div>
                   <div className="pb-2 text-xs text-gray-200 flex justify-center">
-                    <span>&copy; 2025 Loops Corp.</span>
+                    <span>{t("loops.footer.copyright")}</span>
                   </div>
                 </form>
               </div>

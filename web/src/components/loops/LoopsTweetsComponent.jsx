@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import MenuContext from "../../context/MenuContext";
 import {
@@ -18,6 +19,7 @@ const LoopsTweetsComponent = ({
   setSelectedTweet,
   setProfileID,
 }) => {
+  const { t } = useTranslation();
   const { resolution, profile, tweets, setTweets, setMenu } =
     useContext(MenuContext);
 
@@ -52,7 +54,7 @@ const LoopsTweetsComponent = ({
               }}
             >
               <MdArrowBackIosNew className="text-lg" />
-              <span className="text-xs">Back</span>
+              <span className="text-xs">{t("common.back")}</span>
             </div>
             <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
               <img

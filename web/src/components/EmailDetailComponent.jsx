@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_EMAIL } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew } from "react-icons/md";
@@ -7,6 +8,7 @@ import LoadingComponent from "./LoadingComponent";
 import Markdown from "react-markdown";
 
 const EmailDetailComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { setMenu, email, profile } = useContext(MenuContext);
 
   return (
@@ -22,7 +24,7 @@ const EmailDetailComponent = ({ isShow }) => {
           onClick={() => setMenu(MENU_EMAIL)}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
         <div className="flex items-center px-2 text-red-700">
@@ -57,7 +59,7 @@ const EmailDetailComponent = ({ isShow }) => {
                     {email.name}
                   </span>
                   <div className="flex items-center text-gray-400 text-xs">
-                    <span className="text-xs"> to me </span>
+                    <span className="text-xs">{t("email.detail.to_me")}</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="w-3"
@@ -81,11 +83,11 @@ const EmailDetailComponent = ({ isShow }) => {
             </div>
             <div className="w-full flex flex-col justify-between flex-1 mt-2 overflow-auto text-xs">
               <div>
-                <p>Hello, {profile.name}.</p>
+                <p>{t("email.detail.greeting", { name: profile.name })}</p>
                 <p className="mt-3">
                   <Markdown>{email.content}</Markdown>
                 </p>
-                <p className="mt-4">Best,</p>
+                <p className="mt-4">{t("email.detail.closing")}</p>
                 <p>{email.name}</p>
               </div>
             </div>

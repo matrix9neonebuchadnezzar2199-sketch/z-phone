@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   MENU_DEFAULT,
   MENU_MESSAGE_CHATTING,
@@ -12,6 +13,7 @@ import Markdown from "react-markdown";
 import axios from "axios";
 
 const AdsComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { profile, setMenu, ads, setAds, setChatting } =
     useContext(MenuContext);
   const [subMenu, setSubMenu] = useState("list");
@@ -113,10 +115,10 @@ const AdsComponent = ({ isShow }) => {
           }}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Ads
+          {t("ads.title")}
         </span>
         <div className="flex items-center px-2 text-green-500 cursor-pointer">
           {subMenu == "list" ? (
@@ -124,7 +126,7 @@ const AdsComponent = ({ isShow }) => {
               className="text-xs font-medium"
               onClick={() => setSubMenu("create")}
             >
-              +New
+              {t("ads.action.new")}
             </span>
           ) : null}
         </div>
@@ -219,7 +221,7 @@ const AdsComponent = ({ isShow }) => {
                   value={content}
                   name="content"
                   onChange={handleAdsFormChange}
-                  placeholder="WTB bahan pertanian..."
+                  placeholder={t("ads.placeholder.content")}
                   rows={4}
                   className="focus:outline-none text-white w-full text-xs resize-none no-scrollbar bg-gray-900 rounded-lg"
                 ></textarea>
@@ -233,7 +235,7 @@ const AdsComponent = ({ isShow }) => {
                   type="submit"
                   className="rounded-full bg-green-500 px-4 py-1 font-semibold text-white text-sm hover:bg-green-600"
                 >
-                  Post
+                  {t("ads.action.post")}
                 </button>
               </div>
             </form>

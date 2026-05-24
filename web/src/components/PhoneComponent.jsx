@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import {
@@ -24,6 +25,7 @@ const subMenuList = {
 };
 
 const PhoneComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const {
     resolution,
     callHistories,
@@ -118,7 +120,7 @@ const PhoneComponent = ({ isShow }) => {
         <div className="flex flex-col justify-center rounded-xl h-full w-full px-3">
           <div className="bg-slate-700 rounded-lg py-2 flex flex-col w-full p-3">
             <div className="flex justify-between items-center pb-2">
-              <span className="truncate font-semibold">New Contact</span>
+              <span className="truncate font-semibold">{t("phone.contact_modal.title")}</span>
               <div>
                 <MdClose
                   className="text-2xl cursor-pointer text-white hover:text-red-500"
@@ -129,12 +131,12 @@ const PhoneComponent = ({ isShow }) => {
             <form onSubmit={handlePhoneFormSubmit} className="w-full">
               <div className="flex flex-col gap-1 py-2 text-xs">
                 <span className="flex justify-between items-center">
-                  <span>Name:</span>
+                  <span>{t("phone.contact_modal.name_label")}</span>
                   <span>
                     <input
                       name="name"
                       className="border-b w-36 text-base font-medium focus:outline-none bg-slate-700"
-                      placeholder="John"
+                      placeholder={t("phone.contact_modal.name_placeholder")}
                       onChange={handlePhoneFormChange}
                       autoComplete="off"
                       value={formDataNew.name}
@@ -143,7 +145,7 @@ const PhoneComponent = ({ isShow }) => {
                   </span>
                 </span>
                 <span className="flex justify-between items-center">
-                  <span>Number:</span>
+                  <span>{t("phone.contact_modal.number_label")}</span>
                   <span>
                     <input
                       name="phone"
@@ -161,7 +163,7 @@ const PhoneComponent = ({ isShow }) => {
                     className="flex font-medium rounded-full text-white bg-blue-500 px-3 py-1 text-sm items-center justify-center"
                     type="submit"
                   >
-                    <span>SAVE</span>
+                    <span>{t("common.save")}</span>
                   </button>
                 </div>
               </div>
@@ -176,7 +178,7 @@ const PhoneComponent = ({ isShow }) => {
           onClick={() => setMenu(MENU_DEFAULT)}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
         <div className="flex items-center px-2 text-blue-500">
@@ -236,8 +238,8 @@ const PhoneComponent = ({ isShow }) => {
                           {!v.is_anonim
                             ? v.to_person
                             : v.flag == "OUT"
-                            ? "(as anonim) " + v.to_person
-                            : "Anonim"}
+                            ? t("phone.call_history.as_anonymous_prefix") + v.to_person
+                            : t("phone.call_history.anonymous_label")}
                         </span>
                         <span className="text-xs text-gray-400">
                           {v.created_at}
@@ -321,7 +323,7 @@ const PhoneComponent = ({ isShow }) => {
                       >
                         <FaCheck className="text-sm" />
                         <span className="text-sm font-semibold py-0.5">
-                          Save
+                          {t("common.save")}
                         </span>
                       </button>
 
@@ -380,7 +382,7 @@ const PhoneComponent = ({ isShow }) => {
                 setIsShowModal(true);
               }}
             >
-              Add Number
+              {t("phone.keypad.add_number")}
             </span>
           </div>
           <div className="grid grid-cols-3 gap-x-4 gap-y-2 mt-10">
@@ -436,7 +438,7 @@ const PhoneComponent = ({ isShow }) => {
             onClick={() => setSubMenu(subMenuList["call"])}
           >
             <MdOutlinePhoneCallback className="text-xl" />
-            <span className="text-xs">Calls</span>
+            <span className="text-xs">{t("phone.tab.calls")}</span>
           </button>
           <button
             type="button"
@@ -448,7 +450,7 @@ const PhoneComponent = ({ isShow }) => {
             onClick={() => setSubMenu(subMenuList["request"])}
           >
             <MdFormatListBulleted className="text-xl" />
-            <span className="text-xs">Requests</span>
+            <span className="text-xs">{t("phone.tab.requests")}</span>
           </button>
           <button
             type="button"
@@ -458,7 +460,7 @@ const PhoneComponent = ({ isShow }) => {
             onClick={() => setSubMenu(subMenuList["keypad"])}
           >
             <MdDialpad className="text-xl" />
-            <span className="text-xs">Keypad</span>
+            <span className="text-xs">{t("phone.tab.keypad")}</span>
           </button>
         </div>
       </div>

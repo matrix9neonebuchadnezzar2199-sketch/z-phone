@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew, MdClose, MdOutlineSearch } from "react-icons/md";
@@ -8,6 +9,7 @@ import { searchByKeyValueContains } from "../utils/common";
 import LoadingComponent from "./LoadingComponent";
 
 const GarageComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { resolution, setMenu, garages, setGarages, garagesBk } =
     useContext(MenuContext);
   const [isShowModal, setIsShowModal] = useState(false);
@@ -18,28 +20,28 @@ const GarageComponent = ({ isShow }) => {
       case 1:
         return (
           <div className="flex space-x-1 bg-green-600 py-0.5 px-2 text-xs text-white rounded items-center">
-            <span>Garaged</span>
+            <span>{t("garage.state.garaged")}</span>
             <GiHomeGarage />
           </div>
         );
       case 2:
         return (
           <div className="flex space-x-1 bg-red-600 py-0.5 px-2 text-xs text-white rounded items-center">
-            <span>Impound</span>
+            <span>{t("garage.state.impound")}</span>
             <GiPoliceBadge />
           </div>
         );
       case 3:
         return (
           <div className="flex space-x-1 bg-yellow-600 py-0.5 px-2 text-xs text-white rounded items-center">
-            <span>Outside</span>
+            <span>{t("garage.state.outside")}</span>
             <FaRoad />
           </div>
         );
       default:
         return (
           <div className="flex space-x-1 bg-yellow-600 py-0.5 px-2 text-xs text-white rounded items-center">
-            <span>Outside</span>
+            <span>{t("garage.state.outside")}</span>
             <GiPoliceBadge />
           </div>
         );
@@ -92,33 +94,33 @@ const GarageComponent = ({ isShow }) => {
                 </div>
                 <div className="flex flex-col gap-1 border-b py-2 text-xs">
                   <span className="flex justify-between">
-                    <span className="text-gray-400">Plate:</span>
+                    <span className="text-gray-400">{t("garage.detail.plate")}</span>
                     <span className="font-bold">{dataModal.plate}</span>
                   </span>
                   <span className="flex justify-between">
-                    <span className="text-gray-400">Model:</span>
+                    <span className="text-gray-400">{t("garage.detail.model")}</span>
                     <span>{dataModal.name}</span>
                   </span>
                   <span className="flex justify-between">
-                    <span className="text-gray-400">Brand:</span>
+                    <span className="text-gray-400">{t("garage.detail.brand")}</span>
                     <span>{dataModal.brand}</span>
                   </span>
                   <span className="flex justify-between">
-                    <span className="text-gray-400">Category:</span>
+                    <span className="text-gray-400">{t("garage.detail.category")}</span>
                     <span>{dataModal.category}</span>
                   </span>
                   <span className="flex justify-between">
-                    <span className="text-gray-400">Garage:</span>
+                    <span className="text-gray-400">{t("garage.detail.garage")}</span>
                     <span>{dataModal.garage}</span>
                   </span>
                   <span className="flex justify-between">
-                    <span className="text-gray-400">State:</span>
+                    <span className="text-gray-400">{t("garage.detail.state")}</span>
                     <span>{getState(dataModal.state)}</span>
                   </span>
                 </div>
                 <div className="flex flex-col gap-3 pb-2 pt-2 text-xs">
                   <span className="flex justify-between">
-                    <span className="text-gray-400">Purchase:</span>
+                    <span className="text-gray-400">{t("garage.detail.purchase")}</span>
                     <span>{dataModal.created_at}</span>
                   </span>
                   <div className=" border-b border border-dashed"></div>
@@ -126,7 +128,7 @@ const GarageComponent = ({ isShow }) => {
                     <div>
                       <GiMechanicGarage className="text-sm" />
                     </div>
-                    <span>Powered by Mechanic</span>
+                    <span>{t("garage.footer.powered_by")}</span>
                   </span>
                 </div>
               </div>
@@ -141,10 +143,10 @@ const GarageComponent = ({ isShow }) => {
           onClick={() => setMenu(MENU_DEFAULT)}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Garages
+          {t("garage.title")}
         </span>
         <div className="flex items-center px-2 text-blue-500">
           {/* <MdEdit className='text-lg' /> */}
@@ -167,7 +169,7 @@ const GarageComponent = ({ isShow }) => {
               </div>
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder={t("common.search")}
                 className="text-sm w-full text-white flex-1 border border-gray-700 focus:outline-none rounded-full px-2 py-1 pl-8 bg-[#3B3B3B]"
                 autoComplete="off"
                 onKeyUp={(e) => {

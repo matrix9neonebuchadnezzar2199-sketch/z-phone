@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { CFG_INETMAX, MENU_DEFAULT } from "../../constant/menu";
 import MenuContext from "../../context/MenuContext";
 import {
@@ -42,6 +43,7 @@ const ACTIVE_TAB_LIST = {
   APP_HISTORY: "APP_HISTORY",
 };
 const InetMaxComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const {
     resolution,
     profile,
@@ -90,7 +92,7 @@ const InetMaxComponent = ({ isShow }) => {
                 fontSize: "15px",
                 showAlways: true,
                 show: true,
-                label: "Data Usage",
+                label: t("inetmax.chart.data_usage_label"),
                 color: "#FFFFFF",
                 fontFamily: "Inter, sans-serif",
                 formatter: function (w) {
@@ -173,9 +175,7 @@ const InetMaxComponent = ({ isShow }) => {
   const handleTopupSubmit = async (e) => {
     if (topupTotal < CFG_INETMAX.MIN_TOPUP) {
       setTopupTotalError(
-        "A minimum purchase of " +
-          CFG_INETMAX.MIN_TOPUP +
-          "GB is required for online orders."
+        t("inetmax.topup.error.min_purchase", { amount: CFG_INETMAX.MIN_TOPUP })
       );
       return;
     }
@@ -183,12 +183,12 @@ const InetMaxComponent = ({ isShow }) => {
     let result = 0;
     try {
       const response = await axios.post("/topup-internet-data", {
-        label: "Online purchase",
+        label: t("inetmax.history.label.online_purchase"),
         total: topupTotal * CFG_INETMAX.PRICE_PER_GB,
       });
       result = response.data == null ? 0 : response.data;
     } catch (error) {
-      setTopupTotalError("Please try again later!");
+      setTopupTotalError(t("common.error.try_again"));
       console.error("error /topup-internet-data", error);
     }
 
@@ -203,9 +203,9 @@ const InetMaxComponent = ({ isShow }) => {
         topup_histories: [
           {
             total: result,
-            created_at: "now",
+            created_at: t("common.time.now"),
             flag: "CREDIT",
-            label: "Online purchase",
+            label: t("inetmax.history.label.online_purchase"),
           },
           ...inetMax.topup_histories,
         ],
@@ -217,9 +217,9 @@ const InetMaxComponent = ({ isShow }) => {
         histories: [
           {
             type: "withdraw",
-            label: "InetMax purchase",
+            label: t("inetmax.history.label.inetmax_purchase"),
             total: topupTotal,
-            created_at: "just now",
+            created_at: t("common.time.just_now"),
           },
           ...bank.histories,
         ],
@@ -297,7 +297,7 @@ const InetMaxComponent = ({ isShow }) => {
                 }}
               >
                 <MdArrowBackIosNew className="text-lg" />
-                <span className="text-xs">Back</span>
+                <span className="text-xs">{t("common.back")}</span>
               </div>
               <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
               <div className="flex items-center px-2 space-x-2 text-white">
@@ -315,7 +315,7 @@ const InetMaxComponent = ({ isShow }) => {
             <div className="no-scrollbar flex flex-col w-full h-full overflow-y-auto z-30 pb-5 space-y-3">
               <div className="flex justify-between bg-slate-800 rounded-lg items-center px-3 py-2">
                 <div className="flex flex-col space-x-y-1">
-                  <span className="text-white text-xs">Active Package</span>
+                  <span className="text-white text-xs">{t("inetmax.balance.active_package")}</span>
                   <div className="flex flex items-center space-x-1">
                     <LuArrowUpDown className="text-white text-xl" />
                     <span className="text-white font-lg font-semibold">
@@ -333,7 +333,7 @@ const InetMaxComponent = ({ isShow }) => {
                       }}
                     >
                       <MdOutlineShoppingCart className="text-white text-xl" />
-                      <span className="text-white text-sm">Buy</span>
+                      <span className="text-white text-sm">{t("inetmax.topup.buy")}</span>
                     </button>
                   </div>
                 ) : null}
@@ -347,7 +347,7 @@ const InetMaxComponent = ({ isShow }) => {
                   onClick={() => setActiveTab(ACTIVE_TAB_LIST.TOPUP_HISTORY)}
                 >
                   <span className="text-sm text-center text-white">
-                    Purchase
+                    {t("inetmax.tab.purchase")}
                   </span>
                   <span
                     className={`h-0.5 w-14 rounded ${
@@ -361,7 +361,7 @@ const InetMaxComponent = ({ isShow }) => {
                   className="flex flex-col w-full items-center space-y-1 cursor-pointer"
                   onClick={() => setActiveTab(ACTIVE_TAB_LIST.USAGE_HISTORY)}
                 >
-                  <span className="text-sm text-center text-white">Usages</span>
+                  <span className="text-sm text-center text-white">{t("inetmax.tab.usages")}</span>
                   <span
                     className={`h-0.5 w-14 rounded ${
                       activeTab == ACTIVE_TAB_LIST.USAGE_HISTORY
@@ -374,7 +374,7 @@ const InetMaxComponent = ({ isShow }) => {
                   className="flex flex-col w-full items-center space-y-1 cursor-pointer"
                   onClick={() => setActiveTab(ACTIVE_TAB_LIST.APP_HISTORY)}
                 >
-                  <span className="text-sm text-center text-white">Apps</span>
+                  <span className="text-sm text-center text-white">{t("inetmax.tab.apps")}</span>
                   <span
                     className={`h-0.5 w-14 rounded ${
                       activeTab == ACTIVE_TAB_LIST.APP_HISTORY
@@ -397,7 +397,7 @@ const InetMaxComponent = ({ isShow }) => {
                   {inetMax?.topup_histories?.length == 0 ? (
                     <div className="flex justify-center w-full">
                       <span className="text-white text-xs">
-                        No purchase histories
+                        {t("inetmax.history.empty_purchase")}
                       </span>
                     </div>
                   ) : null}
@@ -446,7 +446,7 @@ const InetMaxComponent = ({ isShow }) => {
                   {inetMax?.usage_histories?.length == 0 ? (
                     <div className="flex justify-center w-full">
                       <span className="text-white text-xs">
-                        No usage histories
+                        {t("inetmax.history.empty_usage")}
                       </span>
                     </div>
                   ) : null}
@@ -464,7 +464,7 @@ const InetMaxComponent = ({ isShow }) => {
                                   {v.label}
                                 </p>
                                 <p className="text-xs truncate text-gray-400">
-                                  App usage
+                                  {t("inetmax.history.app_usage_label")}
                                 </p>
                               </div>
                               <div className="inline-flex items-end text-base font-semibold">
@@ -545,7 +545,7 @@ const InetMaxComponent = ({ isShow }) => {
                       <div className="w-1/3 h-1 bg-white rounded-full"></div>
                     </div>
                     <div className="text-white flex items-center space-x-2">
-                      <span className="font-bold">GB</span>
+                      <span className="font-bold">{t("inetmax.unit.gb")}</span>
                       <input
                         type="text"
                         placeholder="10"
@@ -574,8 +574,7 @@ const InetMaxComponent = ({ isShow }) => {
                       </div>
                     </div>
                     <span className="text-white text-xs pb-1">
-                      Ensure your active balance is sufficient to complete the
-                      purchase.
+                      {t("inetmax.topup.balance_hint")}
                     </span>
                     {topupTotalError != null ? (
                       <span className="text-red-500 text-xs">
@@ -586,7 +585,7 @@ const InetMaxComponent = ({ isShow }) => {
                       className="px-2 py-1 bg-blue-500 rounded font-semibold text-sm text-white"
                       onClick={handleTopupSubmit}
                     >
-                      Buy now{" "}
+                      {t("inetmax.topup.buy_now")}{" "}
                       {topupTotalError == null
                         ? "$" +
                           currencyFormat(topupTotal * CFG_INETMAX.PRICE_PER_GB)

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew } from "react-icons/md";
@@ -7,6 +8,7 @@ import axios from "axios";
 import { IoPhonePortraitOutline, IoResizeSharp } from "react-icons/io5";
 
 const SettingComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { resolution, profile, setMenu, setProfile, setResolution } =
     useContext(MenuContext);
   const [isOnDisturb, setIsOnDisturb] = useState(false);
@@ -123,10 +125,10 @@ const SettingComponent = ({ isShow }) => {
           onClick={() => setMenu(MENU_DEFAULT)}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Setting
+          {t("settings.title")}
         </span>
         <div className="flex items-center px-2 text-blue-500">
           {/* <MdEdit className='text-lg' /> */}
@@ -162,7 +164,7 @@ const SettingComponent = ({ isShow }) => {
             </div>
             <div className="flex w-full justify-between items-center space-x-3 border-b border-gray-800 pb-1.5 mb-1.5">
               <span className="text-sm font-light line-clamp-1">
-                Anonim Number
+                {t("settings.toggle.anonymous_number")}
               </span>
               <div className="flex items-center justify-center">
                 <div className="relative inline-block align-middle select-none">
@@ -197,7 +199,7 @@ const SettingComponent = ({ isShow }) => {
             </div>
             <div className="flex w-full justify-between items-center space-x-3 border-b border-gray-800 pb-1.5 mb-1.5">
               <span className="text-sm font-light line-clamp-1">
-                Do Not Disturb
+                {t("settings.toggle.do_not_disturb")}
               </span>
               <div className="flex items-center justify-center">
                 <div className="relative inline-block align-middle select-none">
@@ -233,7 +235,7 @@ const SettingComponent = ({ isShow }) => {
             <div className="flex w-full justify-between items-center space-x-2 border-b border-gray-800 pb-1.5 mb-1.5">
               <input
                 type="text"
-                placeholder="URL avatar"
+                placeholder={t("settings.placeholder.avatar_url")}
                 className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none rounded-md px-2 py-1 bg-[#3B3B3B]"
                 autoComplete="off"
                 value={avatar}
@@ -248,7 +250,7 @@ const SettingComponent = ({ isShow }) => {
                   type="button"
                   onClick={() => saveSetting("avatar")}
                 >
-                  <span>SAVE</span>
+                  <span>{t("common.save")}</span>
                 </button>
               </div>
             </div>
@@ -262,7 +264,7 @@ const SettingComponent = ({ isShow }) => {
             <div className="flex w-full justify-between items-center space-x-2 border-b border-gray-800 pb-1.5 mb-1.5">
               <input
                 type="text"
-                placeholder="URL wallpaper"
+                placeholder={t("settings.placeholder.wallpaper_url")}
                 className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none rounded-md px-2 py-1 bg-[#3B3B3B]"
                 autoComplete="off"
                 value={wallpaper}
@@ -277,7 +279,7 @@ const SettingComponent = ({ isShow }) => {
                   type="button"
                   onClick={() => saveSetting("wallpaper")}
                 >
-                  <span>SAVE</span>
+                  <span>{t("common.save")}</span>
                 </button>
               </div>
             </div>
@@ -290,7 +292,7 @@ const SettingComponent = ({ isShow }) => {
             </div>
             <div className="flex w-full justify-between items-center space-x-2 border-b border-gray-800 pb-1.5 mb-1.5">
               <select
-                placeholder="Choose frame"
+                aria-label={t("settings.placeholder.choose_frame")}
                 className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none rounded-md px-2 py-1 bg-[#3B3B3B]"
                 onChange={(e) => {
                   const { value } = e.target;
@@ -305,13 +307,13 @@ const SettingComponent = ({ isShow }) => {
                   if (v == frame) {
                     return (
                       <option key={i} value={v} selected>
-                        Frame {v}
+                        {v}
                       </option>
                     );
                   } else {
                     return (
                       <option key={i} value={v}>
-                        Frame {v}
+                        {v}
                       </option>
                     );
                   }
@@ -323,7 +325,7 @@ const SettingComponent = ({ isShow }) => {
                   type="button"
                   onClick={() => saveSetting("frame")}
                 >
-                  <span>SAVE</span>
+                  <span>{t("common.save")}</span>
                 </button>
               </div>
             </div>
@@ -351,7 +353,7 @@ const SettingComponent = ({ isShow }) => {
                   type="button"
                   onClick={() => saveSetting("phone_height")}
                 >
-                  <span>SAVE</span>
+                  <span>{t("common.save")}</span>
                 </button>
               </div>
             </div>

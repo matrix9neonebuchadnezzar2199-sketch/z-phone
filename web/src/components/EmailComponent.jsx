@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT, MENU_EMAIL_DETAIL } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew, MdOutlineSearch } from "react-icons/md";
@@ -6,6 +7,7 @@ import LoadingComponent from "./LoadingComponent";
 import { searchByKeyValueContains } from "../utils/common";
 
 const EmailComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { setMenu, emails, setEmails, emailsBk, setEmail } =
     useContext(MenuContext);
 
@@ -26,10 +28,10 @@ const EmailComponent = ({ isShow }) => {
           onClick={() => setMenu(MENU_DEFAULT)}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Email
+          {t("email.title")}
         </span>
         <div className="flex items-center px-2 text-blue-500">
           {/* <MdEdit className='text-lg' /> */}
@@ -52,7 +54,7 @@ const EmailComponent = ({ isShow }) => {
               </div>
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder={t("common.search")}
                 className="text-sm w-full text-white flex-1 border border-gray-700 focus:outline-none rounded-full px-2 py-1 pl-8 bg-[#3B3B3B]"
                 autoComplete="off"
                 onKeyUp={(e) => {
@@ -69,7 +71,7 @@ const EmailComponent = ({ isShow }) => {
           </div>
 
           <div className="pl-1 py-2">
-            <span className="text-xs font-medium text-gray-400">Inbox</span>
+            <span className="text-xs font-medium text-gray-400">{t("email.inbox_label")}</span>
           </div>
           {emails.map((v, i) => {
             return (

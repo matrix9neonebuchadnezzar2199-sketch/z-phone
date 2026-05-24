@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew } from "react-icons/md";
@@ -8,6 +9,7 @@ import { useSwipeable } from "react-swipeable";
 import { IoMdHeart, IoMdClose } from "react-icons/io";
 
 const LovyComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { setMenu, lovys } = useContext(MenuContext);
   const [subMenu, setSubMenu] = useState("list");
 
@@ -59,10 +61,10 @@ const LovyComponent = ({ isShow }) => {
           }}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Lovy
+          {t("lovy.title")}
         </span>
         <div className="flex items-center px-2 text-white cursor-pointer">
           {subMenu == "list" ? (
@@ -151,7 +153,7 @@ const LovyComponent = ({ isShow }) => {
                         {v.name}
                       </span>
                       <span className="line-clamp-1 text-lg font-semibold">
-                        {v.age} y.o
+                        {t("lovy.profile.age_suffix", { age: v.age })}
                       </span>
                       <span className="line-clamp-3 text-sm">{v.bio}</span>
                     </div>

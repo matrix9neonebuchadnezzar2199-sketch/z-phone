@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import MenuContext from "../../context/MenuContext";
 import {
@@ -11,6 +12,7 @@ import { MdArrowBackIosNew } from "react-icons/md";
 import { MENU_DEFAULT } from "../../constant/menu";
 
 const LoopsSigninComponent = ({ isShow, setSubMenu }) => {
+  const { t } = useTranslation();
   const { resolution, profile, tweets, setTweets, setMenu } =
     useContext(MenuContext);
 
@@ -46,7 +48,7 @@ const LoopsSigninComponent = ({ isShow, setSubMenu }) => {
     }
 
     if (result == null) {
-      setErrorMessage("Try again later!");
+      setErrorMessage(t("common.error.try_again"));
       return;
     }
 
@@ -93,7 +95,7 @@ const LoopsSigninComponent = ({ isShow, setSubMenu }) => {
               }}
             >
               <MdArrowBackIosNew className="text-lg" />
-              <span className="text-xs">Back</span>
+              <span className="text-xs">{t("common.back")}</span>
             </div>
             <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
             <div className="flex items-center px-2 space-x-2 text-white"></div>
@@ -107,12 +109,12 @@ const LoopsSigninComponent = ({ isShow, setSubMenu }) => {
                   alt=""
                 />
                 <span className="text-white font-semibold text-2xl">
-                  Let's sign you in
+                  {t("loops.signin.title")}
                 </span>
                 <div className="flex flex-col -space-y-2">
-                  <span className="text-gray-200 text-lg">Welcome back.</span>
+                  <span className="text-gray-200 text-lg">{t("loops.signin.subtitle.welcome_back")}</span>
                   <span className="text-gray-200 text-lg">
-                    You've been missed.
+                    {t("loops.signin.subtitle.missed_you")}
                   </span>
                 </div>
               </div>
@@ -122,7 +124,7 @@ const LoopsSigninComponent = ({ isShow, setSubMenu }) => {
               >
                 <input
                   type="text"
-                  placeholder="Username"
+                  placeholder={t("loops.field.username")}
                   className="w-full text-sm text-white flex-1 border border-gray-600 bg-black focus:outline-none rounded-xl pl-4 pr-1 py-2"
                   autoComplete="off"
                   required
@@ -132,7 +134,7 @@ const LoopsSigninComponent = ({ isShow, setSubMenu }) => {
                 />
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder={t("loops.field.password")}
                   className="w-full text-sm text-white flex-1 border border-gray-600 bg-black focus:outline-none rounded-xl pl-4 pr-1 py-2"
                   autoComplete="off"
                   required
@@ -144,7 +146,7 @@ const LoopsSigninComponent = ({ isShow, setSubMenu }) => {
                   <span className="text-red-500 text-xs">{errorMessage}</span>
                 ) : null}
                 <button type="submit" className="h-10 bg-[#1d9cf0] rounded-xl">
-                  Login
+                  {t("loops.signin.login_button")}
                 </button>
                 <button
                   type="button"
@@ -157,15 +159,15 @@ const LoopsSigninComponent = ({ isShow, setSubMenu }) => {
                       alt=""
                     />
                   </div>
-                  <span>Signin with default account</span>
+                  <span>{t("loops.signin.default_account_button")}</span>
                 </button>
                 <div className="text-sm text-gray-200 flex justify-center space-x-1 py-2">
-                  <span>Don't have an account?</span>
+                  <span>{t("loops.signin.no_account")}</span>
                   <span
                     className="cursor-pointer text-[#1d9cf0] font-semibold"
                     onClick={() => setSubMenu(LOOPS_SIGNUP)}
                   >
-                    Sign up
+                    {t("loops.signin.sign_up_link")}
                   </span>
                 </div>
               </form>

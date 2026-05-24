@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   MENU_DEFAULT,
   NAME,
@@ -12,6 +13,7 @@ import { FaBell } from "react-icons/fa6";
 import axios from "axios";
 
 const ServicesComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { resolution, profile, setMenu, services, setChatting, setServices } =
     useContext(MenuContext);
   const [isShowModal, setIsShowModal] = useState(false);
@@ -105,7 +107,7 @@ const ServicesComponent = ({ isShow }) => {
                           value={formDataMessage.message}
                           name="message"
                           onChange={handleMessageFormChange}
-                          placeholder="Message for a service"
+                          placeholder={t("services.message.placeholder")}
                           rows={4}
                           className="bg-black focus:outline-none text-white w-full text-xs resize-none no-scrollbar bg-slate-800 p-3 rounded-lg"
                         ></textarea>
@@ -115,7 +117,7 @@ const ServicesComponent = ({ isShow }) => {
                           className="flex font-medium rounded-full text-white bg-blue-500 px-3 py-1 text-sm items-center justify-center"
                           type="submit"
                         >
-                          <span>Send</span>
+                          <span>{t("common.send")}</span>
                         </button>
                       </div>
                     </div>
@@ -131,7 +133,7 @@ const ServicesComponent = ({ isShow }) => {
               onClick={() => setMenu(MENU_DEFAULT)}
             >
               <MdArrowBackIosNew className="text-lg" />
-              <span className="text-xs">Back</span>
+              <span className="text-xs">{t("common.back")}</span>
             </div>
             <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
               {/* Services */}
@@ -153,10 +155,10 @@ const ServicesComponent = ({ isShow }) => {
           >
             <div className="flex flex-col -mt-1 pb-2 px-2 absolute bg-black z-10">
               <div className="text-lg font-semibold text-white">
-                {NAME} Services
+                {t("services.header.title", { name: NAME })}
               </div>
               <div className="text-xs text-gray-200">
-                You can access {NAME} City's Services anytime and anywhere.
+                {t("services.header.subtitle", { name: NAME })}
               </div>
             </div>
             {services == undefined ? (
@@ -203,7 +205,7 @@ const ServicesComponent = ({ isShow }) => {
                         }}
                       >
                         <span className="text-sm font-medium text-white">
-                          Message
+                          {t("services.action.message")}
                         </span>
                       </div>
                     </div>
@@ -251,7 +253,7 @@ const ServicesComponent = ({ isShow }) => {
                         <textarea
                           value={ackReport.message}
                           name="message"
-                          placeholder="Message for a service"
+                          placeholder={t("services.message.placeholder")}
                           rows={5}
                           className="bg-black focus:outline-none text-white w-full text-xs resize-none no-scrollbar bg-slate-800 px-3 py-2 rounded-lg"
                           readOnly
@@ -259,7 +261,7 @@ const ServicesComponent = ({ isShow }) => {
                       </span>
                     </div>
                     <input
-                      placeholder="(REQUIRED) reason why it's solved"
+                      placeholder={t("services.report.solved_reason_placeholder")}
                       className="bg-black focus:outline-none text-white w-full text-xs resize-none no-scrollbar bg-slate-800 px-3 py-2 rounded-lg"
                       onChange={(e) => {
                         const { value } = e.target;
@@ -297,7 +299,7 @@ const ServicesComponent = ({ isShow }) => {
                             .finally(function () {});
                         }}
                       >
-                        Solved
+                        {t("services.report.solved_button")}
                       </button>
                       <button
                         className="px-2 py-1 text-white text-xs bg-yellow-500 hover:bg-yellow-600 text-center rounded"
@@ -319,7 +321,7 @@ const ServicesComponent = ({ isShow }) => {
                             .finally(function () {});
                         }}
                       >
-                        Message
+                        {t("services.action.message")}
                       </button>
                     </div>
                   </div>
@@ -333,7 +335,7 @@ const ServicesComponent = ({ isShow }) => {
               onClick={() => setSubMenu("list")}
             >
               <MdArrowBackIosNew className="text-lg" />
-              <span className="text-xs">Back</span>
+              <span className="text-xs">{t("common.back")}</span>
             </div>
             <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
               {/* Services */}

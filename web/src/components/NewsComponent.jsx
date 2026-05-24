@@ -1,5 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
-import { CFG_NEWS, MENU_DEFAULT } from "../constant/menu";
+import { useTranslation } from "react-i18next";
+import { CFG_NEWS, MENU_DEFAULT, NAME } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew, MdLiveTv } from "react-icons/md";
 import LoadingComponent from "./LoadingComponent";
@@ -15,6 +16,7 @@ const subMenuList = {
 };
 
 const NewsComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { resolution, profile, setMenu, news, newsStreams } =
     useContext(MenuContext);
   const [detail, setDetail] = useState(null);
@@ -114,10 +116,10 @@ const NewsComponent = ({ isShow }) => {
           }}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          News
+          {t("news.title")}
         </span>
         <div className="flex items-center px-2 text-white">
           {subMenu == subMenuList.create ? null : (
@@ -157,7 +159,7 @@ const NewsComponent = ({ isShow }) => {
                   }}
                 >
                   <MdArrowBackIosNew className="text-lg" />
-                  <span className="text-xs">Back</span>
+                  <span className="text-xs">{t("common.back")}</span>
                 </div>
                 <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
                 <div className="flex items-center px-2 space-x-2 text-white"></div>
@@ -178,7 +180,7 @@ const NewsComponent = ({ isShow }) => {
                       <span>{detail.company}</span>
                     </div>
                     <span className="text-gray-100 text-xs line-clamp-1">
-                      Reporter - {detail.reporter}
+                      {t("news.detail.reporter_prefix", { name: detail.reporter })}
                     </span>
                     <span className="text-white text-sm">{detail.title}</span>
                   </div>
@@ -217,7 +219,7 @@ const NewsComponent = ({ isShow }) => {
                   }}
                 >
                   <MdArrowBackIosNew className="text-lg" />
-                  <span className="text-xs">Back</span>
+                  <span className="text-xs">{t("common.back")}</span>
                 </div>
                 <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
                 <div className="flex items-center px-2 space-x-2 text-white"></div>
@@ -239,7 +241,7 @@ const NewsComponent = ({ isShow }) => {
                   <table className="text-xss text-gray-100 mt-5 mb-2">
                     <tbody>
                       <tr>
-                        <td>Volume</td>
+                        <td>{t("news.player.volume")}</td>
                         <td>:</td>
                         <td>
                           <input
@@ -255,7 +257,7 @@ const NewsComponent = ({ isShow }) => {
                         </td>
                       </tr>
                       <tr>
-                        <td>Time</td>
+                        <td>{t("news.player.time")}</td>
                         <td>:</td>
                         <td>
                           <input
@@ -285,7 +287,7 @@ const NewsComponent = ({ isShow }) => {
                       <span>{stream.company}</span>
                     </div>
                     <span className="text-gray-100 text-xs line-clamp-1">
-                      Reporter - {stream.reporter}
+                      {t("news.detail.reporter_prefix", { name: stream.reporter })}
                     </span>
                     <span className="text-white text-sm">{stream.title}</span>
                     <div className="pt-2 text-xs pb-5">
@@ -341,7 +343,7 @@ const NewsComponent = ({ isShow }) => {
                         {v.created_at}
                       </span>
                       <span className="text-gray-100 text-xss flex space-x-0.5 items-center">
-                        <span>Read</span> <FaArrowRight />
+                        <span>{t("news.feed.read_link")}</span> <FaArrowRight />
                       </span>
                     </div>
                   </div>
@@ -409,10 +411,10 @@ const NewsComponent = ({ isShow }) => {
             className="flex flex-col space-y-2 mb-14"
             onSubmit={handleSubmitFormPost}
           >
-            <span className="text-lg text-white">Create News</span>
+            <span className="text-lg text-white">{t("news.create.title")}</span>
             <input
               type="text"
-              placeholder="Title"
+              placeholder={t("news.create.placeholder.title")}
               className="w-full text-sm text-white flex-1 bg-gray-900 focus:outline-none rounded-lg pl-2 pr-1 py-1"
               autoComplete="off"
               name="title"
@@ -422,7 +424,7 @@ const NewsComponent = ({ isShow }) => {
             />
             <input
               type="text"
-              placeholder="Cover URL"
+              placeholder={t("news.create.placeholder.cover_url")}
               className="w-full text-sm text-white flex-1 bg-gray-900 focus:outline-none rounded-lg pl-2 pr-1 py-1"
               autoComplete="off"
               name="cover_url"
@@ -432,7 +434,7 @@ const NewsComponent = ({ isShow }) => {
             />
             <input
               type="text"
-              placeholder="Stream URL"
+              placeholder={t("news.create.placeholder.stream_url")}
               className="w-full text-sm text-white flex-1 bg-gray-900 focus:outline-none rounded-lg pl-2 pr-1 py-1"
               autoComplete="off"
               onChange={handleChangeFormPost}
@@ -440,22 +442,21 @@ const NewsComponent = ({ isShow }) => {
               value={formData.stream_url}
             />
             <span className="text-xs text-gray-400">
-              If stream url is filled, it will mark as Live (Youtube URL).
+              {t("news.create.hint.stream_url")}
             </span>
             <textarea
               onChange={handleChangeFormPost}
               name="content"
               value={formData.content}
-              placeholder="News content"
+              placeholder={t("news.create.placeholder.content")}
               rows={4}
               className="focus:outline-none text-white w-full text-xs resize-none no-scrollbar bg-gray-900 rounded-lg pl-2 pr-1 py-1"
             ></textarea>
             <span className="text-xs text-gray-400">
-              <span className="text-red-500 pr-1">*</span>Please note that the
-              news will include the name of your company as the reporter!
+              {t("news.create.hint.reporter_name")}
             </span>
             <button className="rounded-md bg-amber-500 px-4 py-1 font-semibold text-white text-sm hover:bg-amber-600">
-              Create News
+              {t("news.create.title")}
             </button>
           </form>
         </div>
@@ -470,7 +471,7 @@ const NewsComponent = ({ isShow }) => {
             onClick={() => setSubMenu(subMenuList["feed"])}
           >
             <FaRegNewspaper className="text-xl" />
-            <span className="text-xs">Feed</span>
+            <span className="text-xs">{t("news.tab.feed")}</span>
           </button>
           <button
             type="button"
@@ -480,7 +481,7 @@ const NewsComponent = ({ isShow }) => {
             onClick={() => setSubMenu(subMenuList["stream"])}
           >
             <MdLiveTv className="text-xl" />
-            <span className="text-xs">Live</span>
+            <span className="text-xs">{t("news.tab.live")}</span>
           </button>
         </div>
       </div>

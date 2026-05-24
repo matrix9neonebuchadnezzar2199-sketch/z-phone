@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT } from "../constant/menu";
 import { MdArrowBackIosNew } from "react-icons/md";
 import ReactPlayer from "react-player/lazy";
 import MenuContext from "../context/MenuContext";
 
 const PlayTVComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { resolution, setMenu } = useContext(MenuContext);
   const [stream, setStream] = useState({
     url: "",
@@ -80,7 +82,7 @@ const PlayTVComponent = ({ isShow }) => {
                 }}
               >
                 <MdArrowBackIosNew className="text-lg" />
-                <span className="text-xs">Back</span>
+                <span className="text-xs">{t("common.back")}</span>
               </div>
               <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit"></span>
               <div className="flex items-center px-2 space-x-2 text-white"></div>
@@ -106,7 +108,7 @@ const PlayTVComponent = ({ isShow }) => {
                 <table className="text-xss text-gray-100 mt-5 mb-2">
                   <tbody>
                     <tr>
-                      <td>Volume</td>
+                      <td>{t("player.volume")}</td>
                       <td>:</td>
                       <td>
                         <input
@@ -122,7 +124,7 @@ const PlayTVComponent = ({ isShow }) => {
                       </td>
                     </tr>
                     <tr>
-                      <td>Time</td>
+                      <td>{t("player.time")}</td>
                       <td>:</td>
                       <td>
                         <input

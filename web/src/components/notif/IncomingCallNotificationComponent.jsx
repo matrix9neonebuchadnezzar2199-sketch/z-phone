@@ -1,16 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import MenuContext from "../../context/MenuContext";
 import { MdCall, MdCallEnd } from "react-icons/md";
-import {
-  MENU_INCALL,
-  MENU_INCOMING_CALL_NOTIFICATION,
-} from "../../constant/menu";
 import { MdOutlinePhone } from "react-icons/md";
 import useSound from "use-sound";
 import notificationMessageSound from "/sounds/call-sound.mp3";
 import axios from "axios";
 
 const IncomingCallNotificationComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { resolution, notificationCall, setNotificationCall } =
     useContext(MenuContext);
   const [isClose, setIsClose] = useState(false);
@@ -39,7 +37,7 @@ const IncomingCallNotificationComponent = ({ isShow }) => {
         <div className="flex flex-col justify-between w-full h-full items-center pt-5 pb-10">
           <div className="flex flex-col space-y-3 w-full">
             <span className="flex space-x-2 text-lg text-gray-100 font-semibold line-clamp-1 items-center">
-              <span>{MENU_INCOMING_CALL_NOTIFICATION}...</span>
+              <span>{t("phone.incoming.title")}</span>
               <div>
                 <span className="relative flex h-3 w-3 items-center">
                   <MdOutlinePhone className="text-xl animate-ping absolute" />
@@ -66,7 +64,7 @@ const IncomingCallNotificationComponent = ({ isShow }) => {
                   {notificationCall.from}
                 </span>
                 <span className="text-xs text-gray-300 line-clamp-1">
-                  mobile
+                  {t("phone.incoming.mobile_label")}
                 </span>
               </div>
             </div>
@@ -95,7 +93,7 @@ const IncomingCallNotificationComponent = ({ isShow }) => {
               >
                 <MdCallEnd className="text-3xl" />
               </button>
-              <span className="text-white text-xs">Decline</span>
+              <span className="text-white text-xs">{t("common.decline")}</span>
             </div>
             <div className="flex flex-col space-y-2 items-center">
               <button
@@ -129,7 +127,7 @@ const IncomingCallNotificationComponent = ({ isShow }) => {
               >
                 <MdCall className="text-3xl" />
               </button>
-              <span className="text-white text-xs">Accept</span>
+              <span className="text-white text-xs">{t("common.accept")}</span>
             </div>
           </div>
         </div>

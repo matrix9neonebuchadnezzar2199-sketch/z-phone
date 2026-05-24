@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { LOGO, MENU_DEFAULT, NAME } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import { MdArrowBackIosNew } from "react-icons/md";
@@ -27,6 +28,7 @@ const subMenuList = {
 };
 
 const BankComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { setMenu, bank, profile, setBank, resolution } =
     useContext(MenuContext);
   const [subMenu, setSubMenu] = useState(subMenuList["balance"]);
@@ -84,7 +86,7 @@ const BankComponent = ({ isShow }) => {
       return;
     }
     if (bank.balance < formDataTransfer.total) {
-      setErrorTransfer("Your balance is not enough");
+      setErrorTransfer(t("wallet.transfer.error.insufficient_balance"));
       return;
     }
 
@@ -92,7 +94,7 @@ const BankComponent = ({ isShow }) => {
     formDataTransfer.total = parseInt(formDataTransfer.total, 10);
     if (formDataTransfer.total < CFG_WALLET.MIN_TRANSFER) {
       setErrorTransfer(
-        "$" + CFG_WALLET.MIN_TRANSFER + " is minimal amount for transfer."
+        t("wallet.transfer.error.min_amount", { amount: CFG_WALLET.MIN_TRANSFER })
       );
       return;
     }
@@ -107,9 +109,9 @@ const BankComponent = ({ isShow }) => {
             histories: [
               {
                 type: "withdraw",
-                label: "creating...",
+                label: t("wallet.transfer.pending_label"),
                 total: formDataTransfer.total,
-                created_at: "just now",
+                created_at: t("common.time.just_now"),
               },
               ...bank.histories,
             ],
@@ -148,7 +150,7 @@ const BankComponent = ({ isShow }) => {
                 type: "withdraw",
                 label: bill.reason,
                 total: bill.amount,
-                created_at: "just now",
+                created_at: t("common.time.just_now"),
               },
               ...bank.histories,
             ],
@@ -208,10 +210,10 @@ const BankComponent = ({ isShow }) => {
           onClick={() => setMenu(MENU_DEFAULT)}
         >
           <MdArrowBackIosNew className="text-lg" />
-          <span className="text-xs">Back</span>
+          <span className="text-xs">{t("common.back")}</span>
         </div>
         <span className="absolute left-0 right-0 m-auto text-sm text-white w-fit">
-          Digital Banking
+          {t("wallet.title")}
         </span>
         <div className="flex items-center px-2 text-blue-500">
           {/* <MdEdit className='text-lg' /> */}
@@ -245,10 +247,12 @@ const BankComponent = ({ isShow }) => {
                   </span>
                   <div className="flex flex-col">
                     <span className="text-base font-semibold line-clamp-1">
-                      Hi, {profile?.name?.split(" ")[0]}
+                      {t("wallet.greeting.hi", {
+                        name: profile?.name?.split(" ")[0],
+                      })}
                     </span>
                     <span className="text-xs text-gray-400">
-                      Welcome to Digital Banking.
+                      {t("wallet.greeting.subtitle")}
                     </span>
                   </div>
                 </div>
@@ -263,7 +267,7 @@ const BankComponent = ({ isShow }) => {
               >
                 <div className="flex flex-col space-y-3">
                   <div className="flex justify-between space-x-2 items-center">
-                    <span className="text-xs font-semibold">MAIN ACCOUNT</span>
+                    <span className="text-xs font-semibold">{t("wallet.account.main_label")}</span>
                     <span className="text-sm font-semibold">
                       {profile.iban}
                     </span>
@@ -271,13 +275,13 @@ const BankComponent = ({ isShow }) => {
                   <div className="relative flex flex-col space-y-2 border rounded-lg border-slate-700 text-white px-3 py-3">
                     <div className="flex justify-between">
                       <span className="text-xs text-slate-300">
-                        Active Balance
+                        {t("wallet.account.active_balance")}
                       </span>
                       <span
                         className="text-xs text-slate-300 cursor-pointer"
                         onClick={() => setSubMenu(subMenuList["history"])}
                       >
-                        In & Out
+                        {t("wallet.account.in_out_link")}
                       </span>
                     </div>
                     <div className="flex items-center w-full">
@@ -297,7 +301,7 @@ const BankComponent = ({ isShow }) => {
                           className="flex items-center cursor-pointer"
                           onClick={() => setSubMenu(subMenuList["transfer"])}
                         >
-                          <span>Transfer Now</span>
+                          <span>{t("wallet.account.transfer_now")}</span>
                           <FaAngleRight />
                         </div>
                       </div>
@@ -313,13 +317,13 @@ const BankComponent = ({ isShow }) => {
                   <br />
                   <div className="flex justify-between">
                     <span className="text-xs font-normal border-b pb-1 border-slate-700">
-                      Last 5 Transactions
+                      {t("wallet.transactions.last_five")}
                     </span>
                     <span
                       className="text-xs font-normal border-slate-700 cursor-pointer"
                       onClick={() => setSubMenu(subMenuList["history"])}
                     >
-                      Show All
+                      {t("wallet.transactions.show_all")}
                     </span>
                   </div>
                   <div className="flex flex-col space-y-2">
@@ -355,7 +359,7 @@ const BankComponent = ({ isShow }) => {
                     })}
                   </div>
                   <span className="text-xs font-normal border-slate-700 pt-5 text-center">
-                    Digital Bank by {NAME.toLocaleUpperCase()} ROLEPLAY
+                    {t("wallet.footer.brand", { name: NAME.toLocaleUpperCase() })}
                   </span>
                 </div>
               </div>
@@ -372,7 +376,7 @@ const BankComponent = ({ isShow }) => {
             <div className="p-3 rounded-lg">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-bold leading-none text-white">
-                  Top 50 Transactions
+                  {t("wallet.history.title")}
                 </h3>
               </div>
               <div className="flow-root pb-10">
@@ -427,7 +431,7 @@ const BankComponent = ({ isShow }) => {
             <div className="p-3 rounded-lg">
               <div className="flex flex-col space-y-2 mb-4">
                 <h3 className="text-lg font-bold leading-none text-white">
-                  Bills
+                  {t("wallet.bills.title")}
                 </h3>
                 <p className="text-xs text-gray-400">
                   Lakukan pembayaran secepatnya, jika tidak maka akan terpotong
@@ -455,7 +459,7 @@ const BankComponent = ({ isShow }) => {
                             >
                               <FaCheck className="text-sm" />
                               <span className="text-sm font-semibold py-0.5">
-                                Pay
+                                {t("common.pay")}
                               </span>
                             </button>
                             <span className="text-xss text-gray-400">
@@ -487,14 +491,16 @@ const BankComponent = ({ isShow }) => {
               </div>
               <div className="pt-2 px-3">
                 <div className="flex flex-col space-y-1 border-b border-gray-800 w-full pb-1">
-                  <span className="text-sm text-gray-400">From</span>
+                  <span className="text-sm text-gray-400">{t("wallet.transfer.from")}</span>
                   <div className="flex space-x-2 items-center justify-between">
                     <div className="flex items-center space-x-2 line-clamp-1">
                       <FaDollarSign className="text-xl" />
                       <div className="flex flex-col">
-                        <span className="text-sm">Dollar {NAME}</span>
+                        <span className="text-sm">{t("wallet.transfer.currency_name", { name: NAME })}</span>
                         <span className="text-xs text-gray-400 line-clamp-1">
-                          Active Balance ${currencyFormat(bank.balance)}
+                          {t("wallet.transfer.balance_hint", {
+                            amount: currencyFormat(bank.balance),
+                          })}
                         </span>
                       </div>
                     </div>
@@ -508,7 +514,7 @@ const BankComponent = ({ isShow }) => {
               <div className="px-3">
                 <div className="flex flex-col space-y-1 border-b border-gray-800 w-full pb-1">
                   <div className="text-sm text-gray-400 flex space-x-1 items-center">
-                    <span>To</span>
+                    <span>{t("wallet.transfer.to")}</span>
                     {receiver.isValid ? (
                       <span className="text-green-500 font-semibold">
                         {receiver.name}
@@ -543,7 +549,7 @@ const BankComponent = ({ isShow }) => {
                         className="flex items-center cursor-pointer space-x-1"
                         onClick={handleCheckReceiver}
                       >
-                        <span>Check</span>
+                        <span>{t("wallet.transfer.check_button")}</span>
                         <FaSearch />
                       </div>
                     </div>
@@ -552,7 +558,7 @@ const BankComponent = ({ isShow }) => {
               </div>
               <div className="px-3">
                 <div className="flex flex-col space-y-1 border-b border-gray-800 w-full pb-1">
-                  <span className="text-sm text-gray-400">Nominal</span>
+                  <span className="text-sm text-gray-400">{t("wallet.transfer.amount")}</span>
                   <div className="flex space-x-2 items-center justify-between w-full">
                     <div className="flex items-center space-x-2 w-full">
                       <FaDollarSign className="text-xl" />
@@ -574,7 +580,7 @@ const BankComponent = ({ isShow }) => {
               </div>
               <div className="px-3">
                 <div className="flex flex-col space-y-1 border-b border-gray-800 w-full pb-1">
-                  <span className="text-sm text-gray-400">Note</span>
+                  <span className="text-sm text-gray-400">{t("wallet.transfer.note")}</span>
                   <div className="flex space-x-2 items-center justify-between w-full">
                     <div className="flex items-center space-x-2 w-full">
                       <div className="flex flex-col w-full">
@@ -607,7 +613,7 @@ const BankComponent = ({ isShow }) => {
                   type="submit"
                   className="w-full bg-blue-600 hover:bg-blue-700 font-semibold py-2 rounded-lg flex justify-center items-center space-x-2"
                 >
-                  <span>Transfer</span>
+                  <span>{t("wallet.transfer.submit")}</span>
                   <FaArrowRightLong />
                 </button>
               </div>
@@ -625,7 +631,7 @@ const BankComponent = ({ isShow }) => {
                 onClick={() => setSubMenu(subMenuList["balance"])}
               >
                 <FiHome className="text-xl" />
-                <span className="text-xs">Balance</span>
+                <span className="text-xs">{t("wallet.tab.balance")}</span>
               </button>
               <button
                 type="button"
@@ -637,7 +643,7 @@ const BankComponent = ({ isShow }) => {
                 onClick={() => setSubMenu(subMenuList["transfer"])}
               >
                 <FaMoneyBillTransfer className="text-xl" />
-                <span className="text-xs">Transfer</span>
+                <span className="text-xs">{t("wallet.transfer.submit")}</span>
               </button>
               <button
                 type="button"
@@ -649,7 +655,7 @@ const BankComponent = ({ isShow }) => {
                 onClick={() => setSubMenu(subMenuList["bill"])}
               >
                 <MdOutlineReceiptLong className="text-xl" />
-                <span className="text-xs">Bills</span>
+                <span className="text-xs">{t("wallet.bills.title")}</span>
               </button>
               <button
                 type="button"
@@ -661,7 +667,7 @@ const BankComponent = ({ isShow }) => {
                 onClick={() => setSubMenu(subMenuList["history"])}
               >
                 <BiTransfer className="text-xl" />
-                <span className="text-xs">History</span>
+                <span className="text-xs">{t("wallet.tab.history")}</span>
               </button>
             </div>
           </div>

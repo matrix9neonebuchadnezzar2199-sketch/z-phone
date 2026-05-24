@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MENU_DEFAULT, MENU_MESSAGE } from "../constant/menu";
 import MenuContext from "../context/MenuContext";
 import {
@@ -11,6 +12,7 @@ import axios from "axios";
 import { useLongPress } from "@uidotdev/usehooks";
 
 const MessageChattingComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { setMenu, chatting, setChatting, profile, resolution } =
     useContext(MenuContext);
   const messagesEndRef = useRef(null);
@@ -49,7 +51,7 @@ const MessageChattingComponent = ({ isShow }) => {
 
     if (response.data) {
       const newMessage = {
-        time: "just now",
+        time: t("common.time.just_now"),
         message: message,
         sender_citizenid: profile.citizenid,
         id: response.data,
@@ -94,7 +96,7 @@ const MessageChattingComponent = ({ isShow }) => {
 
         if (responseSend.data) {
           const newMessage = {
-            time: "just now",
+            time: t("common.time.just_now"),
             message: "",
             media: response.data,
             sender_citizenid: profile.citizenid,
@@ -150,11 +152,11 @@ const MessageChattingComponent = ({ isShow }) => {
         <div className="flex flex-col justify-center h-full w-full px-5">
           <div className="flex flex-col space-y-2 bg-slate-600 w-full rounded p-3">
             <span className="text-white text-sm font-semibold">
-              Delete message?
+              {t("message.chat.delete_confirm.title")}
             </span>
             <span className="text-white text-sm">
               {deleteMessage?.msg?.message == ""
-                ? "Media"
+                ? t("message.chat.delete_confirm.media_fallback")
                 : deleteMessage?.msg?.message}
             </span>
             <div className="flex justify-end space-x-4">
@@ -165,7 +167,7 @@ const MessageChattingComponent = ({ isShow }) => {
                   setIsOpenDelete(false);
                 }}
               >
-                Cancel
+                {t("common.cancel")}
               </button>
               <button
                 className="rounded text-sm text-red-500"
@@ -186,7 +188,7 @@ const MessageChattingComponent = ({ isShow }) => {
                   setIsOpenDelete(false);
                 }}
               >
-                Delete
+                {t("common.delete")}
               </button>
             </div>
           </div>
@@ -219,7 +221,8 @@ const MessageChattingComponent = ({ isShow }) => {
                   {chatting.conversation_name}
                 </div>
                 <span className="text-xss font-light text-gray-400">
-                  last seen {chatting.last_seen}
+                  {t("message.chat.header.last_seen_prefix")}
+                  {chatting.last_seen}
                 </span>
               </div>
             </div>
@@ -273,7 +276,7 @@ const MessageChattingComponent = ({ isShow }) => {
                           >
                             {v.is_deleted ? (
                               <span className="text-gray-200 italic">
-                                This message was deleted
+                                {t("message.chat.deleted_placeholder")}
                               </span>
                             ) : (
                               <>
@@ -332,7 +335,7 @@ const MessageChattingComponent = ({ isShow }) => {
                           >
                             {v.is_deleted ? (
                               <span className="text-gray-200 italic">
-                                This message was deleted
+                                {t("message.chat.deleted_placeholder")}
                               </span>
                             ) : (
                               <>
@@ -385,7 +388,7 @@ const MessageChattingComponent = ({ isShow }) => {
             <div className="w-full">
               <input
                 type="text"
-                placeholder="Type your message..."
+                placeholder={t("message.chat.input_placeholder")}
                 className="w-full text-xs text-white flex-1 border border-gray-700 focus:outline-none rounded-full px-2 py-1 bg-[#3B3B3B]"
                 value={message}
                 autoComplete="off"

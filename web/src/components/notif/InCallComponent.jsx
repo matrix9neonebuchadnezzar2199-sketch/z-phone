@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { MENU_DEFAULT, MENU_INCALL } from "../../constant/menu";
+import { useTranslation } from "react-i18next";
 import MenuContext from "../../context/MenuContext";
 import { MdCallEnd } from "react-icons/md";
 import Marquee from "react-fast-marquee";
 import axios from "axios";
 
 const InCallComponent = ({ isShow }) => {
+  const { t } = useTranslation();
   const { resolution, notificationCall, setNotificationCall, setMenu } =
     useContext(MenuContext);
   const [isClose, setIsClose] = useState(false);
@@ -52,7 +53,7 @@ const InCallComponent = ({ isShow }) => {
     >
       <div className="flex flex-col">
         <span className="pt-8 pb-16 text-gray-400 pr-5 text-right text-sm font-semibold">
-          {MENU_INCALL}
+          {t("phone.incall.title")}
         </span>
         <div className="flex flex-col items-center w-full">
           <img

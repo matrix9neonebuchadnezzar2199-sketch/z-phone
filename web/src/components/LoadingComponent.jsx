@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const LoadingComponent = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={`flex`}>
       <div className="m-auto pt-[64px]">
@@ -29,7 +32,7 @@ const LoadingComponent = () => {
               className="text-slate-800"
             ></path>
           </svg>
-          <button className="text-white text-sm">Loading...</button>
+          <button className="text-white text-sm">{t("common.loading")}</button>
         </div>
       </div>
     </div>
