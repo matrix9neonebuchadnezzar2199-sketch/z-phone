@@ -154,7 +154,7 @@ setr zphone_discord_webhook "https://discord.com/api/webhooks/YOUR_ID/YOUR_TOKEN
 ```lua
 Config.Core = "QBX"
 Config.OpenPhone = 'M'
-Config.Locale = "ja"
+Config.Locale = "ja"   -- "en" で英語 UI（NUI + Lua 通知）
 ```
 
 `web/public/static/config.json` — メニューラベル・`Asia/Tokyo` 等。変更後は `npm run build`。
@@ -189,9 +189,10 @@ npm run build
 
 ## 既知の残課題
 
-- i18n Phase 2（NUI コンポーネント全文）
-- LockScreen 曜日・月名
 - FiveM 実機検証（管理者側で要確認）
+- `Config.Locale = "en"` で英語 UI に切替可能（NUI + Lua 通知）
+- L-02 Lovy / Play TV はホーム未配置（仕様通り未実装）
+- I-02 ESX `AddMoneyBankSociety` スタブ（ESX 環境のみ）
 
 ---
 

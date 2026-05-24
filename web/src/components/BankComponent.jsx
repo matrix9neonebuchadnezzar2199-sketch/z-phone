@@ -487,7 +487,7 @@ const BankComponent = ({ isShow }) => {
               onSubmit={handleTransferFormSubmit}
             >
               <div className="text-xs px-3 text-gray-400">
-                Transfer aman dan terjamin dengan Digital Banking!
+                {t("wallet.transfer.secure_hint")}
               </div>
               <div className="pt-2 px-3">
                 <div className="flex flex-col space-y-1 border-b border-gray-800 w-full pb-1">

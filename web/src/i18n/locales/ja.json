@@ -192,7 +192,8 @@
       "error": {
         "insufficient_balance": "残高が不足しています",
         "min_amount": "送金の最低金額は ${{amount}} です"
-      }
+      },
+      "secure_hint": "安全な送金をデジタルバンキングで"
     },
     "tab": {
       "balance": "残高",

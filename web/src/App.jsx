@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import i18n from "./i18n";
 import MenuContext from "./context/MenuContext";
 import {
   MENU_ADS,
@@ -114,6 +115,9 @@ function App() {
       try {
         const response = await axios.post("/get-profile");
         setProfile(response.data);
+        if (response.data?.locale) {
+          i18n.changeLanguage(response.data.locale);
+        }
         setResolution(generateDimensions(response.data.phone_height));
       } catch (err) {
         setProfile({});

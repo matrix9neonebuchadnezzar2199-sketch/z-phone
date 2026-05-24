@@ -1,0 +1,437 @@
+{
+  "common": {
+    "back": "Back",
+    "search": "Search...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "send": "Send",
+    "pay": "Pay",
+    "accept": "Accept",
+    "decline": "Decline",
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading...",
+    "from": "From",
+    "time": {
+      "now": "now",
+      "just_now": "just now"
+    },
+    "error": {
+      "try_again": "Please try again later"
+    }
+  },
+  "shell": {
+    "status_bar": {
+      "network_label": "5G"
+    },
+    "outside_notification": {
+      "from_label": "from label"
+    }
+  },
+  "lockscreen": {
+    "weekday": {
+      "sunday": "sunday",
+      "monday": "monday",
+      "tuesday": "tuesday",
+      "wednesday": "wednesday",
+      "thursday": "thursday",
+      "friday": "friday",
+      "saturday": "saturday"
+    },
+    "month": {
+      "january": "january",
+      "february": "february",
+      "march": "march",
+      "april": "april",
+      "may": "may",
+      "june": "june",
+      "july": "july",
+      "august": "august",
+      "september": "september",
+      "october": "october",
+      "november": "november",
+      "december": "december"
+    },
+    "news": {
+      "reporter_brand": "reporter brand",
+      "latest_title": "latest title",
+      "more_updates_title": "more updates title"
+    }
+  },
+  "settings": {
+    "title": "title",
+    "toggle": {
+      "anonymous_number": "anonymous number",
+      "do_not_disturb": "do not disturb"
+    },
+    "placeholder": {
+      "avatar_url": "avatar url",
+      "wallpaper_url": "wallpaper url",
+      "choose_frame": "choose frame"
+    }
+  },
+  "phone": {
+    "title": "title",
+    "incoming": {
+      "title": "title",
+      "mobile_label": "mobile label"
+    },
+    "outgoing": {
+      "title": "title",
+      "mobile_label": "mobile label"
+    },
+    "incall": {
+      "title": "title"
+    },
+    "contact_modal": {
+      "title": "title",
+      "name_label": "name label",
+      "number_label": "number label",
+      "name_placeholder": "name placeholder"
+    },
+    "keypad": {
+      "add_number": "add number"
+    },
+    "call_history": {
+      "as_anonymous_prefix": "as anonymous prefix",
+      "anonymous_label": "anonymous label"
+    },
+    "tab": {
+      "calls": "calls",
+      "requests": "requests",
+      "keypad": "keypad"
+    }
+  },
+  "contact": {
+    "title": "title",
+    "edit_modal": {
+      "title": "title",
+      "name_label": "name label",
+      "phone_label": "phone label",
+      "added_at_label": "added at label",
+      "name_placeholder": "name placeholder"
+    },
+    "action": {
+      "share": "share"
+    }
+  },
+  "message": {
+    "title": "title",
+    "notification": {
+      "new_message": "new message"
+    },
+    "group": {
+      "error": {
+        "min_contacts": "min contacts",
+        "name_required": "name required"
+      },
+      "placeholder": {
+        "choose_contact": "choose contact",
+        "group_name": "group name"
+      },
+      "note_admin": "note admin",
+      "create_button": "create button"
+    },
+    "chat": {
+      "delete_confirm": {
+        "title": "title",
+        "media_fallback": "media fallback"
+      },
+      "header": {
+        "last_seen_prefix": "last seen prefix"
+      },
+      "deleted_placeholder": "deleted placeholder",
+      "input_placeholder": "input placeholder"
+    }
+  },
+  "email": {
+    "title": "title",
+    "inbox_label": "inbox label",
+    "detail": {
+      "to_me": "to me",
+      "greeting": "greeting",
+      "closing": "closing"
+    }
+  },
+  "wallet": {
+    "title": "title",
+    "greeting": {
+      "hi": "hi",
+      "subtitle": "subtitle"
+    },
+    "account": {
+      "main_label": "main label",
+      "active_balance": "active balance",
+      "in_out_link": "in out link",
+      "transfer_now": "transfer now"
+    },
+    "transactions": {
+      "last_five": "last five",
+      "show_all": "show all"
+    },
+    "footer": {
+      "brand": "Digital Bank by {{name}} ROLEPLAY"
+    },
+    "history": {
+      "title": "title"
+    },
+    "bills": {
+      "title": "title"
+    },
+    "transfer": {
+      "from": "from",
+      "to": "to",
+      "amount": "amount",
+      "note": "note",
+      "currency_name": "currency name",
+      "balance_hint": "balance hint",
+      "check_button": "check button",
+      "submit": "submit",
+      "pending_label": "pending label",
+      "error": {
+        "insufficient_balance": "insufficient balance",
+        "min_amount": "min amount"
+      },
+      "secure_hint": "Secure transfers with Digital Banking"
+    },
+    "tab": {
+      "balance": "balance",
+      "history": "history"
+    }
+  },
+  "garage": {
+    "title": "title",
+    "state": {
+      "garaged": "garaged",
+      "impound": "impound",
+      "outside": "outside"
+    },
+    "detail": {
+      "plate": "plate",
+      "model": "model",
+      "brand": "brand",
+      "category": "category",
+      "garage": "garage",
+      "state": "state",
+      "purchase": "purchase"
+    },
+    "footer": {
+      "powered_by": "Powered by Mechanic"
+    },
+    "fallback": {
+      "unknown_vehicle": "unknown vehicle"
+    }
+  },
+  "house": {
+    "title": "title",
+    "detail": {
+      "keyholders": "keyholders"
+    },
+    "card": {
+      "keys_count": "keys count",
+      "tier": "tier",
+      "garage": "garage",
+      "house_locked": "house locked",
+      "garage_locked": "garage locked",
+      "stash_locked": "stash locked"
+    },
+    "action": {
+      "keys": "keys",
+      "location": "location"
+    },
+    "footer": {
+      "brand": "E-Property by {{name}}"
+    }
+  },
+  "gallery": {
+    "title": "title"
+  },
+  "camera": {
+    "title": "title",
+    "hint": {
+      "check_gallery": "check gallery"
+    }
+  },
+  "ads": {
+    "title": "title",
+    "action": {
+      "new": "new",
+      "post": "post"
+    },
+    "placeholder": {
+      "content": "content"
+    }
+  },
+  "services": {
+    "message": {
+      "placeholder": "placeholder"
+    },
+    "header": {
+      "title": "title",
+      "subtitle": "subtitle"
+    },
+    "action": {
+      "message": "message"
+    },
+    "report": {
+      "solved_reason_placeholder": "solved reason placeholder",
+      "solved_button": "solved button"
+    }
+  },
+  "news": {
+    "title": "title",
+    "notification": {
+      "reporter_news": "reporter news"
+    },
+    "detail": {
+      "reporter_prefix": "reporter prefix"
+    },
+    "player": {
+      "volume": "volume",
+      "time": "time"
+    },
+    "feed": {
+      "read_link": "read link"
+    },
+    "create": {
+      "title": "title",
+      "placeholder": {
+        "title": "title",
+        "cover_url": "cover url",
+        "stream_url": "stream url",
+        "content": "content"
+      },
+      "hint": {
+        "stream_url": "stream url",
+        "reporter_name": "reporter name"
+      }
+    },
+    "tab": {
+      "feed": "feed",
+      "live": "live"
+    }
+  },
+  "player": {
+    "volume": "volume",
+    "time": "time"
+  },
+  "lovy": {
+    "title": "Lovy",
+    "profile": {
+      "age_suffix": "age suffix"
+    }
+  },
+  "inetmax": {
+    "balance": {
+      "active_package": "active package"
+    },
+    "topup": {
+      "buy": "buy",
+      "buy_now": "buy now",
+      "balance_hint": "balance hint",
+      "error": {
+        "min_purchase": "min purchase"
+      }
+    },
+    "chart": {
+      "data_usage_label": "data usage label"
+    },
+    "tab": {
+      "purchase": "purchase",
+      "usages": "usages",
+      "apps": "apps"
+    },
+    "history": {
+      "empty_purchase": "empty purchase",
+      "empty_usage": "empty usage",
+      "app_usage_label": "app usage label",
+      "label": {
+        "online_purchase": "online purchase",
+        "inetmax_purchase": "inetmax purchase"
+      }
+    },
+    "unit": {
+      "gb": "GB"
+    }
+  },
+  "loops": {
+    "field": {
+      "username": "username",
+      "password": "password",
+      "fullname": "fullname",
+      "phone_number": "phone number",
+      "bio": "bio"
+    },
+    "signin": {
+      "title": "title",
+      "subtitle": {
+        "welcome_back": "welcome back",
+        "missed_you": "missed you"
+      },
+      "login_button": "login button",
+      "default_account_button": "default account button",
+      "no_account": "no account",
+      "sign_up_link": "sign up link"
+    },
+    "signup": {
+      "title": "title",
+      "subtitle": {
+        "speak": "speak",
+        "join": "join"
+      },
+      "error": {
+        "password_min": "password min"
+      },
+      "submit": "submit",
+      "default_account_button": "default account button",
+      "have_account": "have account",
+      "login_link": "login link"
+    },
+    "error": {
+      "username_invalid": "username invalid",
+      "phone_invalid": "phone invalid"
+    },
+    "post": {
+      "placeholder": "placeholder",
+      "submit": "submit"
+    },
+    "comment": {
+      "placeholder": "placeholder"
+    },
+    "profile": {
+      "logout": "logout",
+      "send_message": "send message",
+      "private": "private",
+      "joined_at": "joined at",
+      "tab": {
+        "posts": "posts",
+        "replies": "replies",
+        "settings": "settings"
+      }
+    },
+    "settings": {
+      "allow_message": "allow message",
+      "placeholder": {
+        "avatar_url": "avatar url",
+        "cover_url": "cover url",
+        "username": "username"
+      }
+    },
+    "footer": {
+      "copyright": "copyright"
+    }
+  },
+  "notify": {
+    "type": {
+      "new_message": "new message",
+      "incoming_call": "incoming call",
+      "calling": "calling",
+      "in_call": "in call",
+      "internal": "internal"
+    },
+    "outside": {
+      "format": "[%s] %s"
+    }
+  }
+}
