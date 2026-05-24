@@ -67,13 +67,13 @@
     "MENU_PLAYTV": "Play TV",
     "MENU_MESSAGE_CHATTING": "Chatting",
     "MENU_EMAIL_DETAIL": "Email Detail",
-    "MENU_INCOMING_CALL_NOTIFICATION": "Incoming Call",
-    "MENU_START_CALL_NOTIFICATION": "Calling...",
-    "MENU_NEW_MESSAGE_NOTIFICATION": "New Message",
-    "MENU_INCALL": "In Call",
+    "MENU_INCOMING_CALL_NOTIFICATION": "着信",
+    "MENU_START_CALL_NOTIFICATION": "発信中",
+    "MENU_NEW_MESSAGE_NOTIFICATION": "新着メッセージ",
+    "MENU_INCALL": "通話中",
     "MENU_NEWS": "News",
-    "MENU_NEW_NEWS_NOTIFICATION": "Reporter News",
-    "MENU_INTERNAL_NOTIFICATION": "Notification"
+    "MENU_NEW_NEWS_NOTIFICATION": "記者ニュース",
+    "MENU_INTERNAL_NOTIFICATION": "通知"
   },
   "MENUS": [
     {
