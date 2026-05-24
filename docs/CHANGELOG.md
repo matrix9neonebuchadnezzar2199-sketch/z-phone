@@ -35,6 +35,10 @@ All notable fixes for [matrix9neonebuchadnezzar2199-sketch/z-phone](https://gith
 - **i18n Phase 5 foundation** `en.json`, `locales/en.lua`, `Config.Locale` drives NUI via `profile.locale`.
 - **Services logos** Per-job logo URLs in `Config.Services` (L-01).
 
+### Documentation
+
+- **README restructure** TOP page slimmed to quick-start; install, config, i18n, troubleshooting, and app-add steps moved to `docs/GUIDE-JA.md`.
+
 ### Configuration
 
 Add to `server.cfg`:
