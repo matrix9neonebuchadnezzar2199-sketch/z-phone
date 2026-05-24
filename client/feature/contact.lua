@@ -35,8 +35,8 @@ RegisterNUICallback('share-contact', function(body, cb)
     if not (distance ~= -1 and distance < 2 and GetEntitySpeed(ped) < 5.0 and not IsPedRagdoll(ped)) then
         TriggerEvent("z-phone:client:sendNotifInternal", {
             type = "Notification",
-            from = "Contact",
-            message = "Cannot share contact!"
+            from = L("notify_from_contact"),
+            message = L("notify_contact_share_failed")
         })
         cb(false)
         return
@@ -46,8 +46,8 @@ RegisterNUICallback('share-contact', function(body, cb)
     lib.callback('z-phone:server:ShareContact', false, function(isOk)
         TriggerEvent("z-phone:client:sendNotifInternal", {
             type = "Notification",
-            from = "Contact",
-            message = "Success share contact!"
+            from = L("notify_from_contact"),
+            message = L("notify_contact_share_success")
         })
         cb(isOk)
     end, body)

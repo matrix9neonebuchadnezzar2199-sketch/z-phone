@@ -5,7 +5,7 @@ RegisterNUICallback('get-garages', function(_, cb)
             local VehicleData = Config.Vehicles[v.vehicle]
 
             VehiclesFormatted[#VehiclesFormatted + 1] = {
-                name = VehicleData['name'] or 'Unknown Vehicle',
+                name = VehicleData['name'] or L('garage_unknown_vehicle'),
                 image = "https://raw.githubusercontent.com/alfaben12/kmrp-assets/main/images/".. v.vehicle ..".png",
                 brand = VehicleData and VehicleData['brand'] or '',
                 model = VehicleData and VehicleData['model'] or '',

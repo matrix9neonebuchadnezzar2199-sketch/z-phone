@@ -53,8 +53,8 @@ RegisterNUICallback('create-group', function(body, cb)
         if (isOk) then
             TriggerEvent("z-phone:client:sendNotifInternal", {
                 type = "Notification",
-                from = "Message",
-                message = "Group chat created!"
+                from = L("notify_from_message"),
+                message = L("notify_message_group_created")
             })
         end
         cb(isOk)
